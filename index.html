@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -74,44 +75,6 @@
     .wave-bar:nth-child(3) { animation-delay: 0.3s; }
     .wave-bar:nth-child(4) { animation-delay: 0.45s; }
     .wave-bar:nth-child(5) { animation-delay: 0.6s; }
-
-    /* =====================================================================
-       ADAPTIVE DEVICE MODES (Phone / Tablet / Desktop)
-    ====================================================================== */
-    /* Prevent iOS Safari input auto-zoom & ensure comfortable touch ergonomics */
-    html[data-device="phone"] input,
-    html[data-device="phone"] select,
-    html[data-device="phone"] textarea {
-      font-size: 16px !important;
-    }
-
-    html[data-device="phone"] .adaptive-btn {
-      min-height: 52px;
-      padding-left: 1.25rem;
-      padding-right: 1.25rem;
-      font-size: 0.95rem;
-      border-radius: 1rem;
-    }
-
-    html[data-device="tablet"] .adaptive-btn {
-      min-height: 46px;
-      padding-left: 1.15rem;
-      padding-right: 1.15rem;
-      font-size: 0.9rem;
-    }
-
-    html[data-device="desktop"] .adaptive-btn {
-      min-height: 40px;
-    }
-
-    /* Safe-area bottom clearance when fixed mobile dock is active */
-    html[data-device="phone"] #app-shell {
-      padding-bottom: calc(9.5rem + env(safe-area-inset-bottom));
-    }
-
-    .safe-pb {
-      padding-bottom: max(0.65rem, env(safe-area-inset-bottom));
-    }
   </style>
 </head>
 <body class="min-h-screen flex flex-col antialiased selection:bg-indigo-100 selection:text-indigo-900">
@@ -228,7 +191,7 @@
             <input id="login-pass" type="password" required placeholder="Enter your passcode" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 outline-none text-sm transition" />
           </div>
           <div id="login-error" class="hidden text-xs font-medium text-rose-600 bg-rose-50 px-3 py-2 rounded-lg"></div>
-          <button type="submit" class="adaptive-btn w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-sm shadow-md shadow-indigo-200 transition flex items-center justify-center gap-2">
+          <button type="submit" class="w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-sm shadow-md shadow-indigo-200 transition flex items-center justify-center gap-2">
             <span>Enter Practice Studio</span>
             <i data-lucide="arrow-right" class="w-4 h-4"></i>
           </button>
@@ -263,7 +226,7 @@
             </div>
           </div>
           <div id="reg-error" class="hidden text-xs font-medium text-rose-600 bg-rose-50 px-3 py-2 rounded-lg"></div>
-          <button type="submit" class="adaptive-btn w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-sm shadow-md shadow-indigo-200 transition flex items-center justify-center gap-2">
+          <button type="submit" class="w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-sm shadow-md shadow-indigo-200 transition flex items-center justify-center gap-2">
             <i data-lucide="user-plus" class="w-4 h-4"></i>
             <span>Create Profile & Start</span>
           </button>
@@ -284,136 +247,44 @@
   <div id="app-shell" class="hidden flex-1 flex flex-col">
     
     <!-- Top Navigation Header -->
-    <header class="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-slate-200/80">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-2 sm:gap-4">
+    <header class="sticky top-0 z-30 bg-white/90 backdrop-blur-md border-b border-slate-200/80">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
         <!-- Brand Logo -->
-        <div class="flex items-center gap-2.5 sm:gap-3 shrink-0">
+        <div class="flex items-center gap-3">
           <div class="w-9 h-9 rounded-xl bg-indigo-600 text-white flex items-center justify-center shadow-sm">
             <i data-lucide="mic-2" class="w-5 h-5"></i>
           </div>
           <div>
-            <span class="font-display font-bold text-slate-900 text-sm sm:text-base tracking-tight block leading-none">HKDSE Paper 4</span>
-            <span class="text-[11px] font-medium text-slate-500 hidden xs:block">Part B • Individual Response</span>
+            <span class="font-display font-bold text-slate-900 text-base tracking-tight block leading-none">HKDSE Paper 4</span>
+            <span class="text-[11px] font-medium text-slate-500">Part B • Individual Response</span>
           </div>
         </div>
 
-        <!-- Top Navigation (Shown on Tablet & Desktop; hidden on Phone in favor of thumb dock) -->
-        <nav id="top-nav-bar" class="hidden md:flex items-center bg-slate-100/90 p-1 rounded-xl border border-slate-200/60">
-          <button data-nav="practice" class="nav-btn px-3.5 py-1.5 rounded-lg text-sm font-semibold bg-white text-indigo-600 shadow-sm transition flex items-center gap-2">
+        <!-- 3-Tab Navigation -->
+        <nav class="hidden md:flex items-center bg-slate-100/90 p-1 rounded-xl border border-slate-200/60">
+          <button data-nav="practice" class="nav-btn px-4 py-1.5 rounded-lg text-sm font-semibold bg-white text-indigo-600 shadow-sm transition flex items-center gap-2">
             <i data-lucide="play-circle" class="w-4 h-4"></i>
-            Practice
+            Practice Arena
           </button>
-          <button data-nav="trends" class="nav-btn px-3.5 py-1.5 rounded-lg text-sm font-semibold text-slate-600 hover:text-slate-900 transition flex items-center gap-2">
+          <button data-nav="trends" class="nav-btn px-4 py-1.5 rounded-lg text-sm font-semibold text-slate-600 hover:text-slate-900 transition flex items-center gap-2">
             <i data-lucide="bar-chart-2" class="w-4 h-4"></i>
-            Trends
+            Progress & Trends
           </button>
-          <button data-nav="bank" class="nav-btn px-3.5 py-1.5 rounded-lg text-sm font-semibold text-slate-600 hover:text-slate-900 transition flex items-center gap-2">
-            <i data-lucide="book-open" class="w-4 h-4"></i>
-            Question Bank
-          </button>
-          <button data-nav="settings" class="nav-btn px-3.5 py-1.5 rounded-lg text-sm font-semibold text-slate-600 hover:text-slate-900 transition flex items-center gap-2">
+          <button data-nav="settings" class="nav-btn px-4 py-1.5 rounded-lg text-sm font-semibold text-slate-600 hover:text-slate-900 transition flex items-center gap-2">
             <i data-lucide="sliders" class="w-4 h-4"></i>
-            Settings
+            Settings & Profile
           </button>
         </nav>
 
-        <!-- Device Mode Switcher + Student Pill & Logout -->
-        <div class="flex items-center gap-2 sm:gap-2.5">
-          <!-- Live Adaptive Device Mode Switcher -->
-          <div class="flex items-center bg-slate-100 border border-slate-200/80 rounded-xl px-2 py-1 gap-1" title="Adaptive UI Layout Mode">
-            <i id="device-mode-icon" data-lucide="monitor" class="w-3.5 h-3.5 text-indigo-600 shrink-0"></i>
-            <select id="device-mode-select" aria-label="Device UI Mode" class="bg-transparent text-xs font-semibold text-slate-700 outline-none cursor-pointer pr-1">
-              <option value="auto">Auto (Desktop)</option>
-              <option value="phone">Phone Mode</option>
-              <option value="tablet">Tablet Mode</option>
-              <option value="desktop">Desktop Mode</option>
-            </select>
-          </div>
-
+        <!-- Student Pill & Logout -->
+        <div class="flex items-center gap-3">
           <div class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-50 border border-indigo-100">
             <span class="w-2 h-2 rounded-full bg-emerald-500" title="Auto-saved"></span>
-            <span id="header-student-name" class="text-xs font-semibold text-indigo-950 max-w-[90px] truncate">Student</span>
+            <span id="header-student-name" class="text-xs font-semibold text-indigo-950">Student</span>
             <span id="header-target-badge" class="text-[11px] font-bold px-1.5 py-0.5 rounded bg-indigo-600 text-white">Target: 5</span>
           </div>
-          <button id="logout-btn" title="Switch Student / Logout" class="p-2.5 rounded-xl text-slate-500 hover:text-rose-600 hover:bg-rose-50 transition">
+          <button id="logout-btn" title="Switch Student / Logout" class="p-2 rounded-xl text-slate-500 hover:text-rose-600 hover:bg-rose-50 transition">
             <i data-lucide="log-out" class="w-4 h-4"></i>
-          </button>
-        </div>
-      </div>
-    </header>
-
-    <!-- ===================================================================
-         PHONE-ONLY THUMB-ZONE FLOATING RECORD CTA & FIXED BOTTOM NAV DOCK
-    ==================================================================== -->
-    <div id="mobile-thumb-dock" class="hidden fixed bottom-0 inset-x-0 z-30 bg-white/95 backdrop-blur-md border-t border-slate-200 shadow-[0_-6px_24px_rgba(15,23,42,0.08)] safe-pb">
-      <!-- Primary One-Handed Recording Action Bar (Visible in Practice tab on Phone) -->
-      <div id="mobile-practice-cta-bar" class="px-4 pt-2.5 pb-1.5 flex items-center gap-2.5">
-        <button id="mobile-start-btn" type="button" class="flex-1 min-h-[52px] rounded-2xl bg-indigo-600 active:bg-indigo-700 text-white font-bold text-base shadow-lg shadow-indigo-200 flex items-center justify-center gap-2.5 transition">
-          <i data-lucide="mic" class="w-5 h-5"></i>
-          <span>Start 1-Min Response</span>
-        </button>
-
-        <button id="mobile-stop-btn" type="button" class="hidden flex-1 min-h-[52px] rounded-2xl bg-rose-600 active:bg-rose-700 text-white font-bold text-base shadow-lg shadow-rose-200 flex items-center justify-center gap-2.5 transition">
-          <i data-lucide="square" class="w-5 h-5"></i>
-          <span>Finish & Grade (<span id="mobile-dock-timer">01:00</span>)</span>
-        </button>
-
-        <button id="mobile-reset-btn" type="button" aria-label="Reset Response" class="hidden min-h-[52px] px-4 rounded-2xl border border-slate-200 bg-slate-50 active:bg-slate-100 text-slate-700 font-semibold text-sm">
-          Reset
-        </button>
-      </div>
-
-      <!-- 4-Tab Thumb Navigation -->
-      <nav class="grid grid-cols-4 px-2 pt-1">
-        <button data-nav="practice" class="nav-btn min-h-[52px] flex flex-col items-center justify-center gap-1 rounded-xl text-indigo-600 font-bold text-[11px]">
-          <i data-lucide="mic" class="w-5 h-5"></i>
-          <span>Practice</span>
-        </button>
-        <button data-nav="trends" class="nav-btn min-h-[52px] flex flex-col items-center justify-center gap-1 rounded-xl text-slate-500 font-semibold text-[11px]">
-          <i data-lucide="bar-chart-2" class="w-5 h-5"></i>
-          <span>Trends</span>
-        </button>
-        <button data-nav="bank" class="nav-btn min-h-[52px] flex flex-col items-center justify-center gap-1 rounded-xl text-slate-500 font-semibold text-[11px]">
-          <i data-lucide="book-open" class="w-5 h-5"></i>
-          <span>Bank</span>
-        </button>
-        <button data-nav="settings" class="nav-btn min-h-[52px] flex flex-col items-center justify-center gap-1 rounded-xl text-slate-500 font-semibold text-[11px]">
-          <i data-lucide="sliders" class="w-5 h-5"></i>
-          <span>Settings</span>
-        </button>
-      </nav>
-    </div>
-
-    <!-- ===================================================================
-         TAB 1: PRACTICE ARENA
-    ==================================================================== -->
-    <main id="view-practice" class="view-section max-w-5xl w-full mx-auto px-4 sm:px-6 py-5 sm:py-8 space-y-5 sm:space-y-6 flex-1">
-      
-      <!-- Question Selector Bar -->
-      <div id="practice-selector-card" class="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/80 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
-        <div class="flex flex-col sm:flex-row sm:items-center gap-2.5 w-full sm:w-auto">
-          <div class="flex items-center gap-2">
-            <label for="theme-filter" class="text-xs font-bold uppercase tracking-wider text-slate-400 shrink-0">Theme:</label>
-            <select id="theme-filter" class="w-full sm:w-auto px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-sm font-medium text-slate-700 focus:border-indigo-500 outline-none">
-              <option value="ALL">All HKDSE Themes (18 Questions)</option>
-              <option value="Technology & Social Media">Technology & Social Media</option>
-              <option value="Education & School Life">Education & School Life</option>
-              <option value="Environment & Sustainability">Environment & Sustainability</option>
-              <option value="Hong Kong Culture & Society">Hong Kong Culture & Society</option>
-              <option value="Youth & Career">Youth & Career</option>
-              <option value="Health & Lifestyle">Health & Lifestyle</option>
-            </select>
-          </div>
-
-          <select id="question-select" class="w-full sm:max-w-xs md:max-w-sm px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-sm font-medium text-slate-700 truncate focus:border-indigo-500 outline-none">
-            <!-- Populated by JS -->
-          </select>
-        </div>
-
-        <div class="flex items-center gap-2 w-full sm:w-auto">
-          <button id="random-question-btn" class="adaptive-btn w-full sm:w-auto px-4 py-2.5 rounded-xl bg-indigo-50 hover:bg-indigo-100 text-indigo-700 text-xs font-semibold transition flex items-center justify-center gap-1.5">
-            <i data-lucide="shuffle" class="w-4 h-4"></i>
-            <span>Random Exam Prompt</span>
           </button>
         </div>
       </div>
@@ -497,12 +368,12 @@
             </div>
 
             <!-- Read Aloud & Hint Buttons -->
-            <div class="flex flex-row sm:flex-col gap-2.5 shrink-0 w-full sm:w-auto">
-              <button id="speak-prompt-btn" class="adaptive-btn flex-1 sm:flex-initial px-3.5 py-2.5 rounded-xl border border-slate-200 hover:border-indigo-300 hover:bg-indigo-50/50 text-slate-700 text-xs font-semibold transition flex items-center justify-center gap-1.5">
+            <div class="flex sm:flex-col gap-2 shrink-0">
+              <button id="speak-prompt-btn" class="px-3.5 py-2 rounded-xl border border-slate-200 hover:border-indigo-300 hover:bg-indigo-50/50 text-slate-700 text-xs font-semibold transition flex items-center gap-1.5">
                 <i data-lucide="volume-2" class="w-4 h-4 text-indigo-600"></i>
                 <span>Listen to Examiner</span>
               </button>
-              <button id="toggle-hint-btn" class="adaptive-btn flex-1 sm:flex-initial px-3.5 py-2.5 rounded-xl border border-slate-200 hover:border-amber-300 hover:bg-amber-50/50 text-slate-700 text-xs font-semibold transition flex items-center justify-center gap-1.5">
+              <button id="toggle-hint-btn" class="px-3.5 py-2 rounded-xl border border-slate-200 hover:border-amber-300 hover:bg-amber-50/50 text-slate-700 text-xs font-semibold transition flex items-center gap-1.5">
                 <i data-lucide="lightbulb" class="w-4 h-4 text-amber-500"></i>
                 <span>Structure Hint</span>
               </button>
@@ -522,45 +393,40 @@
       </div>
 
       <!-- Recording & 60-Second Timer Studio -->
-      <div id="practice-studio-card" class="bg-white rounded-3xl p-5 sm:p-8 border border-slate-200/80 shadow-sm">
-        <div id="studio-grid" class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-sm">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           
           <!-- Left: Circular 60s Countdown Ring & Controls -->
-          <div id="studio-timer-col" class="lg:col-span-5 flex flex-col items-center justify-center text-center border-b lg:border-b-0 lg:border-r border-slate-100 pb-6 lg:pb-0 lg:pr-6">
-            <div id="timer-ring-wrapper" class="relative w-40 h-40 sm:w-44 sm:h-44 flex items-center justify-center mb-4 sm:mb-5">
+          <div class="lg:col-span-5 flex flex-col items-center justify-center text-center border-b lg:border-b-0 lg:border-r border-slate-100 pb-6 lg:pb-0 lg:pr-6">
+            <div class="relative w-44 h-44 flex items-center justify-center mb-5">
               <svg class="w-full h-full -rotate-90" viewBox="0 0 120 120">
                 <circle cx="60" cy="60" r="52" fill="none" stroke="#f1f5f9" stroke-width="8" />
-                <circle id="timer-ring" cx="60" cy="60" r="52" fill="none" stroke="#10b981" stroke-width="8"
+                <circle id="timer-ring" cx="60" cy="60" r="52" fill="none" stroke="#4f46e5" stroke-width="8"
                         stroke-linecap="round" stroke-dasharray="326.73" stroke-dashoffset="0"
                         class="transition-all duration-300" />
               </svg>
               <div class="absolute inset-0 flex flex-col items-center justify-center">
-                <span id="timer-display" class="font-display text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">01:00</span>
+                <span id="timer-display" class="font-display text-4xl font-extrabold text-slate-900 tracking-tight">01:00</span>
                 <span id="timer-status" class="text-xs font-semibold text-slate-400 mt-1">Ready to Speak</span>
               </div>
             </div>
 
-            <!-- Action Buttons (Desktop & Tablet primary controls; also accessible on Phone) -->
-            <div id="inline-record-controls" class="flex flex-wrap items-center justify-center gap-3 w-full">
-              <button id="start-record-btn" class="adaptive-btn px-6 py-3 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-sm shadow-lg shadow-indigo-200 transition flex items-center justify-center gap-2">
+            <!-- Action Buttons -->
+            <div class="flex flex-wrap items-center justify-center gap-3 w-full">
+              <button id="start-record-btn" class="px-6 py-3 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-sm shadow-lg shadow-indigo-200 transition flex items-center gap-2">
                 <i data-lucide="mic" class="w-4 h-4"></i>
                 <span>Start 1-Min Response</span>
               </button>
 
-              <button id="stop-record-btn" class="adaptive-btn hidden px-6 py-3 rounded-2xl bg-rose-600 hover:bg-rose-700 text-white font-semibold text-sm shadow-lg shadow-rose-200 transition flex items-center justify-center gap-2">
+              <button id="stop-record-btn" class="hidden px-6 py-3 rounded-2xl bg-rose-600 hover:bg-rose-700 text-white font-semibold text-sm shadow-lg shadow-rose-200 transition flex items-center gap-2">
                 <i data-lucide="square" class="w-4 h-4"></i>
                 <span>Finish & Grade</span>
               </button>
 
-              <button id="reset-record-btn" class="adaptive-btn hidden px-4 py-3 rounded-2xl border border-slate-200 hover:bg-slate-50 text-slate-600 font-semibold text-sm transition">
+              <button id="reset-record-btn" class="hidden px-4 py-3 rounded-2xl border border-slate-200 hover:bg-slate-50 text-slate-600 font-semibold text-sm transition">
                 Reset
               </button>
             </div>
-
-            <!-- Desktop Shortcut Hint -->
-            <p id="desktop-shortcut-hint" class="hidden lg:block mt-3 text-[11px] text-slate-400">
-              Shortcuts: <kbd class="px-1.5 py-0.5 rounded bg-slate-100 border border-slate-200 font-mono text-slate-600">Space</kbd> Start/Stop • <kbd class="px-1.5 py-0.5 rounded bg-slate-100 border border-slate-200 font-mono text-slate-600">R</kbd> Replay Prompt
-            </p>
 
             <!-- Live Mic Indicator -->
             <div id="mic-wave-box" class="hidden mt-4 flex items-center gap-2 text-xs font-semibold text-indigo-600">
@@ -576,7 +442,7 @@
           </div>
 
           <!-- Right: Live Speech-to-Text Transcript & Fallback Editor -->
-          <div id="studio-transcript-col" class="lg:col-span-7 flex flex-col h-full">
+          <div class="lg:col-span-7 flex flex-col h-full">
             <div class="flex items-center justify-between mb-2">
               <div class="flex items-center gap-2">
                 <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Live Spoken Transcript</span>
@@ -593,11 +459,11 @@
               <div id="interim-overlay" class="hidden mt-1 text-xs italic text-indigo-600 px-1"></div>
             </div>
 
-            <div class="mt-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
+            <div class="mt-3 flex flex-wrap items-center justify-between gap-2">
               <p class="text-xs text-slate-400">
                 Tip: Speak naturally for 45–60 seconds with a clear stance, 2 reasons, and a brief conclusion.
               </p>
-              <button id="grade-manual-btn" class="adaptive-btn w-full sm:w-auto px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold transition flex items-center justify-center gap-1.5 shrink-0">
+              <button id="grade-manual-btn" class="px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold transition flex items-center gap-1.5">
                 <i data-lucide="sparkles" class="w-3.5 h-3.5 text-amber-300"></i>
                 <span>Evaluate Transcript</span>
               </button>
@@ -645,7 +511,7 @@
         </div>
 
         <!-- 4 Official HKDSE Domains Breakdown -->
-        <div id="domains-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <!-- Domain 1 -->
           <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm flex flex-col justify-between">
             <div>
@@ -844,34 +710,7 @@
     </main>
 
     <!-- ===================================================================
-         TAB 3: HKDSE QUESTION BANK BROWSER
-    ==================================================================== -->
-    <main id="view-bank" class="view-section hidden max-w-5xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-6 flex-1">
-      <div class="bg-white rounded-3xl p-5 sm:p-7 border border-slate-200/80 shadow-sm space-y-5">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-4">
-          <div>
-            <h2 class="text-lg sm:text-xl font-bold text-slate-900">HKDSE Paper 4 Part B Question Bank</h2>
-            <p class="text-xs sm:text-sm text-slate-500">Tap any past-paper style question to load it into the 1-minute Practice Studio.</p>
-          </div>
-          <select id="bank-theme-filter" class="px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-sm font-semibold text-slate-700 outline-none focus:border-indigo-500">
-            <option value="ALL">All 6 Core Themes (18 Prompts)</option>
-            <option value="Technology & Social Media">Technology & Social Media</option>
-            <option value="Education & School Life">Education & School Life</option>
-            <option value="Environment & Sustainability">Environment & Sustainability</option>
-            <option value="Hong Kong Culture & Society">Hong Kong Culture & Society</option>
-            <option value="Youth & Career">Youth & Career</option>
-            <option value="Health & Lifestyle">Health & Lifestyle</option>
-          </select>
-        </div>
-
-        <div id="bank-cards-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <!-- Populated dynamically -->
-        </div>
-      </div>
-    </main>
-
-    <!-- ===================================================================
-         TAB 4: SETTINGS & STUDENT PROFILE
+         TAB 3: SETTINGS & STUDENT PROFILE
     ==================================================================== -->
     <main id="view-settings" class="view-section hidden max-w-3xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-6 flex-1">
       
@@ -885,20 +724,6 @@
             <i data-lucide="check" class="w-3.5 h-3.5"></i>
             Auto-Saved
           </span>
-        </div>
-
-        <!-- Device Layout Preference Card -->
-        <div class="p-4 rounded-2xl bg-indigo-50/70 border border-indigo-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-          <div>
-            <span class="text-xs font-bold uppercase tracking-wider text-indigo-700 block">Adaptive Interface Layout</span>
-            <p id="settings-device-status" class="text-xs sm:text-sm text-slate-700 mt-0.5">Currently detecting device automatically.</p>
-          </div>
-          <div class="grid grid-cols-4 gap-1.5 bg-white p-1 rounded-xl border border-indigo-100 shrink-0">
-            <button type="button" data-set-device="auto" class="device-pill-btn px-2.5 py-2 rounded-lg text-xs font-bold bg-indigo-600 text-white transition">Auto</button>
-            <button type="button" data-set-device="phone" class="device-pill-btn px-2.5 py-2 rounded-lg text-xs font-semibold text-slate-600 hover:bg-slate-100 transition">Phone</button>
-            <button type="button" data-set-device="tablet" class="device-pill-btn px-2.5 py-2 rounded-lg text-xs font-semibold text-slate-600 hover:bg-slate-100 transition">Tablet</button>
-            <button type="button" data-set-device="desktop" class="device-pill-btn px-2.5 py-2 rounded-lg text-xs font-semibold text-slate-600 hover:bg-slate-100 transition">Desktop</button>
-          </div>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
@@ -1001,127 +826,343 @@
   ====================================================================== -->
   <script>
     /**
-     * 3. ADAPTIVE DEVICE DETECTION ENGINE (Phone / Tablet / Desktop)
+     * 1. CURATED HKDSE PAPER 4 PART B QUESTION DATABASE
+     * Realistic HKEAA Individual Response prompts across 6 core themes.
      */
-    const STORAGE_KEY_DEVICE_PREF = 'hkdse_p4_device_pref_v1';
-    let devicePreference = localStorage.getItem(STORAGE_KEY_DEVICE_PREF) || 'auto';
-    let activeDeviceMode = 'desktop';
-    let currentTabName = 'practice';
+    const HKDSE_QUESTIONS = [
+      // Technology & Social Media
+      {
+        id: 'tech-1',
+        theme: 'Technology & Social Media',
+        type: 'Arguing For / Against',
+        context: 'Your class is discussing how artificial intelligence tools affect secondary school students’ learning habits.',
+        prompt: 'Do you think secondary schools should allow students to use AI tools for their homework? Why or why not?',
+        structure: '1. Clear stance (Yes, with guidelines / No, undermines core skills) → 2. Reason 1: Personalized tutoring & efficiency → 3. Reason 2: Preparing for future workplaces (or risk of over-reliance) → 4. Balanced conclusion.',
+        phrases: ['From my perspective...', 'A double-edged sword', 'Foster independent thinking', 'Academic integrity'],
+        sample5Star: 'Personally, I believe secondary schools should allow students to use AI tools for homework, provided there are clear guidelines. First and foremost, AI acts like a twenty-four-hour personal tutor that can explain complex concepts in simple terms, helping students overcome learning bottlenecks outside school hours. Furthermore, since artificial intelligence is rapidly transforming every industry, learning how to use these tools ethically and effectively prepares students for university and future careers. Of course, schools must teach students not to copy answers blindly, so that AI enhances rather than replaces genuine critical thinking.'
+      },
+      {
+        id: 'tech-2',
+        theme: 'Technology & Social Media',
+        type: 'Making Suggestions',
+        context: 'Your school’s Student Union is concerned about cyberbullying and social media addiction among junior form students.',
+        prompt: 'What can schools do to help teenagers develop healthier social media habits?',
+        structure: '1. Acknowledge the urgency → 2. Suggestion 1: Interactive digital literacy workshops → 3. Suggestion 2: Device-free social activities at school → 4. Wrap up with long-term benefit.',
+        phrases: ['To tackle this pressing issue...', 'Digital footprint', 'Peer-led workshops', 'Strike a healthy balance'],
+        sample5Star: 'To help teenagers develop healthier social media habits, I think schools can take two practical steps. Firstly, instead of boring lectures, schools should invite young alumni or content creators to lead interactive workshops on digital wellbeing and managing screen time. Students are much more receptive to advice from relatable role models. Secondly, schools can organize phone-free lunchtime clubs, such as board game corners or sports tournaments, encouraging face-to-face interaction. By combining education with offline fun, students will naturally become less dependent on their screens.'
+      },
+      {
+        id: 'tech-3',
+        theme: 'Technology & Social Media',
+        type: 'Making & Justifying a Choice',
+        context: 'Your grandparents want to stay better connected with family members living overseas.',
+        prompt: 'Which communication method would you recommend to elderly people: video calls or instant messaging? Explain your choice.',
+        structure: '1. State choice clearly (Video calls) → 2. Compare visual warmth & emotional connection → 3. Ease of speaking vs. typing small Chinese/English characters → 4. Conclusion.',
+        phrases: ['Without a doubt, I would recommend...', 'Bridge the geographical gap', 'User-friendly', 'Sense of closeness'],
+        sample5Star: 'Without a doubt, I would recommend video calls rather than instant messaging for elderly people. The main reason is that seeing their loved ones’ faces and hearing their voices creates a much stronger sense of warmth and emotional connection, which text messages simply cannot replace. Moreover, typing on a tiny smartphone keyboard can be frustrating and straining for seniors with poorer eyesight, whereas tapping a single button for a video call is far more intuitive. Therefore, video calling is definitely the most heartwarming and practical choice.'
+      },
 
-    function detectPhysicalDevice() {
-      const width = window.innerWidth;
-      const ua = navigator.userAgent || '';
-      const hasTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || window.matchMedia('(pointer: coarse)').matches;
+      // Education & School Life
+      {
+        id: 'edu-1',
+        theme: 'Education & School Life',
+        type: 'Arguing For / Against',
+        context: 'Your school is considering replacing traditional printed textbooks with tablet computers for all subjects.',
+        prompt: 'Would you prefer using e-textbooks on a tablet or traditional paper textbooks at school? Why?',
+        structure: '1. State preference clearly → 2. Point 1: Portability & multimedia features (or eye strain & fewer distractions for paper) → 3. Point 2: Note-taking & revision efficiency → 4. Summary.',
+        phrases: ['Given the choice, I would opt for...', 'Alleviate the burden of heavy schoolbags', 'Prone to digital distractions', 'Annotate effortlessly'],
+        sample5Star: 'Given the choice, I would definitely prefer using e-textbooks on a tablet at school. First, carrying seven or eight thick textbooks every day puts unnecessary physical strain on students’ backs, whereas a single lightweight tablet holds all our learning materials. Second, e-textbooks offer interactive features such as instant dictionary lookups, search functions, and embedded videos that make revision much more efficient. As long as schools install focus apps to block games during lessons, tablets are a huge upgrade for modern learning.'
+      },
+      {
+        id: 'edu-2',
+        theme: 'Education & School Life',
+        type: 'Explaining a Course of Action',
+        context: 'Many Secondary 6 students feel overwhelmed by exam stress ahead of the HKDSE.',
+        prompt: 'How do you usually manage stress during exam periods, and would you recommend this method to your classmates?',
+        structure: '1. Share personal method (e.g., Pomodoro technique + evening jog) → 2. Explain how it restores focus → 3. Why classmates would benefit → 4. Encouraging closing.',
+        phrases: ['Whenever exam pressure mounts...', 'Recharge my batteries', 'Maintain mental clarity', 'Burnout'],
+        sample5Star: 'Whenever DSE exam pressure mounts, I manage my stress by combining structured study blocks with a thirty-minute brisk walk or jog every evening. Stepping away from my desk without my phone allows my brain to process what I have revised and releases endorphins that lift my mood. I would wholeheartedly recommend this habit to my classmates because many students study late into the night without breaks, which actually hurts memory retention. Even a short daily workout can keep us energized and prevent burnout.'
+      },
+      {
+        id: 'edu-3',
+        theme: 'Education & School Life',
+        type: 'Making & Justifying a Choice',
+        context: 'Your school has received funding to organize one major post-exam activity for Secondary 4 students.',
+        prompt: 'Which activity would be more beneficial for students: an overseas cultural exchange tour or a local community service project? Why?',
+        structure: '1. Choose one option clearly → 2. Give two distinct benefits (empathy/local awareness vs. global perspective) → 3. Acknowledge the other option briefly → 4. Conclude.',
+        phrases: ['Broaden one’s horizons', 'Cultivate empathy', 'First-hand exposure', 'Give back to society'],
+        sample5Star: 'I believe a local community service project would be more beneficial for Secondary 4 students. While an overseas trip is exciting, serving underprivileged groups right here in Hong Kong—such as elderly residents living in subdivided flats—helps students develop genuine empathy and social responsibility. Furthermore, a local project is much more inclusive because every student can participate regardless of their family’s financial background. Understanding our own community first lays the best foundation for becoming compassionate citizens.'
+      },
 
-      const isPhoneUA = /iPhone|iPod|Android.*Mobile|Windows Phone|BlackBerry/i.test(ua);
-      const isTabletUA = /iPad|Android(?!.*Mobile)|Tablet/i.test(ua) || (/Macintosh/i.test(ua) && navigator.maxTouchPoints > 1);
+      // Environment & Sustainability
+      {
+        id: 'env-1',
+        theme: 'Environment & Sustainability',
+        type: 'Arguing For / Against',
+        context: 'Hong Kong has implemented strict regulations banning single-use plastic tableware in restaurants.',
+        prompt: 'Do you think banning disposable plastic tableware is an effective way to protect the environment? Why or why not?',
+        structure: '1. Stance (Yes, effective long-term despite short-term inconvenience) → 2. Impact on landfills & marine life → 3. Shifts consumer habits toward reusable items → 4. Conclusion.',
+        phrases: ['In the long run', 'Curb plastic pollution', 'Initial inconvenience', 'Sustainable mindset'],
+        sample5Star: 'Yes, I firmly believe banning disposable plastic tableware is a highly effective step toward protecting our environment. Hong Kong’s landfills are nearing capacity, and single-use plastics take hundreds of years to decompose while harming marine ecosystems. Although wooden or paper alternatives may feel slightly inconvenient at first, legislation forces both restaurants and diners to change their habits and bring reusable cutlery. Over time, this policy creates a lasting cultural shift toward sustainability.'
+      },
+      {
+        id: 'env-2',
+        theme: 'Environment & Sustainability',
+        type: 'Making Suggestions',
+        context: 'Your school wants to reduce food waste in the school tuck shop and lunchboxes.',
+        prompt: 'What practical measures can students and schools take to reduce food waste at lunchtime?',
+        structure: '1. State the problem of leftover school lunches → 2. Measure 1: Flexible portion sizes (small/regular) → 3. Measure 2: Food composting or sharing pantry → 4. Closing.',
+        phrases: ['Cherish food resources', 'Portion control', 'Raise awareness', 'Tangible difference'],
+        sample5Star: 'To reduce lunchtime food waste, schools and students can adopt two simple measures. First, lunch suppliers should offer flexible portion sizes—such as small, medium, and large—so students with smaller appetites do not end up throwing away half their rice. Second, the school can set up a food-sharing corner for unopened packaged snacks or fruit, alongside a composting bin for unavoidable scraps used in the school garden. Together, these practical steps can make a tangible difference every single day.'
+      },
+      {
+        id: 'env-3',
+        theme: 'Environment & Sustainability',
+        type: 'Making & Justifying a Choice',
+        context: 'Your district council is planning a green campaign for residents.',
+        prompt: 'Which green habit is easiest for Hong Kong families to adopt: saving electricity at home or reducing online shopping packaging? Explain your view.',
+        structure: '1. Choose saving electricity → 2. Direct financial incentive (lower bills) → 3. Simple daily actions (AC temperature, turning off standby power) → 4. Conclude.',
+        phrases: ['Win-win solution', 'Carbon footprint', 'Tangible financial incentive', 'Effortless to implement'],
+        sample5Star: 'I think saving electricity at home is much easier for Hong Kong families to adopt. Unlike online shopping, where packaging is largely controlled by overseas sellers, every family has immediate control over their home appliances. Simple habits like setting the air conditioner to twenty-five degrees Celsius and switching off unused lights require zero extra cost. Better yet, families see an immediate drop in their monthly electricity bills, making it a win-win solution for both their wallets and the planet.'
+      },
 
-      if (isPhoneUA || width < 640) return 'phone';
-      if (isTabletUA || (hasTouch && width >= 640 && width <= 1080)) return 'tablet';
-      return 'desktop';
+      // Hong Kong Culture & Society
+      {
+        id: 'hk-1',
+        theme: 'Hong Kong Culture & Society',
+        type: 'Making & Justifying a Choice',
+        context: 'You are hosting an exchange student from Canada who only has one afternoon free in Hong Kong.',
+        prompt: 'Where would you take your visitor: to a traditional dai pai dong and temple street, or to Victoria Peak and the Harbourfront? Why?',
+        structure: '1. Choose one destination → 2. Highlight authentic cultural immersion vs. iconic skyline → 3. Explain why it creates a memorable impression → 4. Conclusion.',
+        phrases: ['Authentic local flavor', 'East-meets-West heritage', 'Unforgettable impression', 'Vibrant atmosphere'],
+        sample5Star: 'If my visitor only has one afternoon, I would definitely take them to a traditional dai pai dong and Temple Street. While Victoria Peak offers a stunning skyline, bustling street stalls showcase the true soul and grassroots warmth of Hong Kong’s culinary heritage. Tasting freshly wok-fried dishes and exploring local night markets gives an exchange student an authentic cultural experience they could never find in a shopping mall. That vibrant local atmosphere will leave a truly unforgettable impression.'
+      },
+      {
+        id: 'hk-2',
+        theme: 'Hong Kong Culture & Society',
+        type: 'Arguing For / Against',
+        context: 'Many historic buildings and old shops in Hong Kong are being redeveloped into modern shopping malls.',
+        prompt: 'Should the government prioritize preserving historic buildings even if it slows down urban development? Why or why not?',
+        structure: '1. Clear stance (Yes, heritage gives a city identity) → 2. Cultural & educational value for future generations → 3. Adaptive reuse (like Tai Kwun or PMQ) boosts tourism → 4. Conclusion.',
+        phrases: ['Collective memory', 'Adaptive reuse', 'Irreplaceable heritage', 'Cultural identity'],
+        sample5Star: 'Yes, I believe the government should prioritize preserving historic buildings rather than replacing everything with generic shopping malls. Historic architecture holds our city’s collective memory and gives Hong Kong its unique East-meets-West identity. In fact, preservation does not have to hinder development—successful projects like Tai Kwun and PMQ show that revitalizing heritage sites can attract tourists and support local creative industries. Once a historic building is demolished, its cultural value is lost forever.'
+      },
+      {
+        id: 'hk-3',
+        theme: 'Hong Kong Culture & Society',
+        type: 'Making Suggestions',
+        context: 'Hong Kong is promoting mega-events and cultural tourism to attract more international visitors.',
+        prompt: 'How can Hong Kong make itself a more welcoming destination for international tourists?',
+        structure: '1. Acknowledge Hong Kong’s strengths → 2. Suggestion 1: Multilingual digital transport & hiking signage → 3. Suggestion 2: Hospitality training & hidden-gem walking routes → 4. Wrap up.',
+        phrases: ['World-class hospitality', 'Seamless travel experience', 'Off the beaten track', 'Lasting impression'],
+        sample5Star: 'To make Hong Kong even more welcoming for international tourists, we can focus on two key areas. First, we should upgrade multilingual digital guides and clear signage not just in the MTR, but also on popular country park hiking trails and outlying islands so visitors can explore safely. Second, encouraging warm, patient hospitality in local eateries and providing curated walking maps of cultural neighborhoods will help tourists feel genuinely valued and eager to return.'
+      },
+
+      // Youth & Career
+      {
+        id: 'youth-1',
+        theme: 'Youth & Career',
+        type: 'Making & Justifying a Choice',
+        context: 'Your cousin has just finished secondary school and is deciding what to do over the summer before university.',
+        prompt: 'Would you advise a fresh DSE graduate to take a part-time job or go backpacking overseas? Explain your reasons.',
+        structure: '1. Clear advice (Part-time job / internship) → 2. Reason 1: Financial independence & workplace soft skills → 3. Reason 2: Clarifies career interests before university → 4. Brief concession & conclusion.',
+        phrases: ['Real-world exposure', 'Financial independence', 'Interpersonal skills', 'Stepping stone'],
+        sample5Star: 'I would advise a fresh DSE graduate to take a part-time job over the summer. After years of focusing mainly on academic exams, working in a real business environment teaches invaluable soft skills like teamwork, time management, and communicating with customers. On top of that, earning their own income fosters financial independence and helps cover university expenses. While travelling is fun, gaining practical work experience serves as a much stronger stepping stone into adulthood.'
+      },
+      {
+        id: 'youth-2',
+        theme: 'Youth & Career',
+        type: 'Arguing For / Against',
+        context: 'More young people in Hong Kong are interested in becoming content creators or entrepreneurs instead of taking traditional office jobs.',
+        prompt: 'Is becoming a full-time social media content creator a realistic career choice for young people today? Why or why not?',
+        structure: '1. Nuanced stance (Possible, but high-risk without backup skills) → 2. Intense competition & unstable algorithm income → 3. Need for transferable skills (video editing, marketing) → 4. Conclusion.',
+        phrases: ['Fierce competition', 'Unpredictable income', 'Transferable skills', 'Pragmatic approach'],
+        sample5Star: 'In my opinion, becoming a full-time content creator is a risky career choice for most young people unless they treat it with a very pragmatic mindset. While a small percentage achieve viral success, the market is heavily saturated and income fluctuates unpredictably with platform algorithms. Therefore, I think young people should first build solid qualifications or pursue content creation part-time while developing transferable skills like digital marketing and video production. That way, they can chase their passion safely.'
+      },
+      {
+        id: 'youth-3',
+        theme: 'Youth & Career',
+        type: 'Explaining a Course of Action',
+        context: 'You are preparing for university admission interviews.',
+        prompt: 'What is the most important quality universities or employers look for in young people today, and how can students develop it?',
+        structure: '1. Identify quality (Adaptability / Problem-solving) → 2. Explain why it matters in a fast-changing world → 3. How students can build it (extracurriculars, teamwork) → 4. Closing.',
+        phrases: ['Adaptability', 'Step out of one’s comfort zone', 'Resilience', 'Navigate uncertainty'],
+        sample5Star: 'I believe adaptability is the single most important quality universities and employers look for today. Because technology and job requirements are evolving faster than ever, organizations value young people who can learn quickly and stay calm when facing unfamiliar challenges. Students can cultivate adaptability by stepping out of their comfort zones—such as joining inter-school competitions, leading student clubs, or learning a new skill outside their core subjects.'
+      },
+
+      // Health & Lifestyle
+      {
+        id: 'health-1',
+        theme: 'Health & Lifestyle',
+        type: 'Arguing For / Against',
+        context: 'Many secondary students in Hong Kong sleep fewer than six hours a night due to homework and late-night phone use.',
+        prompt: 'Do you think starting the school day 30 minutes later would improve students’ academic performance? Why or why not?',
+        structure: '1. Clear stance (Yes, improves alertness & concentration) → 2. Biological need for sleep in teenagers → 3. Better focus in morning lessons → 4. Note on self-discipline.',
+        phrases: ['Sleep deprivation', 'Cognitive alertness', 'Morning productivity', 'Healthy circadian rhythm'],
+        sample5Star: 'Yes, I strongly believe starting the school day thirty minutes later would boost students’ academic performance. Medical research shows that teenagers naturally have a shifted sleep cycle, and chronic sleep deprivation severely impairs memory and concentration during early morning lessons. With an extra half hour of rest, students would arrive at school more alert, attentive, and emotionally balanced, making classroom learning far more productive.'
+      },
+      {
+        id: 'health-2',
+        theme: 'Health & Lifestyle',
+        type: 'Making & Justifying a Choice',
+        context: 'Your family wants to spend more quality time together on weekends.',
+        prompt: 'Which weekend activity is better for family bonding: cooking a meal together at home or going hiking in a country park? Why?',
+        structure: '1. Choose one (Going hiking) → 2. Screen-free nature environment encourages open conversation → 3. Physical health benefits for all ages → 4. Conclusion.',
+        phrases: ['Unplug from digital devices', 'Quality bonding time', 'Rejuvenate', 'Meaningful conversations'],
+        sample5Star: 'I think going hiking in a country park is even better for family bonding than cooking at home. In Hong Kong’s fast-paced urban lifestyle, spending a morning surrounded by greenery helps both parents and teenagers unplug from work emails and smartphones. Walking side by side at a relaxed pace naturally sparks open, stress-free conversations while improving everyone’s physical fitness. It is a refreshing way to strengthen family ties.'
+      },
+      {
+        id: 'health-3',
+        theme: 'Health & Lifestyle',
+        type: 'Making Suggestions',
+        context: 'Fast food and sugary drinks are very popular among teenagers in Hong Kong.',
+        prompt: 'How can teenagers be encouraged to adopt healthier eating habits without feeling forced?',
+        structure: '1. Acknowledge that strict bans often backfire → 2. Suggestion 1: Make healthy snacks tasty & affordable at school → 3. Suggestion 2: Peer challenges & nutrition awareness → 4. Wrap up.',
+        phrases: ['Sustainable lifestyle change', 'Nutritious alternatives', 'Positive reinforcement', 'Long-term wellbeing'],
+        sample5Star: 'To encourage teenagers to eat healthier without feeling forced, we should make nutritious choices both appealing and accessible. First, school tuck shops can introduce tasty, affordable options like fruit smoothies, whole-grain wraps, and low-sugar drinks alongside traditional snacks. Second, sharing quick, budget-friendly healthy recipes on social media can inspire teens through positive peer influence rather than strict rules. When healthy food tastes great, good habits follow naturally.'
+      }
+    ];
+
+    /**
+     * 2. STORAGE & MULTI-USER STATE MANAGEMENT (localStorage with Demo Account)
+     */
+    const STORAGE_KEY_USERS = 'hkdse_p4_studio_users_v1';
+    const STORAGE_KEY_ACTIVE = 'hkdse_p4_studio_active_user_v1';
+
+    let usersDB = {};
+    let currentUser = null;
+    let currentQuestion = HKDSE_QUESTIONS[0];
+    let latestEvaluation = null;
+
+    // Seed a rich Demo Student profile so users can test Trends & History right away
+    function ensureDemoAccount() {
+      if (!usersDB['demo']) {
+        const now = Date.now();
+        const day = 86400000;
+        usersDB['demo'] = {
+          id: 'demo',
+          name: 'Alex Wong (Demo)',
+          passcode: 'demo',
+          targetLevel: '5*',
+          settings: {
+            voiceRate: 1.0,
+            autoRead: false,
+            strictMode: false
+          },
+          history: [
+            {
+              id: 'hist-1',
+              date: new Date(now - 6 * day).toISOString(),
+              questionId: 'edu-1',
+              theme: 'Education & School Life',
+              prompt: 'Would you prefer using e-textbooks on a tablet or traditional paper textbooks at school? Why?',
+              transcript: 'I think I prefer using tablet in school because paper textbook is very heavy for students every day. Also tablet have many function like searching dictionary and watching video. However some student may play game during lesson. In conclusion tablet is more convenient for us.',
+              duration: 46,
+              wpm: 102,
+              scores: { d1: 4, d2: 4, d3: 4, d4: 4 },
+              totalScore: 16,
+              dseLevel: '4',
+              headline: 'Clear Stance with Room for Grammatical Polish',
+              summary: 'You stated your preference clearly and gave two logical reasons, though singular/plural agreement and linking variety held your score at Level 4.',
+              grammarIssues: [
+                {
+                  original: 'using tablet in school because paper textbook is very heavy',
+                  correction: 'using tablets at school because paper textbooks are very heavy',
+                  explanation: 'Countable nouns ("tablet", "textbook") require plural forms when speaking generally.'
+                },
+                {
+                  original: 'tablet have many function',
+                  correction: 'tablets have many functions',
+                  explanation: 'Subject-verb agreement ("tablets have") and plural noun after "many".'
+                }
+              ],
+              tips: [
+                'Watch plural nouns when making general statements (e.g., "students", "tablets").',
+                'Extend your response to 55–60 seconds by adding a concrete example.'
+              ],
+              sampleAnswer: HKDSE_QUESTIONS.find(q => q.id === 'edu-1').sample5Star
+            },
+            {
+              id: 'hist-2',
+              date: new Date(now - 3 * day).toISOString(),
+              questionId: 'env-1',
+              theme: 'Environment & Sustainability',
+              prompt: 'Do you think banning disposable plastic tableware is an effective way to protect the environment? Why or why not?',
+              transcript: 'Personally, I agree that banning disposable plastic tableware is effective to protect our environment. First, Hong Kong landfills are almost full, and plastic waste harms marine animals for hundreds of years. Although wooden forks are a bit inconvenient at first, people will get used to bringing their own reusable cutlery. Therefore, this policy brings long-term benefits.',
+              duration: 54,
+              wpm: 122,
+              scores: { d1: 5, d2: 5, d3: 5, d4: 5 },
+              totalScore: 20,
+              dseLevel: '5',
+              headline: 'Well-Structured Argument with Persuasive Connectives',
+              summary: 'Strong fluency, balanced concession ("Although..."), and clear topic vocabulary elevated your performance to Level 5.',
+              grammarIssues: [
+                {
+                  original: 'effective to protect our environment',
+                  correction: 'effective in protecting our environment / an effective way to protect',
+                  explanation: '"Effective in + -ing" or "an effective way to + verb" sounds more natural than "effective to + verb".'
+                }
+              ],
+              tips: [
+                'Use higher-level collocations like "curb plastic pollution" or "ecological footprint".',
+                'Maintain your steady 120+ WPM speaking pace.'
+              ],
+              sampleAnswer: HKDSE_QUESTIONS.find(q => q.id === 'env-1').sample5Star
+            },
+            {
+              id: 'hist-3',
+              date: new Date(now - 1 * day).toISOString(),
+              questionId: 'tech-1',
+              theme: 'Technology & Social Media',
+              prompt: 'Do you think secondary schools should allow students to use AI tools for their homework? Why or why not?',
+              transcript: 'From my perspective, secondary schools should allow students to use AI tools for homework under proper guidelines. First and foremost, AI acts like a twenty-four-hour personal tutor that explains difficult concepts clearly. Moreover, learning how to use AI ethically prepares us for future workplaces. Of course, schools must remind students not to copy answers blindly so that genuine critical thinking is preserved.',
+              duration: 58,
+              wpm: 131,
+              scores: { d1: 6, d2: 6, d3: 5, d4: 6 },
+              totalScore: 23,
+              dseLevel: '5*',
+              headline: 'Distinction-Level Delivery & Nuanced Reasoning',
+              summary: 'Excellent pacing, natural discourse markers ("First and foremost", "From my perspective"), and a thoughtful caveat at the end.',
+              grammarIssues: [],
+              tips: [
+                'Zero major grammatical errors detected! Try incorporating one idiomatic phrase (e.g., "a double-edged sword") to push into 5** territory.'
+              ],
+              sampleAnswer: HKDSE_QUESTIONS.find(q => q.id === 'tech-1').sample5Star
+            }
+          ]
+        };
+        saveUsersDB();
+      }
     }
 
-    function applyAdaptiveDeviceLayout(announce = false) {
-      const detected = detectPhysicalDevice();
-      activeDeviceMode = devicePreference === 'auto' ? detected : devicePreference;
-
-      document.documentElement.setAttribute('data-device', activeDeviceMode);
-
-      // Update header selector & icon
-      const headerSelect = document.getElementById('device-mode-select');
-      const headerIcon = document.getElementById('device-mode-icon');
-      if (headerSelect) {
-        headerSelect.value = devicePreference;
-        const autoOption = headerSelect.querySelector('option[value="auto"]');
-        if (autoOption) {
-          const cap = detected.charAt(0).toUpperCase() + detected.slice(1);
-          autoOption.textContent = `Auto (${cap})`;
-        }
+    function loadUsersDB() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY_USERS);
+        usersDB = raw ? JSON.parse(raw) : {};
+      } catch (e) {
+        usersDB = {};
       }
-      if (headerIcon) {
-        const iconMap = { phone: 'smartphone', tablet: 'tablet', desktop: 'monitor' };
-        headerIcon.setAttribute('data-lucide', iconMap[activeDeviceMode] || 'monitor');
-      }
+      ensureDemoAccount();
+    }
 
-      // Toggle Top Nav vs Bottom Phone Thumb Dock
-      const topNav = document.getElementById('top-nav-bar');
-      const mobileDock = document.getElementById('mobile-thumb-dock');
-      const mobileCtaBar = document.getElementById('mobile-practice-cta-bar');
-      const inlineControls = document.getElementById('inline-record-controls');
-      const studioGrid = document.getElementById('studio-grid');
-      const studioTimerCol = document.getElementById('studio-timer-col');
-      const studioTranscriptCol = document.getElementById('studio-transcript-col');
-      const domainsGrid = document.getElementById('domains-grid');
-      const desktopShortcutHint = document.getElementById('desktop-shortcut-hint');
-
-      if (activeDeviceMode === 'phone') {
-        if (topNav) topNav.className = 'hidden';
-        if (mobileDock) mobileDock.classList.remove('hidden');
-        if (mobileCtaBar) {
-          mobileCtaBar.classList.toggle('hidden', currentTabName !== 'practice');
-        }
-        // Hide duplicate inline record buttons on phone since the thumb-dock CTA is anchored at bottom
-        if (inlineControls) inlineControls.classList.add('hidden');
-        if (desktopShortcutHint) desktopShortcutHint.classList.add('hidden');
-        if (studioGrid) studioGrid.className = 'grid grid-cols-1 gap-5 items-center';
-        if (studioTimerCol) studioTimerCol.className = 'flex flex-col items-center justify-center text-center border-b border-slate-100 pb-4';
-        if (studioTranscriptCol) studioTranscriptCol.className = 'flex flex-col h-full';
-        if (domainsGrid) domainsGrid.className = 'grid grid-cols-1 gap-3.5';
-      } else if (activeDeviceMode === 'tablet') {
-        if (topNav) topNav.className = 'flex items-center bg-slate-100/90 p-1 rounded-xl border border-slate-200/60';
-        if (mobileDock) mobileDock.classList.add('hidden');
-        if (inlineControls) inlineControls.classList.remove('hidden');
-        if (desktopShortcutHint) desktopShortcutHint.classList.add('hidden');
-        // Balanced 2-column split on Tablet
-        if (studioGrid) studioGrid.className = 'grid grid-cols-1 md:grid-cols-12 gap-6 items-center';
-        if (studioTimerCol) studioTimerCol.className = 'md:col-span-5 flex flex-col items-center justify-center text-center border-b md:border-b-0 md:border-r border-slate-100 pb-5 md:pb-0 md:pr-5';
-        if (studioTranscriptCol) studioTranscriptCol.className = 'md:col-span-7 flex flex-col h-full';
-        if (domainsGrid) domainsGrid.className = 'grid grid-cols-1 sm:grid-cols-2 gap-4';
-      } else {
-        // Desktop
-        if (topNav) topNav.className = 'flex items-center bg-slate-100/90 p-1 rounded-xl border border-slate-200/60';
-        if (mobileDock) mobileDock.classList.add('hidden');
-        if (inlineControls) inlineControls.classList.remove('hidden');
-        if (desktopShortcutHint) desktopShortcutHint.classList.remove('hidden');
-        if (studioGrid) studioGrid.className = 'grid grid-cols-1 lg:grid-cols-12 gap-8 items-center';
-        if (studioTimerCol) studioTimerCol.className = 'lg:col-span-5 flex flex-col items-center justify-center text-center border-b lg:border-b-0 lg:border-r border-slate-100 pb-6 lg:pb-0 lg:pr-6';
-        if (studioTranscriptCol) studioTranscriptCol.className = 'lg:col-span-7 flex flex-col h-full';
-        if (domainsGrid) domainsGrid.className = 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4';
-      }
-
-      // Update Settings pill buttons & status text
-      const statusText = document.getElementById('settings-device-status');
-      if (statusText) {
-        const capActive = activeDeviceMode.charAt(0).toUpperCase() + activeDeviceMode.slice(1);
-        const capDet = detected.charAt(0).toUpperCase() + detected.slice(1);
-        statusText.textContent = devicePreference === 'auto'
-          ? `Auto-detected: ${capDet} Mode (tap size & layout adapted automatically).`
-          : `Manually locked to ${capActive} Mode (detected device: ${capDet}).`;
-      }
-      document.querySelectorAll('.device-pill-btn').forEach(btn => {
-        const isSel = btn.dataset.setDevice === devicePreference;
-        btn.className = isSel
-          ? 'device-pill-btn px-2.5 py-2 rounded-lg text-xs font-bold bg-indigo-600 text-white transition'
-          : 'device-pill-btn px-2.5 py-2 rounded-lg text-xs font-semibold text-slate-600 hover:bg-slate-100 transition';
-      });
-
-      syncNavHighlight(currentTabName);
-      lucide.createIcons();
-
-      if (announce) {
-        const label = activeDeviceMode.charAt(0).toUpperCase() + activeDeviceMode.slice(1);
-        showToast(`Switched to ${label} Interface Mode`, 'indigo');
+    function saveUsersDB() {
+      try {
+        localStorage.setItem(STORAGE_KEY_USERS, JSON.stringify(usersDB));
+      } catch (e) {
+        showToast('Storage warning: Could not persist to browser storage.', 'rose');
       }
     }
 
-    function setDeviceModePreference(mode, announce = true) {
-      devicePreference = mode;
-      localStorage.setItem(STORAGE_KEY_DEVICE_PREF, mode);
-      applyAdaptiveDeviceLayout(announce);
+    function syncCurrentUser() {
+      if (!currentUser) return;
+      usersDB[currentUser.id] = currentUser;
+      saveUsersDB();
+      localStorage.setItem(STORAGE_KEY_ACTIVE, currentUser.id);
+      updateHeaderUI();
     }
 
     /**
-     * 4. UI HELPERS (Toast, Custom Confirm Modal, Navigation)
+     * 3. UI HELPERS (Toast, Custom Confirm Modal, Navigation)
      */
     function showToast(message, tone = 'indigo') {
       const container = document.getElementById('toast-container');
@@ -1165,91 +1206,34 @@
       };
     }
 
-    function syncNavHighlight(tabName) {
+    function switchTab(tabName) {
+      document.querySelectorAll('.view-section').forEach(el => el.classList.add('hidden'));
+      document.getElementById(`view-${tabName}`).classList.remove('hidden');
+
       document.querySelectorAll('.nav-btn').forEach(btn => {
         const isActive = btn.dataset.nav === tabName;
-        if (btn.closest('#top-nav-bar')) {
+        if (btn.closest('nav')) {
+          // Desktop nav
           btn.className = isActive
-            ? 'nav-btn px-3.5 py-1.5 rounded-lg text-sm font-semibold bg-white text-indigo-600 shadow-sm transition flex items-center gap-2'
-            : 'nav-btn px-3.5 py-1.5 rounded-lg text-sm font-semibold text-slate-600 hover:text-slate-900 transition flex items-center gap-2';
-        } else if (btn.closest('#mobile-thumb-dock')) {
+            ? 'nav-btn px-4 py-1.5 rounded-lg text-sm font-semibold bg-white text-indigo-600 shadow-sm transition flex items-center gap-2'
+            : 'nav-btn px-4 py-1.5 rounded-lg text-sm font-semibold text-slate-600 hover:text-slate-900 transition flex items-center gap-2';
+        } else {
+          // Mobile nav
           btn.className = isActive
-            ? 'nav-btn min-h-[52px] flex flex-col items-center justify-center gap-1 rounded-xl text-indigo-600 bg-indigo-50/70 font-bold text-[11px]'
-            : 'nav-btn min-h-[52px] flex flex-col items-center justify-center gap-1 rounded-xl text-slate-500 font-semibold text-[11px]';
+            ? 'nav-btn flex-1 py-2 rounded-lg text-xs font-semibold bg-indigo-50 text-indigo-600 flex items-center justify-center gap-1.5'
+            : 'nav-btn flex-1 py-2 rounded-lg text-xs font-semibold text-slate-600 flex items-center justify-center gap-1.5';
         }
       });
-    }
-
-    function switchTab(tabName) {
-      currentTabName = tabName;
-      document.querySelectorAll('.view-section').forEach(el => el.classList.add('hidden'));
-      const targetView = document.getElementById(`view-${tabName}`);
-      if (targetView) targetView.classList.remove('hidden');
-
-      syncNavHighlight(tabName);
-
-      // Show/hide mobile thumb-dock Practice CTA depending on active tab
-      const mobileCtaBar = document.getElementById('mobile-practice-cta-bar');
-      if (mobileCtaBar && activeDeviceMode === 'phone') {
-        mobileCtaBar.classList.toggle('hidden', tabName !== 'practice');
-      }
 
       if (tabName === 'trends') {
         renderTrendsDashboard();
-      } else if (tabName === 'bank') {
-        renderQuestionBank(document.getElementById('bank-theme-filter')?.value || 'ALL');
       } else if (tabName === 'settings') {
         populateSettingsForm();
       }
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    function renderQuestionBank(themeFilter = 'ALL') {
-      const container = document.getElementById('bank-cards-grid');
-      if (!container) return;
-      const list = themeFilter === 'ALL'
-        ? HKDSE_QUESTIONS
-        : HKDSE_QUESTIONS.filter(q => q.theme === themeFilter);
-
-      container.innerHTML = '';
-      list.forEach((q, idx) => {
-        const card = document.createElement('div');
-        card.className = 'p-5 rounded-2xl border border-slate-200/80 bg-slate-50/50 hover:bg-white hover:border-indigo-300 hover:shadow-md transition flex flex-col justify-between gap-4';
-        card.innerHTML = `
-          <div class="space-y-2">
-            <div class="flex flex-wrap items-center justify-between gap-2 text-xs">
-              <span class="px-2.5 py-0.5 rounded-lg bg-indigo-50 text-indigo-700 font-semibold">${escapeHtml(q.theme)}</span>
-              <span class="text-slate-400 font-medium">${escapeHtml(q.type)}</span>
-            </div>
-            <h3 class="text-sm sm:text-base font-bold text-slate-900 leading-snug">${idx + 1}. ${escapeHtml(q.prompt)}</h3>
-            <p class="text-xs text-slate-500 line-clamp-2">${escapeHtml(q.context)}</p>
-          </div>
-          <div class="flex items-center justify-between gap-2 pt-2 border-t border-slate-200/60">
-            <button type="button" class="bank-listen-btn px-3 py-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-xs font-semibold text-slate-700 flex items-center gap-1.5">
-              <i data-lucide="volume-2" class="w-3.5 h-3.5 text-indigo-600"></i>
-              <span>Listen</span>
-            </button>
-            <button type="button" class="bank-practice-btn px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold flex items-center gap-1.5 shadow-sm">
-              <i data-lucide="mic" class="w-3.5 h-3.5"></i>
-              <span>Practice This</span>
-            </button>
-          </div>
-        `;
-        card.querySelector('.bank-listen-btn').onclick = () => speakText(q.prompt);
-        card.querySelector('.bank-practice-btn').onclick = () => {
-          document.getElementById('theme-filter').value = 'ALL';
-          populateQuestionDropdown('ALL');
-          selectQuestionById(q.id, false);
-          switchTab('practice');
-          showToast('Prompt loaded into Practice Studio!', 'indigo');
-        };
-        container.appendChild(card);
-      });
-      lucide.createIcons();
     }
 
     /**
-     * 5. AUTHENTICATION FLOW
+     * 4. AUTHENTICATION FLOW
      */
     function renderSavedAccountChips() {
       const box = document.getElementById('saved-accounts-box');
@@ -1450,10 +1434,8 @@
     function updateTimerVisuals() {
       const mins = Math.floor(secondsRemaining / 60);
       const secs = secondsRemaining % 60;
-      const formatted = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
-      document.getElementById('timer-display').textContent = formatted;
-      const mobileDockTimer = document.getElementById('mobile-dock-timer');
-      if (mobileDockTimer) mobileDockTimer.textContent = formatted;
+      document.getElementById('timer-display').textContent =
+        `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
 
       const ring = document.getElementById('timer-ring');
       const progress = (EXAM_SECONDS - secondsRemaining) / EXAM_SECONDS;
@@ -1462,17 +1444,13 @@
       if (secondsRemaining <= 10 && secondsRemaining > 0) {
         ring.style.stroke = '#e11d48'; // Rose warning in final 10s
         document.getElementById('timer-status').textContent = 'Wrap up your conclusion!';
-        document.getElementById('timer-status').className = 'text-xs font-bold text-rose-600 mt-1 animate-pulse';
-      } else if (secondsRemaining <= 25 && isRecording) {
-        ring.style.stroke = '#f59e0b'; // Amber pacing indicator
-        document.getElementById('timer-status').textContent = 'Develop Reason 2...';
-        document.getElementById('timer-status').className = 'text-xs font-semibold text-amber-600 mt-1';
+        document.getElementById('timer-status').className = 'text-xs font-bold text-rose-600 mt-1';
       } else if (isRecording) {
-        ring.style.stroke = '#10b981'; // Emerald active recording
+        ring.style.stroke = '#4f46e5';
         document.getElementById('timer-status').textContent = 'Recording in progress...';
-        document.getElementById('timer-status').className = 'text-xs font-semibold text-emerald-600 mt-1';
+        document.getElementById('timer-status').className = 'text-xs font-semibold text-indigo-600 mt-1';
       } else {
-        ring.style.stroke = '#10b981';
+        ring.style.stroke = '#4f46e5';
         document.getElementById('timer-status').textContent = 'Ready to Speak';
         document.getElementById('timer-status').className = 'text-xs font-semibold text-slate-400 mt-1';
       }
@@ -1505,11 +1483,6 @@
       document.getElementById('stop-record-btn').classList.remove('hidden');
       document.getElementById('reset-record-btn').classList.remove('hidden');
       document.getElementById('mic-wave-box').classList.remove('hidden');
-
-      // Sync Phone thumb-dock buttons
-      document.getElementById('mobile-start-btn')?.classList.add('hidden');
-      document.getElementById('mobile-stop-btn')?.classList.remove('hidden');
-      document.getElementById('mobile-reset-btn')?.classList.remove('hidden');
 
       if (speechSupported && recognition) {
         try {
@@ -1546,10 +1519,6 @@
       document.getElementById('interim-overlay').classList.add('hidden');
       document.getElementById('timer-status').textContent = 'Response Completed';
 
-      // Sync Phone thumb-dock buttons
-      document.getElementById('mobile-start-btn')?.classList.remove('hidden');
-      document.getElementById('mobile-stop-btn')?.classList.add('hidden');
-
       if (shouldEvaluate) {
         const transcript = document.getElementById('transcript-box').value.trim();
         const durationUsed = Math.max(10, EXAM_SECONDS - secondsRemaining);
@@ -1568,7 +1537,6 @@
       document.getElementById('transcript-box').value = '';
       document.getElementById('interim-overlay').classList.add('hidden');
       document.getElementById('reset-record-btn').classList.add('hidden');
-      document.getElementById('mobile-reset-btn')?.classList.add('hidden');
       document.getElementById('evaluation-result').classList.add('hidden');
       document.getElementById('evaluation-loading').classList.add('hidden');
       updateTimerVisuals();
@@ -2232,32 +2200,86 @@ Candidate Spoken Transcript: "${transcript}"`;
      */
     window.addEventListener('DOMContentLoaded', () => {
       lucide.createIcons();
-      applyAdaptiveDeviceLayout(false);
       loadUsersDB();
       initSpeechRecognition();
       populateQuestionDropdown('ALL');
       renderSavedAccountChips();
       bindSettingsAutoSave();
 
-      // Adaptive Device Mode Switchers & Resize/Orientation Listeners
-      document.getElementById('device-mode-select').onchange = (e) => {
-        setDeviceModePreference(e.target.value, true);
+      // Auth Tab Switching
+      document.getElementById('tab-login').onclick = () => {
+        document.getElementById('tab-login').className = 'flex-1 py-2 text-sm font-semibold rounded-lg bg-white text-slate-900 shadow-sm transition';
+        document.getElementById('tab-register').className = 'flex-1 py-2 text-sm font-semibold rounded-lg text-slate-500 hover:text-slate-800 transition';
+        document.getElementById('login-form').classList.remove('hidden');
+        document.getElementById('register-form').classList.add('hidden');
       };
-      document.querySelectorAll('.device-pill-btn').forEach(btn => {
-        btn.onclick = () => setDeviceModePreference(btn.dataset.setDevice, true);
-      });
 
-      let resizeTimer = null;
-      window.addEventListener('resize', () => {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(() => {
-          if (devicePreference === 'auto') {
-            applyAdaptiveDeviceLayout(false);
-          }
-        }, 150);
-      });
-      window.addEventListener('orientationchange', () => {
-        setTimeout(() => applyAdaptiveDeviceLayout(false), 200);
+      document.getElementById('tab-register').onclick = () => {
+        document.getElementById('tab-register').className = 'flex-1 py-2 text-sm font-semibold rounded-lg bg-white text-slate-900 shadow-sm transition';
+        document.getElementById('tab-login').className = 'flex-1 py-2 text-sm font-semibold rounded-lg text-slate-500 hover:text-slate-800 transition';
+        document.getElementById('register-form').classList.remove('hidden');
+        document.getElementById('login-form').classList.add('hidden');
+      };
+
+      // Demo Login
+      document.getElementById('demo-login-btn').onclick = () => {
+        ensureDemoAccount();
+        loginUser('demo');
+      };
+
+      // Login Submit
+      document.getElementById('login-form').onsubmit = (e) => {
+        e.preventDefault();
+        const id = document.getElementById('login-id').value.trim().toLowerCase();
+        const pass = document.getElementById('login-pass').value;
+        const errEl = document.getElementById('login-error');
+
+        const user = usersDB[id];
+        if (!user || user.passcode !== pass) {
+          errEl.textContent = 'Invalid Student ID or Passcode. Try creating a new account or click Demo Student.';
+          errEl.classList.remove('hidden');
+          return;
+        }
+        errEl.classList.add('hidden');
+        loginUser(id);
+      };
+
+      // Register Submit
+      document.getElementById('register-form').onsubmit = (e) => {
+        e.preventDefault();
+        const name = document.getElementById('reg-name').value.trim();
+        const id = document.getElementById('reg-id').value.trim().toLowerCase().replace(/\s+/g, '_');
+        const pass = document.getElementById('reg-pass').value;
+        const target = document.getElementById('reg-target').value;
+        const errEl = document.getElementById('reg-error');
+
+        if (id.length < 2 || pass.length < 3) {
+          errEl.textContent = 'Please enter a valid Student ID and a passcode (at least 3 characters).';
+          errEl.classList.remove('hidden');
+          return;
+        }
+        if (usersDB[id]) {
+          errEl.textContent = 'This Student ID already exists. Please sign in or choose another ID.';
+          errEl.classList.remove('hidden');
+          return;
+        }
+
+        errEl.classList.add('hidden');
+        usersDB[id] = {
+          id,
+          name,
+          passcode: pass,
+          targetLevel: target,
+          settings: { voiceRate: 1.0, autoRead: false, strictMode: false },
+          history: []
+        };
+        saveUsersDB();
+        loginUser(id);
+      };
+
+      // Navigation
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.onclick = () => switchTab(btn.dataset.nav);
       });
 
       document.getElementById('logout-btn').onclick = logoutUser;
@@ -2291,30 +2313,9 @@ Candidate Spoken Transcript: "${transcript}"`;
       document.getElementById('stop-record-btn').onclick = () => stopRecording(true);
       document.getElementById('reset-record-btn').onclick = resetPracticeArea;
 
-      // Phone thumb-dock CTA wiring
-      document.getElementById('mobile-start-btn').onclick = startRecording;
-      document.getElementById('mobile-stop-btn').onclick = () => stopRecording(true);
-      document.getElementById('mobile-reset-btn').onclick = resetPracticeArea;
-
-      // Question Bank theme filter
-      document.getElementById('bank-theme-filter').onchange = (e) => {
-        renderQuestionBank(e.target.value);
-      };
-
-      // Desktop keyboard shortcuts (Spacebar = Start/Stop, R = Replay Examiner)
-      window.addEventListener('keydown', (e) => {
-        if (activeDeviceMode !== 'desktop' || !currentUser || currentTabName !== 'practice') return;
-        const tag = (e.target.tagName || '').toLowerCase();
-        if (tag === 'input' || tag === 'textarea' || tag === 'select') return;
-
-        if (e.code === 'Space') {
-          e.preventDefault();
-          if (isRecording) stopRecording(true);
-          else startRecording();
-        } else if (e.key === 'r' || e.key === 'R') {
-          e.preventDefault();
-          speakText(currentQuestion.prompt);
-        }
+      document.getElementById('transcript-box').addEventListener('input', () => {
+        finalTranscriptBuffer = document.getElementById('transcript-box').value;
+        updateLiveMetrics();
       });
 
       document.getElementById('grade-manual-btn').onclick = () => {
@@ -2377,3 +2378,4 @@ Candidate Spoken Transcript: "${transcript}"`;
   </script>
 </body>
 </html>
+```
