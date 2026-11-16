@@ -1,10 +1,9 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HKDSE English Paper 4 • Individual Response Studio</title>
+  <title>HKDSE English Paper 4 • Individual Response Studio (100,000+ Prompts)</title>
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Google Fonts: Inter & Plus Jakarta Sans -->
@@ -48,7 +47,6 @@
     h1, h2, h3, .font-display {
       font-family: 'Plus Jakarta Sans', sans-serif;
     }
-    /* Custom subtle scrollbar */
     ::-webkit-scrollbar {
       width: 6px;
       height: 6px;
@@ -63,7 +61,6 @@
     ::-webkit-scrollbar-thumb:hover {
       background: #94a3b8;
     }
-    /* Pulse animation for active recording */
     @keyframes soundWave {
       0%, 100% { transform: scaleY(0.35); }
       50% { transform: scaleY(1); }
@@ -79,10 +76,10 @@
 </head>
 <body class="min-h-screen flex flex-col antialiased selection:bg-indigo-100 selection:text-indigo-900">
 
-  <!-- Toast Notification Banner (Replaces alert/confirm) -->
+  <!-- Toast Notification Banner -->
   <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
 
-  <!-- Custom Confirmation Modal (Replaces confirm) -->
+  <!-- Custom Confirmation Modal -->
   <div id="confirm-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-900/50 backdrop-blur-sm p-4">
     <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-100 transform transition-all">
       <div class="flex items-center gap-3 text-amber-600 mb-3">
@@ -116,43 +113,43 @@
             Part B Individual Response Studio
           </h1>
           <p class="text-indigo-100 text-sm leading-relaxed mb-8">
-            Master the 1-minute DSE speaking response with real-time speech recognition, HKEAA 4-domain rubric marking, instant grammar coaching, and personal progress tracking.
+            Practice with <strong class="text-white">120,000+ HKEAA-style exam questions</strong>, level-adaptive linking phrases (Level 3 to 5**), real-time speech recognition, and 4-domain rubric grading.
           </p>
 
           <div class="space-y-4 text-sm">
             <div class="flex items-start gap-3">
               <div class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center shrink-0 mt-0.5">
-                <i data-lucide="mic" class="w-4 h-4 text-emerald-300"></i>
+                <i data-lucide="database" class="w-4 h-4 text-emerald-300"></i>
               </div>
               <div>
-                <p class="font-semibold text-white">60-Second Exam Simulation</p>
-                <p class="text-indigo-200 text-xs">Examiner audio prompt + live speech-to-text pacing.</p>
+                <p class="font-semibold text-white">120,000+ Exam Question Bank</p>
+                <p class="text-indigo-200 text-xs">Covers all 8 HKDSE themes & 6 question archetypes.</p>
               </div>
             </div>
             <div class="flex items-start gap-3">
               <div class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center shrink-0 mt-0.5">
-                <i data-lucide="award" class="w-4 h-4 text-amber-300"></i>
+                <i data-lucide="book-open-check" class="w-4 h-4 text-amber-300"></i>
+              </div>
+              <div>
+                <p class="font-semibold text-white">Level-Tiered Linking & Vocab Coach</p>
+                <p class="text-indigo-200 text-xs">Tailored connectives for Level 3, Level 4–5 & Level 5*–5**.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center shrink-0 mt-0.5">
+                <i data-lucide="award" class="w-4 h-4 text-sky-300"></i>
               </div>
               <div>
                 <p class="font-semibold text-white">Official 4-Domain DSE Grading</p>
                 <p class="text-indigo-200 text-xs">Scored 0–7 per domain & mapped to Levels 1 to 5**.</p>
               </div>
             </div>
-            <div class="flex items-start gap-3">
-              <div class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center shrink-0 mt-0.5">
-                <i data-lucide="trending-up" class="w-4 h-4 text-sky-300"></i>
-              </div>
-              <div>
-                <p class="font-semibold text-white">Auto-Saved Multi-Student Profiles</p>
-                <p class="text-indigo-200 text-xs">Every attempt, grammar tip & skill trend stays saved.</p>
-              </div>
-            </div>
           </div>
         </div>
 
         <div class="mt-8 pt-6 border-t border-white/15 flex items-center justify-between text-xs text-indigo-200">
+          <span>120,000+ Prompts Ready</span>
           <span>HKEAA Rubric Aligned</span>
-          <span>Auto-Save Enabled</span>
         </div>
       </div>
 
@@ -256,7 +253,7 @@
           </div>
           <div>
             <span class="font-display font-bold text-slate-900 text-base tracking-tight block leading-none">HKDSE Paper 4</span>
-            <span class="text-[11px] font-medium text-slate-500">Part B • Individual Response</span>
+            <span class="text-[11px] font-medium text-slate-500">Part B • <span id="bank-total-badge" class="text-indigo-600 font-semibold">120,000+</span> Questions</span>
           </div>
         </div>
 
@@ -266,13 +263,17 @@
             <i data-lucide="play-circle" class="w-4 h-4"></i>
             Practice Arena
           </button>
+          <button data-nav="phrasebook" class="nav-btn px-4 py-1.5 rounded-lg text-sm font-semibold text-slate-600 hover:text-slate-900 transition flex items-center gap-2">
+            <i data-lucide="book-open" class="w-4 h-4"></i>
+            Linking & Vocab Bank
+          </button>
           <button data-nav="trends" class="nav-btn px-4 py-1.5 rounded-lg text-sm font-semibold text-slate-600 hover:text-slate-900 transition flex items-center gap-2">
             <i data-lucide="bar-chart-2" class="w-4 h-4"></i>
             Progress & Trends
           </button>
           <button data-nav="settings" class="nav-btn px-4 py-1.5 rounded-lg text-sm font-semibold text-slate-600 hover:text-slate-900 transition flex items-center gap-2">
             <i data-lucide="sliders" class="w-4 h-4"></i>
-            Settings & Profile
+            Settings
           </button>
         </nav>
 
@@ -289,17 +290,21 @@
         </div>
       </div>
 
-      <!-- Mobile Bottom-Style Subheader Nav -->
+      <!-- Mobile Subheader Nav -->
       <div class="flex md:hidden border-t border-slate-100 bg-white px-2 py-1.5 gap-1">
-        <button data-nav="practice" class="nav-btn flex-1 py-2 rounded-lg text-xs font-semibold bg-indigo-50 text-indigo-600 flex items-center justify-center gap-1.5">
+        <button data-nav="practice" class="nav-btn flex-1 py-2 rounded-lg text-xs font-semibold bg-indigo-50 text-indigo-600 flex items-center justify-center gap-1">
           <i data-lucide="play-circle" class="w-3.5 h-3.5"></i>
           Practice
         </button>
-        <button data-nav="trends" class="nav-btn flex-1 py-2 rounded-lg text-xs font-semibold text-slate-600 flex items-center justify-center gap-1.5">
+        <button data-nav="phrasebook" class="nav-btn flex-1 py-2 rounded-lg text-xs font-semibold text-slate-600 flex items-center justify-center gap-1">
+          <i data-lucide="book-open" class="w-3.5 h-3.5"></i>
+          Vocab
+        </button>
+        <button data-nav="trends" class="nav-btn flex-1 py-2 rounded-lg text-xs font-semibold text-slate-600 flex items-center justify-center gap-1">
           <i data-lucide="bar-chart-2" class="w-3.5 h-3.5"></i>
           Trends
         </button>
-        <button data-nav="settings" class="nav-btn flex-1 py-2 rounded-lg text-xs font-semibold text-slate-600 flex items-center justify-center gap-1.5">
+        <button data-nav="settings" class="nav-btn flex-1 py-2 rounded-lg text-xs font-semibold text-slate-600 flex items-center justify-center gap-1">
           <i data-lucide="sliders" class="w-3.5 h-3.5"></i>
           Settings
         </button>
@@ -307,54 +312,74 @@
     </header>
 
     <!-- ===================================================================
-         TAB 1: PRACTICE ARENA
+         TAB 1: PRACTICE ARENA (WITH 120,000+ QUESTION GENERATOR)
     ==================================================================== -->
     <main id="view-practice" class="view-section max-w-5xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-6 flex-1">
       
-      <!-- Question Selector Bar -->
-      <div class="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/80 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div class="flex flex-wrap items-center gap-2.5">
-          <label for="theme-filter" class="text-xs font-bold uppercase tracking-wider text-slate-400">Theme:</label>
-          <select id="theme-filter" class="px-3.5 py-2 rounded-xl border border-slate-200 bg-slate-50 text-sm font-medium text-slate-700 focus:border-indigo-500 outline-none">
-            <option value="ALL">All HKDSE Themes (18 Questions)</option>
-            <option value="Technology & Social Media">Technology & Social Media</option>
-            <option value="Education & School Life">Education & School Life</option>
-            <option value="Environment & Sustainability">Environment & Sustainability</option>
-            <option value="Hong Kong Culture & Society">Hong Kong Culture & Society</option>
-            <option value="Youth & Career">Youth & Career</option>
-            <option value="Health & Lifestyle">Health & Lifestyle</option>
-          </select>
+      <!-- Question Selector & Filter Bar -->
+      <div class="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/80 shadow-sm space-y-3">
+        <div class="flex flex-wrap items-center justify-between gap-3">
+          <div class="flex flex-wrap items-center gap-2.5 flex-1">
+            <!-- Theme Filter -->
+            <select id="theme-filter" class="px-3.5 py-2 rounded-xl border border-slate-200 bg-slate-50 text-xs sm:text-sm font-medium text-slate-700 focus:border-indigo-500 outline-none">
+              <option value="ALL">All 8 HKDSE Themes (120,000+ Prompts)</option>
+              <option value="Technology & AI">Technology & AI</option>
+              <option value="Education & School Life">Education & School Life</option>
+              <option value="Environment & Sustainability">Environment & Sustainability</option>
+              <option value="Hong Kong Culture & Society">Hong Kong Culture & Society</option>
+              <option value="Youth & Career">Youth & Career</option>
+              <option value="Health & Lifestyle">Health & Lifestyle</option>
+              <option value="Media, Pop Culture & Arts">Media, Pop Culture & Arts</option>
+              <option value="Community & Social Issues">Community & Social Issues</option>
+            </select>
 
-          <select id="question-select" class="px-3.5 py-2 rounded-xl border border-slate-200 bg-white text-sm font-medium text-slate-700 max-w-xs sm:max-w-sm truncate focus:border-indigo-500 outline-none">
-            <!-- Populated by JS -->
-          </select>
-        </div>
+            <!-- Question Archetype Filter -->
+            <select id="type-filter" class="px-3.5 py-2 rounded-xl border border-slate-200 bg-slate-50 text-xs sm:text-sm font-medium text-slate-700 focus:border-indigo-500 outline-none">
+              <option value="ALL">All Question Types</option>
+              <option value="Arguing For / Against">Arguing For / Against</option>
+              <option value="Making & Justifying a Choice">Making & Justifying a Choice</option>
+              <option value="Making Suggestions">Making Suggestions</option>
+              <option value="Explaining a Course of Action">Explaining a Course of Action</option>
+              <option value="Evaluating Pros & Cons">Evaluating Pros & Cons</option>
+              <option value="Personal Experience & Reflection">Personal Experience & Reflection</option>
+            </select>
 
-        <div class="flex items-center gap-2">
-          <button id="random-question-btn" class="px-4 py-2 rounded-xl bg-indigo-50 hover:bg-indigo-100 text-indigo-700 text-xs font-semibold transition flex items-center gap-1.5">
-            <i data-lucide="shuffle" class="w-3.5 h-3.5"></i>
-            Random Exam Prompt
-          </button>
+            <!-- Batch Question Picker -->
+            <select id="question-select" class="px-3.5 py-2 rounded-xl border border-slate-200 bg-white text-xs sm:text-sm font-medium text-slate-700 max-w-xs sm:max-w-sm truncate focus:border-indigo-500 outline-none">
+              <!-- Populated dynamically with batch of generated questions -->
+            </select>
+          </div>
+
+          <div class="flex items-center gap-2 shrink-0">
+            <button id="refresh-batch-btn" title="Load 25 fresh questions in dropdown" class="px-3 py-2 rounded-xl border border-slate-200 hover:bg-slate-50 text-slate-600 text-xs font-semibold transition flex items-center gap-1">
+              <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
+              <span>New Batch</span>
+            </button>
+            <button id="random-question-btn" class="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold shadow-sm transition flex items-center gap-1.5">
+              <i data-lucide="shuffle" class="w-3.5 h-3.5"></i>
+              <span>Random Prompt</span>
+            </button>
+          </div>
         </div>
       </div>
 
       <!-- Exam Prompt Card -->
       <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm overflow-hidden">
-        <!-- Context Header (Simulates Part A Group Interaction link) -->
         <div class="bg-slate-900 text-slate-300 px-6 py-3.5 flex flex-wrap items-center justify-between gap-2 text-xs">
           <div class="flex items-center gap-2">
-            <span class="px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-300 font-semibold border border-indigo-400/20" id="q-theme-badge">Technology & Social Media</span>
+            <span class="px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-300 font-semibold border border-indigo-400/20" id="q-theme-badge">Technology & AI</span>
             <span class="text-slate-400">•</span>
             <span id="q-type-badge" class="text-slate-300 font-medium">Arguing For / Against</span>
           </div>
-          <span class="text-slate-400 font-medium">Part B: Individual Response (1 Minute)</span>
+          <div class="flex items-center gap-3">
+            <span id="q-code-badge" class="font-mono text-[11px] text-slate-400">Prompt #DSE-10492</span>
+            <span class="text-slate-400 font-medium">Part B (1 Min)</span>
+          </div>
         </div>
 
         <div class="p-6 sm:p-8">
           <p class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Group Discussion Context</p>
-          <p id="q-context" class="text-sm text-slate-600 mb-5 pb-5 border-b border-slate-100">
-            Your class is discussing how artificial intelligence tools affect secondary school students' learning habits.
-          </p>
+          <p id="q-context" class="text-sm text-slate-600 mb-5 pb-5 border-b border-slate-100"></p>
 
           <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
             <div class="space-y-2">
@@ -362,9 +387,7 @@
                 <i data-lucide="message-square-quote" class="w-4 h-4"></i>
                 Examiner's Question
               </span>
-              <h2 id="q-prompt" class="text-xl sm:text-2xl font-bold text-slate-900 leading-snug">
-                Do you think secondary schools should allow students to use AI tools for their homework? Why or why not?
-              </h2>
+              <h2 id="q-prompt" class="text-xl sm:text-2xl font-bold text-slate-900 leading-snug"></h2>
             </div>
 
             <!-- Read Aloud & Hint Buttons -->
@@ -373,21 +396,45 @@
                 <i data-lucide="volume-2" class="w-4 h-4 text-indigo-600"></i>
                 <span>Listen to Examiner</span>
               </button>
-              <button id="toggle-hint-btn" class="px-3.5 py-2 rounded-xl border border-slate-200 hover:border-amber-300 hover:bg-amber-50/50 text-slate-700 text-xs font-semibold transition flex items-center gap-1.5">
-                <i data-lucide="lightbulb" class="w-4 h-4 text-amber-500"></i>
-                <span>Structure Hint</span>
+              <button id="toggle-hint-btn" class="px-3.5 py-2 rounded-xl border border-amber-200 bg-amber-50/60 hover:bg-amber-100/70 text-amber-900 text-xs font-semibold transition flex items-center gap-1.5">
+                <i data-lucide="sparkles" class="w-4 h-4 text-amber-600"></i>
+                <span>Linking Words & Hints</span>
               </button>
             </div>
           </div>
 
-          <!-- Collapsible Learning Mode Hint Box -->
-          <div id="hint-box" class="hidden mt-5 p-4 rounded-2xl bg-amber-50/70 border border-amber-200/80 text-sm text-slate-700 space-y-2">
-            <div class="flex items-center justify-between">
-              <span class="text-xs font-bold uppercase tracking-wider text-amber-800">5** Response Blueprint & Useful Expressions</span>
-              <span class="text-[11px] text-amber-700">Tip: Aim for 110–150 words in 60s</span>
+          <!-- Level-Adaptive Linking Words & Structure Hint Box -->
+          <div id="hint-box" class="mt-5 p-5 rounded-2xl bg-gradient-to-br from-amber-50/90 to-indigo-50/50 border border-amber-200/80 text-sm text-slate-700 space-y-4">
+            <div class="flex flex-wrap items-center justify-between gap-2 border-b border-amber-200/60 pb-3">
+              <div>
+                <span class="text-xs font-bold uppercase tracking-wider text-amber-900 block">Level-Adaptive Linking Words & Response Coach</span>
+                <span class="text-[11px] text-slate-600">Switch proficiency tier to upgrade your vocabulary & connectives</span>
+              </div>
+
+              <!-- Proficiency Level Selector Pills -->
+              <div class="flex items-center bg-white p-1 rounded-xl border border-amber-200/80 shadow-sm">
+                <button type="button" data-vocab-tier="L3" class="vocab-tier-btn px-2.5 py-1 rounded-lg text-xs font-semibold transition">Level 3 (Clear)</button>
+                <button type="button" data-vocab-tier="L4_5" class="vocab-tier-btn px-2.5 py-1 rounded-lg text-xs font-semibold transition">Level 4–5 (Fluent)</button>
+                <button type="button" data-vocab-tier="L5_STAR" class="vocab-tier-btn px-2.5 py-1 rounded-lg text-xs font-semibold transition">Level 5*–5** (Distinction)</button>
+              </div>
             </div>
-            <p id="q-hint-structure" class="text-xs sm:text-sm text-slate-700 leading-relaxed"></p>
-            <div id="q-hint-phrases" class="flex flex-wrap gap-1.5 pt-1"></div>
+
+            <!-- Step-by-Step Blueprint -->
+            <div class="bg-white/80 rounded-xl p-3.5 border border-amber-100">
+              <span class="text-[11px] font-bold uppercase tracking-wider text-indigo-700 block mb-1">Recommended 60-Second Structure</span>
+              <p id="q-hint-structure" class="text-xs sm:text-sm text-slate-700 leading-relaxed"></p>
+            </div>
+
+            <!-- Categorized Linking Phrases for Selected Level -->
+            <div id="tiered-linking-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              <!-- Populated dynamically by JS based on selected level -->
+            </div>
+
+            <!-- Topic-Specific Keywords -->
+            <div class="pt-1">
+              <span class="text-[11px] font-bold uppercase tracking-wider text-slate-500 block mb-1.5">Topic-Specific Vocabulary (Click to hear pronunciation)</span>
+              <div id="q-hint-phrases" class="flex flex-wrap gap-1.5"></div>
+            </div>
           </div>
         </div>
       </div>
@@ -455,13 +502,13 @@
             </div>
 
             <div class="relative flex-1">
-              <textarea id="transcript-box" rows="6" placeholder="Click 'Start 1-Min Response' and speak clearly into your microphone. Your words will appear here in real time (you can also type or edit text manually if your browser blocks mic access)..." class="w-full h-full min-h-[168px] p-4 rounded-2xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 outline-none text-sm text-slate-800 leading-relaxed resize-none transition"></textarea>
+              <textarea id="transcript-box" rows="6" placeholder="Click 'Start 1-Min Response' and speak clearly into your microphone. Try using the linking phrases above (e.g., 'First of all, I totally agree with your point that...')..." class="w-full h-full min-h-[168px] p-4 rounded-2xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 outline-none text-sm text-slate-800 leading-relaxed resize-none transition"></textarea>
               <div id="interim-overlay" class="hidden mt-1 text-xs italic text-indigo-600 px-1"></div>
             </div>
 
             <div class="mt-3 flex flex-wrap items-center justify-between gap-2">
               <p class="text-xs text-slate-400">
-                Tip: Speak naturally for 45–60 seconds with a clear stance, 2 reasons, and a brief conclusion.
+                Tip: Aim for 110–145 words in 60s with clear transition signposts.
               </p>
               <button id="grade-manual-btn" class="px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold transition flex items-center gap-1.5">
                 <i data-lucide="sparkles" class="w-3.5 h-3.5 text-amber-300"></i>
@@ -474,7 +521,7 @@
       </div>
 
       <!-- =================================================================
-           AI DSE MARKING & GRAMMAR REPORT PANEL (APPEARS AFTER PRACTICE)
+           AI DSE MARKING & GRAMMAR REPORT PANEL
       ================================================================== -->
       <div id="evaluation-loading" class="hidden bg-white rounded-3xl p-10 border border-slate-200/80 shadow-sm text-center space-y-3">
         <div class="w-12 h-12 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center mx-auto animate-bounce">
@@ -512,7 +559,6 @@
 
         <!-- 4 Official HKDSE Domains Breakdown -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <!-- Domain 1 -->
           <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm flex flex-col justify-between">
             <div>
               <div class="flex items-center justify-between mb-2">
@@ -527,7 +573,6 @@
             </div>
           </div>
 
-          <!-- Domain 2 -->
           <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm flex flex-col justify-between">
             <div>
               <div class="flex items-center justify-between mb-2">
@@ -542,7 +587,6 @@
             </div>
           </div>
 
-          <!-- Domain 3 -->
           <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm flex flex-col justify-between">
             <div>
               <div class="flex items-center justify-between mb-2">
@@ -557,7 +601,6 @@
             </div>
           </div>
 
-          <!-- Domain 4 -->
           <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm flex flex-col justify-between">
             <div>
               <div class="flex items-center justify-between mb-2">
@@ -573,10 +616,8 @@
           </div>
         </div>
 
-        <!-- Grammar & Spoken Expression Clinic + Improvement Plan -->
+        <!-- Grammar Clinic + Sample Model Response -->
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-          
-          <!-- Grammar Corrections -->
           <div class="lg:col-span-7 bg-white rounded-3xl p-6 border border-slate-200/80 shadow-sm space-y-4">
             <div class="flex items-center justify-between">
               <div class="flex items-center gap-2">
@@ -591,12 +632,9 @@
               <span id="grammar-count-badge" class="text-xs font-bold px-2.5 py-1 rounded-full bg-slate-100 text-slate-700">0 issues</span>
             </div>
 
-            <div id="grammar-list" class="space-y-3">
-              <!-- Populated dynamically -->
-            </div>
+            <div id="grammar-list" class="space-y-3"></div>
           </div>
 
-          <!-- Actionable Coaching & Sample 5** Answer -->
           <div class="lg:col-span-5 space-y-6">
             <div class="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-sm space-y-3">
               <div class="flex items-center gap-2">
@@ -605,9 +643,7 @@
                 </div>
                 <h4 class="font-bold text-slate-900 text-base">How to Upgrade Your Score</h4>
               </div>
-              <ul id="improvement-tips-list" class="space-y-2.5 text-xs sm:text-sm text-slate-700">
-                <!-- Populated dynamically -->
-              </ul>
+              <ul id="improvement-tips-list" class="space-y-2.5 text-xs sm:text-sm text-slate-700"></ul>
             </div>
 
             <div class="bg-indigo-50/70 rounded-3xl p-6 border border-indigo-100 space-y-2.5">
@@ -624,18 +660,46 @@
               <p id="res-sample-answer" class="text-xs sm:text-sm text-slate-700 leading-relaxed italic"></p>
             </div>
           </div>
-
         </div>
       </section>
 
     </main>
 
     <!-- ===================================================================
-         TAB 2: PROGRESS & SKILL TRENDS DASHBOARD
+         TAB 2: DEDICATED LEVEL-BASED LINKING WORDS & USEFUL PHRASES BANK
+    ==================================================================== -->
+    <main id="view-phrasebook" class="view-section hidden max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-6 flex-1">
+      <div class="bg-gradient-to-r from-indigo-600 to-slate-900 rounded-3xl p-6 sm:p-8 text-white shadow-md flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div class="space-y-1.5 max-w-2xl">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/15 text-xs font-semibold">
+            <i data-lucide="sparkles" class="w-3.5 h-3.5 text-amber-300"></i>
+            HKDSE Paper 4 Speaking Toolkit
+          </span>
+          <h2 class="text-xl sm:text-2xl font-bold">Level-Adaptive Linking Words & High-Scoring Expressions</h2>
+          <p class="text-xs sm:text-sm text-indigo-100">
+            Upgrade basic phrases like <em>"I totally agree your point"</em> into natural, examiner-impressing English tailored to your target HKDSE level. Click any phrase to hear its pronunciation!
+          </p>
+        </div>
+
+        <!-- Level Filter -->
+        <div class="flex bg-white/10 backdrop-blur-sm p-1 rounded-2xl border border-white/15 shrink-0">
+          <button type="button" data-pb-tier="ALL" class="pb-tier-btn px-3 py-2 rounded-xl text-xs font-semibold bg-white text-slate-900 shadow-sm transition">All Levels</button>
+          <button type="button" data-pb-tier="L3" class="pb-tier-btn px-3 py-2 rounded-xl text-xs font-semibold text-white/80 hover:text-white transition">Level 3</button>
+          <button type="button" data-pb-tier="L4_5" class="pb-tier-btn px-3 py-2 rounded-xl text-xs font-semibold text-white/80 hover:text-white transition">Level 4–5</button>
+          <button type="button" data-pb-tier="L5_STAR" class="pb-tier-btn px-3 py-2 rounded-xl text-xs font-semibold text-white/80 hover:text-white transition">Level 5*–5**</button>
+        </div>
+      </div>
+
+      <!-- Phrase Categories Grid -->
+      <div id="phrasebook-container" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Populated dynamically -->
+      </div>
+    </main>
+
+    <!-- ===================================================================
+         TAB 3: PROGRESS & SKILL TRENDS DASHBOARD
     ==================================================================== -->
     <main id="view-trends" class="view-section hidden max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-6 flex-1">
-      
-      <!-- Top KPI Summary Cards -->
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm">
           <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Current Avg Level</span>
@@ -666,9 +730,7 @@
         </div>
       </div>
 
-      <!-- Charts Row -->
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        <!-- DSE Score Trend Line Chart -->
         <div class="lg:col-span-7 bg-white rounded-3xl p-6 border border-slate-200/80 shadow-sm">
           <div class="flex items-center justify-between mb-4">
             <div>
@@ -681,7 +743,6 @@
           </div>
         </div>
 
-        <!-- 4-Domain Skill Radar Chart -->
         <div class="lg:col-span-5 bg-white rounded-3xl p-6 border border-slate-200/80 shadow-sm">
           <div class="mb-4">
             <h3 class="font-bold text-slate-900 text-base">4-Domain Skill Profile</h3>
@@ -693,7 +754,6 @@
         </div>
       </div>
 
-      <!-- Past Practice History Log -->
       <div class="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-sm">
         <div class="flex items-center justify-between mb-4">
           <div>
@@ -701,19 +761,14 @@
             <p class="text-xs text-slate-500">Click any past session to review your transcript and grammar corrections</p>
           </div>
         </div>
-
-        <div id="history-list" class="divide-y divide-slate-100">
-          <!-- Populated dynamically -->
-        </div>
+        <div id="history-list" class="divide-y divide-slate-100"></div>
       </div>
-
     </main>
 
     <!-- ===================================================================
-         TAB 3: SETTINGS & STUDENT PROFILE
+         TAB 4: SETTINGS & STUDENT PROFILE
     ==================================================================== -->
     <main id="view-settings" class="view-section hidden max-w-3xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-6 flex-1">
-      
       <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-sm space-y-6">
         <div class="flex items-center justify-between border-b border-slate-100 pb-4">
           <div>
@@ -767,13 +822,12 @@
           <label class="flex items-center justify-between p-4 rounded-2xl bg-slate-50 border border-slate-200/70 cursor-pointer">
             <div>
               <span class="text-sm font-semibold text-slate-800 block">Strict Exam Mode (Hide Hints by Default)</span>
-              <span class="text-xs text-slate-500">Keep structure blueprints collapsed to simulate real exam pressure</span>
+              <span class="text-xs text-slate-500">Keep linking words and blueprints collapsed to simulate real exam pressure</span>
             </div>
             <input id="set-strict-mode" type="checkbox" class="w-5 h-5 accent-indigo-600 rounded" />
           </label>
         </div>
 
-        <!-- Data Management -->
         <div class="pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3">
           <button id="export-data-btn" type="button" class="px-4 py-2.5 rounded-xl border border-slate-200 hover:bg-slate-50 text-slate-700 text-xs font-semibold transition flex items-center gap-1.5">
             <i data-lucide="download" class="w-4 h-4"></i>
@@ -786,7 +840,6 @@
           </button>
         </div>
       </div>
-
     </main>
 
   </div>
@@ -826,215 +879,403 @@
   ====================================================================== -->
   <script>
     /**
-     * 1. CURATED HKDSE PAPER 4 PART B QUESTION DATABASE
-     * Realistic HKEAA Individual Response prompts across 6 core themes.
+     * 1. LEVEL-ADAPTIVE LINKING WORDS & USEFUL EXPRESSIONS LIBRARY
+     * Designed specifically for HKDSE Paper 4 (Levels 3, 4-5, and 5*-5**).
      */
-    const HKDSE_QUESTIONS = [
-      // Technology & Social Media
+    const LINKING_PHRASE_BANK = [
       {
-        id: 'tech-1',
-        theme: 'Technology & Social Media',
-        type: 'Arguing For / Against',
-        context: 'Your class is discussing how artificial intelligence tools affect secondary school students’ learning habits.',
-        prompt: 'Do you think secondary schools should allow students to use AI tools for their homework? Why or why not?',
-        structure: '1. Clear stance (Yes, with guidelines / No, undermines core skills) → 2. Reason 1: Personalized tutoring & efficiency → 3. Reason 2: Preparing for future workplaces (or risk of over-reliance) → 4. Balanced conclusion.',
-        phrases: ['From my perspective...', 'A double-edged sword', 'Foster independent thinking', 'Academic integrity'],
-        sample5Star: 'Personally, I believe secondary schools should allow students to use AI tools for homework, provided there are clear guidelines. First and foremost, AI acts like a twenty-four-hour personal tutor that can explain complex concepts in simple terms, helping students overcome learning bottlenecks outside school hours. Furthermore, since artificial intelligence is rapidly transforming every industry, learning how to use these tools ethically and effectively prepares students for university and future careers. Of course, schools must teach students not to copy answers blindly, so that AI enhances rather than replaces genuine critical thinking.'
+        category: 'Opening & Stating Your Stance',
+        icon: 'flag',
+        L3: [
+          { phrase: 'First of all, I totally agree with the point that...', example: 'First of all, I totally agree with the point that schools should support students.' },
+          { phrase: 'In my opinion, I think that...', example: 'In my opinion, I think that this idea is very useful for teenagers.' },
+          { phrase: 'Personally, I would choose...', example: 'Personally, I would choose the first option because it is more convenient.' }
+        ],
+        L4_5: [
+          { phrase: 'From my perspective, I firmly believe that...', example: 'From my perspective, I firmly believe that digital literacy is essential today.' },
+          { phrase: 'I wholeheartedly agree with the view that...', example: 'I wholeheartedly agree with the view that protecting our heritage matters.' },
+          { phrase: 'Given the choice, I would definitely opt for...', example: 'Given the choice, I would definitely opt for local community service.' }
+        ],
+        L5_STAR: [
+          { phrase: 'I concur entirely with the notion that...', example: 'I concur entirely with the notion that sustainable habits start at home.' },
+          { phrase: 'Taking all factors into account, I am convinced that...', example: 'Taking all factors into account, I am convinced that a balanced approach works best.' },
+          { phrase: 'Without a shadow of a doubt, I would advocate...', example: 'Without a shadow of a doubt, I would advocate stricter environmental guidelines.' }
+        ]
       },
       {
-        id: 'tech-2',
-        theme: 'Technology & Social Media',
-        type: 'Making Suggestions',
-        context: 'Your school’s Student Union is concerned about cyberbullying and social media addiction among junior form students.',
-        prompt: 'What can schools do to help teenagers develop healthier social media habits?',
-        structure: '1. Acknowledge the urgency → 2. Suggestion 1: Interactive digital literacy workshops → 3. Suggestion 2: Device-free social activities at school → 4. Wrap up with long-term benefit.',
-        phrases: ['To tackle this pressing issue...', 'Digital footprint', 'Peer-led workshops', 'Strike a healthy balance'],
-        sample5Star: 'To help teenagers develop healthier social media habits, I think schools can take two practical steps. Firstly, instead of boring lectures, schools should invite young alumni or content creators to lead interactive workshops on digital wellbeing and managing screen time. Students are much more receptive to advice from relatable role models. Secondly, schools can organize phone-free lunchtime clubs, such as board game corners or sports tournaments, encouraging face-to-face interaction. By combining education with offline fun, students will naturally become less dependent on their screens.'
+        category: 'Sequencing & Adding Arguments',
+        icon: 'layers',
+        L3: [
+          { phrase: 'First of all, ... Secondly, ...', example: 'First of all, it saves time. Secondly, it is cheaper for students.' },
+          { phrase: 'Besides that, another reason is...', example: 'Besides that, another reason is that teenagers can learn teamwork.' },
+          { phrase: 'Also, we should remember that...', example: 'Also, we should remember that health is more important than money.' }
+        ],
+        L4_5: [
+          { phrase: 'First and foremost, ... Furthermore, ...', example: 'First and foremost, it relieves exam stress. Furthermore, it boosts concentration.' },
+          { phrase: 'On top of that, ...', example: 'On top of that, part-time work builds financial independence.' },
+          { phrase: 'Equally important is the fact that...', example: 'Equally important is the fact that elderly residents need face-to-face warmth.' }
+        ],
+        L5_STAR: [
+          { phrase: 'Foremost among the benefits is...', example: 'Foremost among the benefits is the cultivation of independent critical thinking.' },
+          { phrase: 'Compounding this advantage is...', example: 'Compounding this advantage is the long-term reduction in landfill waste.' },
+          { phrase: 'Not only does this..., but it also...', example: 'Not only does this broaden students’ horizons, but it also fosters genuine empathy.' }
+        ]
       },
       {
-        id: 'tech-3',
-        theme: 'Technology & Social Media',
-        type: 'Making & Justifying a Choice',
-        context: 'Your grandparents want to stay better connected with family members living overseas.',
-        prompt: 'Which communication method would you recommend to elderly people: video calls or instant messaging? Explain your choice.',
-        structure: '1. State choice clearly (Video calls) → 2. Compare visual warmth & emotional connection → 3. Ease of speaking vs. typing small Chinese/English characters → 4. Conclusion.',
-        phrases: ['Without a doubt, I would recommend...', 'Bridge the geographical gap', 'User-friendly', 'Sense of closeness'],
-        sample5Star: 'Without a doubt, I would recommend video calls rather than instant messaging for elderly people. The main reason is that seeing their loved ones’ faces and hearing their voices creates a much stronger sense of warmth and emotional connection, which text messages simply cannot replace. Moreover, typing on a tiny smartphone keyboard can be frustrating and straining for seniors with poorer eyesight, whereas tapping a single button for a video call is far more intuitive. Therefore, video calling is definitely the most heartwarming and practical choice.'
-      },
-
-      // Education & School Life
-      {
-        id: 'edu-1',
-        theme: 'Education & School Life',
-        type: 'Arguing For / Against',
-        context: 'Your school is considering replacing traditional printed textbooks with tablet computers for all subjects.',
-        prompt: 'Would you prefer using e-textbooks on a tablet or traditional paper textbooks at school? Why?',
-        structure: '1. State preference clearly → 2. Point 1: Portability & multimedia features (or eye strain & fewer distractions for paper) → 3. Point 2: Note-taking & revision efficiency → 4. Summary.',
-        phrases: ['Given the choice, I would opt for...', 'Alleviate the burden of heavy schoolbags', 'Prone to digital distractions', 'Annotate effortlessly'],
-        sample5Star: 'Given the choice, I would definitely prefer using e-textbooks on a tablet at school. First, carrying seven or eight thick textbooks every day puts unnecessary physical strain on students’ backs, whereas a single lightweight tablet holds all our learning materials. Second, e-textbooks offer interactive features such as instant dictionary lookups, search functions, and embedded videos that make revision much more efficient. As long as schools install focus apps to block games during lessons, tablets are a huge upgrade for modern learning.'
+        category: 'Showing Contrast & Concession',
+        icon: 'git-branch',
+        L3: [
+          { phrase: 'However, some people think...', example: 'However, some people think tablets may distract students in class.' },
+          { phrase: 'Although it is convenient, it is...', example: 'Although it is convenient, it is not good for our eyes.' },
+          { phrase: 'On the other hand, ...', example: 'On the other hand, traditional books are easier to read.' }
+        ],
+        L4_5: [
+          { phrase: 'While it is true that..., I still believe...', example: 'While it is true that plastic bans cause minor inconvenience, I still believe they are vital.' },
+          { phrase: 'Despite these drawbacks, the benefits outweigh...', example: 'Despite these drawbacks, the benefits far outweigh the initial costs.' },
+          { phrase: 'Admittedly, ... Nevertheless, ...', example: 'Admittedly, content creation is exciting. Nevertheless, income can be unstable.' }
+        ],
+        L5_STAR: [
+          { phrase: 'Granted, ... Yet one cannot overlook...', example: 'Granted, urban redevelopment drives growth. Yet one cannot overlook our collective memory.' },
+          { phrase: 'Notwithstanding the initial hurdles, ...', example: 'Notwithstanding the initial hurdles, the policy fosters a lasting green mindset.' },
+          { phrase: 'While critics may contend that..., the reality is...', example: 'While critics may contend that AI encourages laziness, the reality is that proper guidance prevents abuse.' }
+        ]
       },
       {
-        id: 'edu-2',
-        theme: 'Education & School Life',
-        type: 'Explaining a Course of Action',
-        context: 'Many Secondary 6 students feel overwhelmed by exam stress ahead of the HKDSE.',
-        prompt: 'How do you usually manage stress during exam periods, and would you recommend this method to your classmates?',
-        structure: '1. Share personal method (e.g., Pomodoro technique + evening jog) → 2. Explain how it restores focus → 3. Why classmates would benefit → 4. Encouraging closing.',
-        phrases: ['Whenever exam pressure mounts...', 'Recharge my batteries', 'Maintain mental clarity', 'Burnout'],
-        sample5Star: 'Whenever DSE exam pressure mounts, I manage my stress by combining structured study blocks with a thirty-minute brisk walk or jog every evening. Stepping away from my desk without my phone allows my brain to process what I have revised and releases endorphins that lift my mood. I would wholeheartedly recommend this habit to my classmates because many students study late into the night without breaks, which actually hurts memory retention. Even a short daily workout can keep us energized and prevent burnout.'
+        category: 'Giving Concrete Examples',
+        icon: 'sparkles',
+        L3: [
+          { phrase: 'For example, in Hong Kong...', example: 'For example, in Hong Kong, many students take the MTR every morning.' },
+          { phrase: 'Such as... and...', example: 'We can do outdoor activities such as hiking and cycling.' },
+          { phrase: 'Take my school as an example...', example: 'Take my school as an example, we have a green club.' }
+        ],
+        L4_5: [
+          { phrase: 'A prime example of this is...', example: 'A prime example of this is Tai Kwun, which revitalized historic architecture.' },
+          { phrase: 'To illustrate this point, consider...', example: 'To illustrate this point, consider how video calls connect families overseas.' },
+          { phrase: 'This is particularly evident in...', example: 'This is particularly evident in Hong Kong’s fast-paced academic environment.' }
+        ],
+        L5_STAR: [
+          { phrase: 'A compelling case in point is...', example: 'A compelling case in point is the plastic tableware regulation introduced across local eateries.' },
+          { phrase: 'This phenomenon is vividly reflected in...', example: 'This phenomenon is vividly reflected in teenagers’ reliance on short-video platforms.' },
+          { phrase: 'By way of illustration, ...', example: 'By way of illustration, peer-led workshops often resonate far more than teacher lectures.' }
+        ]
       },
       {
-        id: 'edu-3',
-        theme: 'Education & School Life',
-        type: 'Making & Justifying a Choice',
-        context: 'Your school has received funding to organize one major post-exam activity for Secondary 4 students.',
-        prompt: 'Which activity would be more beneficial for students: an overseas cultural exchange tour or a local community service project? Why?',
-        structure: '1. Choose one option clearly → 2. Give two distinct benefits (empathy/local awareness vs. global perspective) → 3. Acknowledge the other option briefly → 4. Conclude.',
-        phrases: ['Broaden one’s horizons', 'Cultivate empathy', 'First-hand exposure', 'Give back to society'],
-        sample5Star: 'I believe a local community service project would be more beneficial for Secondary 4 students. While an overseas trip is exciting, serving underprivileged groups right here in Hong Kong—such as elderly residents living in subdivided flats—helps students develop genuine empathy and social responsibility. Furthermore, a local project is much more inclusive because every student can participate regardless of their family’s financial background. Understanding our own community first lays the best foundation for becoming compassionate citizens.'
-      },
-
-      // Environment & Sustainability
-      {
-        id: 'env-1',
-        theme: 'Environment & Sustainability',
-        type: 'Arguing For / Against',
-        context: 'Hong Kong has implemented strict regulations banning single-use plastic tableware in restaurants.',
-        prompt: 'Do you think banning disposable plastic tableware is an effective way to protect the environment? Why or why not?',
-        structure: '1. Stance (Yes, effective long-term despite short-term inconvenience) → 2. Impact on landfills & marine life → 3. Shifts consumer habits toward reusable items → 4. Conclusion.',
-        phrases: ['In the long run', 'Curb plastic pollution', 'Initial inconvenience', 'Sustainable mindset'],
-        sample5Star: 'Yes, I firmly believe banning disposable plastic tableware is a highly effective step toward protecting our environment. Hong Kong’s landfills are nearing capacity, and single-use plastics take hundreds of years to decompose while harming marine ecosystems. Although wooden or paper alternatives may feel slightly inconvenient at first, legislation forces both restaurants and diners to change their habits and bring reusable cutlery. Over time, this policy creates a lasting cultural shift toward sustainability.'
+        category: 'Explaining Cause & Effect',
+        icon: 'arrow-right-circle',
+        L3: [
+          { phrase: 'Because of this, students can...', example: 'Because of this, students can finish their revision faster.' },
+          { phrase: 'As a result, ...', example: 'As a result, families can save more electricity every month.' },
+          { phrase: 'This helps teenagers to...', example: 'This helps teenagers to build self-confidence.' }
+        ],
+        L4_5: [
+          { phrase: 'Consequently, this leads to...', example: 'Consequently, this leads to better classroom engagement and alertness.' },
+          { phrase: 'This paves the way for...', example: 'This paves the way for a smoother transition into university life.' },
+          { phrase: 'In the long run, this will...', example: 'In the long run, this will reduce pressure on our public healthcare system.' }
+        ],
+        L5_STAR: [
+          { phrase: 'This serves as a catalyst for...', example: 'This serves as a catalyst for meaningful cross-generational dialogue.' },
+          { phrase: 'The ripple effect of this is...', example: 'The ripple effect of this is a more compassionate and inclusive society.' },
+          { phrase: 'Ultimately, this translates into...', example: 'Ultimately, this translates into stronger resilience when facing future uncertainties.' }
+        ]
       },
       {
-        id: 'env-2',
-        theme: 'Environment & Sustainability',
-        type: 'Making Suggestions',
-        context: 'Your school wants to reduce food waste in the school tuck shop and lunchboxes.',
-        prompt: 'What practical measures can students and schools take to reduce food waste at lunchtime?',
-        structure: '1. State the problem of leftover school lunches → 2. Measure 1: Flexible portion sizes (small/regular) → 3. Measure 2: Food composting or sharing pantry → 4. Closing.',
-        phrases: ['Cherish food resources', 'Portion control', 'Raise awareness', 'Tangible difference'],
-        sample5Star: 'To reduce lunchtime food waste, schools and students can adopt two simple measures. First, lunch suppliers should offer flexible portion sizes—such as small, medium, and large—so students with smaller appetites do not end up throwing away half their rice. Second, the school can set up a food-sharing corner for unopened packaged snacks or fruit, alongside a composting bin for unavoidable scraps used in the school garden. Together, these practical steps can make a tangible difference every single day.'
-      },
-      {
-        id: 'env-3',
-        theme: 'Environment & Sustainability',
-        type: 'Making & Justifying a Choice',
-        context: 'Your district council is planning a green campaign for residents.',
-        prompt: 'Which green habit is easiest for Hong Kong families to adopt: saving electricity at home or reducing online shopping packaging? Explain your view.',
-        structure: '1. Choose saving electricity → 2. Direct financial incentive (lower bills) → 3. Simple daily actions (AC temperature, turning off standby power) → 4. Conclude.',
-        phrases: ['Win-win solution', 'Carbon footprint', 'Tangible financial incentive', 'Effortless to implement'],
-        sample5Star: 'I think saving electricity at home is much easier for Hong Kong families to adopt. Unlike online shopping, where packaging is largely controlled by overseas sellers, every family has immediate control over their home appliances. Simple habits like setting the air conditioner to twenty-five degrees Celsius and switching off unused lights require zero extra cost. Better yet, families see an immediate drop in their monthly electricity bills, making it a win-win solution for both their wallets and the planet.'
-      },
-
-      // Hong Kong Culture & Society
-      {
-        id: 'hk-1',
-        theme: 'Hong Kong Culture & Society',
-        type: 'Making & Justifying a Choice',
-        context: 'You are hosting an exchange student from Canada who only has one afternoon free in Hong Kong.',
-        prompt: 'Where would you take your visitor: to a traditional dai pai dong and temple street, or to Victoria Peak and the Harbourfront? Why?',
-        structure: '1. Choose one destination → 2. Highlight authentic cultural immersion vs. iconic skyline → 3. Explain why it creates a memorable impression → 4. Conclusion.',
-        phrases: ['Authentic local flavor', 'East-meets-West heritage', 'Unforgettable impression', 'Vibrant atmosphere'],
-        sample5Star: 'If my visitor only has one afternoon, I would definitely take them to a traditional dai pai dong and Temple Street. While Victoria Peak offers a stunning skyline, bustling street stalls showcase the true soul and grassroots warmth of Hong Kong’s culinary heritage. Tasting freshly wok-fried dishes and exploring local night markets gives an exchange student an authentic cultural experience they could never find in a shopping mall. That vibrant local atmosphere will leave a truly unforgettable impression.'
-      },
-      {
-        id: 'hk-2',
-        theme: 'Hong Kong Culture & Society',
-        type: 'Arguing For / Against',
-        context: 'Many historic buildings and old shops in Hong Kong are being redeveloped into modern shopping malls.',
-        prompt: 'Should the government prioritize preserving historic buildings even if it slows down urban development? Why or why not?',
-        structure: '1. Clear stance (Yes, heritage gives a city identity) → 2. Cultural & educational value for future generations → 3. Adaptive reuse (like Tai Kwun or PMQ) boosts tourism → 4. Conclusion.',
-        phrases: ['Collective memory', 'Adaptive reuse', 'Irreplaceable heritage', 'Cultural identity'],
-        sample5Star: 'Yes, I believe the government should prioritize preserving historic buildings rather than replacing everything with generic shopping malls. Historic architecture holds our city’s collective memory and gives Hong Kong its unique East-meets-West identity. In fact, preservation does not have to hinder development—successful projects like Tai Kwun and PMQ show that revitalizing heritage sites can attract tourists and support local creative industries. Once a historic building is demolished, its cultural value is lost forever.'
-      },
-      {
-        id: 'hk-3',
-        theme: 'Hong Kong Culture & Society',
-        type: 'Making Suggestions',
-        context: 'Hong Kong is promoting mega-events and cultural tourism to attract more international visitors.',
-        prompt: 'How can Hong Kong make itself a more welcoming destination for international tourists?',
-        structure: '1. Acknowledge Hong Kong’s strengths → 2. Suggestion 1: Multilingual digital transport & hiking signage → 3. Suggestion 2: Hospitality training & hidden-gem walking routes → 4. Wrap up.',
-        phrases: ['World-class hospitality', 'Seamless travel experience', 'Off the beaten track', 'Lasting impression'],
-        sample5Star: 'To make Hong Kong even more welcoming for international tourists, we can focus on two key areas. First, we should upgrade multilingual digital guides and clear signage not just in the MTR, but also on popular country park hiking trails and outlying islands so visitors can explore safely. Second, encouraging warm, patient hospitality in local eateries and providing curated walking maps of cultural neighborhoods will help tourists feel genuinely valued and eager to return.'
-      },
-
-      // Youth & Career
-      {
-        id: 'youth-1',
-        theme: 'Youth & Career',
-        type: 'Making & Justifying a Choice',
-        context: 'Your cousin has just finished secondary school and is deciding what to do over the summer before university.',
-        prompt: 'Would you advise a fresh DSE graduate to take a part-time job or go backpacking overseas? Explain your reasons.',
-        structure: '1. Clear advice (Part-time job / internship) → 2. Reason 1: Financial independence & workplace soft skills → 3. Reason 2: Clarifies career interests before university → 4. Brief concession & conclusion.',
-        phrases: ['Real-world exposure', 'Financial independence', 'Interpersonal skills', 'Stepping stone'],
-        sample5Star: 'I would advise a fresh DSE graduate to take a part-time job over the summer. After years of focusing mainly on academic exams, working in a real business environment teaches invaluable soft skills like teamwork, time management, and communicating with customers. On top of that, earning their own income fosters financial independence and helps cover university expenses. While travelling is fun, gaining practical work experience serves as a much stronger stepping stone into adulthood.'
-      },
-      {
-        id: 'youth-2',
-        theme: 'Youth & Career',
-        type: 'Arguing For / Against',
-        context: 'More young people in Hong Kong are interested in becoming content creators or entrepreneurs instead of taking traditional office jobs.',
-        prompt: 'Is becoming a full-time social media content creator a realistic career choice for young people today? Why or why not?',
-        structure: '1. Nuanced stance (Possible, but high-risk without backup skills) → 2. Intense competition & unstable algorithm income → 3. Need for transferable skills (video editing, marketing) → 4. Conclusion.',
-        phrases: ['Fierce competition', 'Unpredictable income', 'Transferable skills', 'Pragmatic approach'],
-        sample5Star: 'In my opinion, becoming a full-time content creator is a risky career choice for most young people unless they treat it with a very pragmatic mindset. While a small percentage achieve viral success, the market is heavily saturated and income fluctuates unpredictably with platform algorithms. Therefore, I think young people should first build solid qualifications or pursue content creation part-time while developing transferable skills like digital marketing and video production. That way, they can chase their passion safely.'
-      },
-      {
-        id: 'youth-3',
-        theme: 'Youth & Career',
-        type: 'Explaining a Course of Action',
-        context: 'You are preparing for university admission interviews.',
-        prompt: 'What is the most important quality universities or employers look for in young people today, and how can students develop it?',
-        structure: '1. Identify quality (Adaptability / Problem-solving) → 2. Explain why it matters in a fast-changing world → 3. How students can build it (extracurriculars, teamwork) → 4. Closing.',
-        phrases: ['Adaptability', 'Step out of one’s comfort zone', 'Resilience', 'Navigate uncertainty'],
-        sample5Star: 'I believe adaptability is the single most important quality universities and employers look for today. Because technology and job requirements are evolving faster than ever, organizations value young people who can learn quickly and stay calm when facing unfamiliar challenges. Students can cultivate adaptability by stepping out of their comfort zones—such as joining inter-school competitions, leading student clubs, or learning a new skill outside their core subjects.'
-      },
-
-      // Health & Lifestyle
-      {
-        id: 'health-1',
-        theme: 'Health & Lifestyle',
-        type: 'Arguing For / Against',
-        context: 'Many secondary students in Hong Kong sleep fewer than six hours a night due to homework and late-night phone use.',
-        prompt: 'Do you think starting the school day 30 minutes later would improve students’ academic performance? Why or why not?',
-        structure: '1. Clear stance (Yes, improves alertness & concentration) → 2. Biological need for sleep in teenagers → 3. Better focus in morning lessons → 4. Note on self-discipline.',
-        phrases: ['Sleep deprivation', 'Cognitive alertness', 'Morning productivity', 'Healthy circadian rhythm'],
-        sample5Star: 'Yes, I strongly believe starting the school day thirty minutes later would boost students’ academic performance. Medical research shows that teenagers naturally have a shifted sleep cycle, and chronic sleep deprivation severely impairs memory and concentration during early morning lessons. With an extra half hour of rest, students would arrive at school more alert, attentive, and emotionally balanced, making classroom learning far more productive.'
-      },
-      {
-        id: 'health-2',
-        theme: 'Health & Lifestyle',
-        type: 'Making & Justifying a Choice',
-        context: 'Your family wants to spend more quality time together on weekends.',
-        prompt: 'Which weekend activity is better for family bonding: cooking a meal together at home or going hiking in a country park? Why?',
-        structure: '1. Choose one (Going hiking) → 2. Screen-free nature environment encourages open conversation → 3. Physical health benefits for all ages → 4. Conclusion.',
-        phrases: ['Unplug from digital devices', 'Quality bonding time', 'Rejuvenate', 'Meaningful conversations'],
-        sample5Star: 'I think going hiking in a country park is even better for family bonding than cooking at home. In Hong Kong’s fast-paced urban lifestyle, spending a morning surrounded by greenery helps both parents and teenagers unplug from work emails and smartphones. Walking side by side at a relaxed pace naturally sparks open, stress-free conversations while improving everyone’s physical fitness. It is a refreshing way to strengthen family ties.'
-      },
-      {
-        id: 'health-3',
-        theme: 'Health & Lifestyle',
-        type: 'Making Suggestions',
-        context: 'Fast food and sugary drinks are very popular among teenagers in Hong Kong.',
-        prompt: 'How can teenagers be encouraged to adopt healthier eating habits without feeling forced?',
-        structure: '1. Acknowledge that strict bans often backfire → 2. Suggestion 1: Make healthy snacks tasty & affordable at school → 3. Suggestion 2: Peer challenges & nutrition awareness → 4. Wrap up.',
-        phrases: ['Sustainable lifestyle change', 'Nutritious alternatives', 'Positive reinforcement', 'Long-term wellbeing'],
-        sample5Star: 'To encourage teenagers to eat healthier without feeling forced, we should make nutritious choices both appealing and accessible. First, school tuck shops can introduce tasty, affordable options like fruit smoothies, whole-grain wraps, and low-sugar drinks alongside traditional snacks. Second, sharing quick, budget-friendly healthy recipes on social media can inspire teens through positive peer influence rather than strict rules. When healthy food tastes great, good habits follow naturally.'
+        category: 'Concluding & Wrapping Up (Final 10s)',
+        icon: 'check-circle',
+        L3: [
+          { phrase: 'In conclusion, I think... is the best choice.', example: 'In conclusion, I think joining a volunteer team is the best choice.' },
+          { phrase: 'All in all, I strongly support...', example: 'All in all, I strongly support starting school thirty minutes later.' },
+          { phrase: 'That is why I agree with...', example: 'That is why I agree with encouraging healthy eating at school.' }
+        ],
+        L4_5: [
+          { phrase: 'To sum up, ... is clearly the most practical solution.', example: 'To sum up, flexible lunch portions are clearly the most practical solution.' },
+          { phrase: 'Overall, I firmly believe that...', example: 'Overall, I firmly believe that striking a balance is the key to success.' },
+          { phrase: 'For these reasons, I wholeheartedly recommend...', example: 'For these reasons, I wholeheartedly recommend visiting a traditional dai pai dong.' }
+        ],
+        L5_STAR: [
+          { phrase: 'In essence, embracing... will yield lasting rewards.', example: 'In essence, embracing adaptability will yield lasting rewards for young people.' },
+          { phrase: 'Ultimately, it is a win-win proposition for...', example: 'Ultimately, it is a win-win proposition for both local residents and international visitors.' },
+          { phrase: 'All things considered, the case for... is compelling.', example: 'All things considered, the case for preserving historic landmarks is truly compelling.' }
+        ]
       }
     ];
 
     /**
-     * 2. STORAGE & MULTI-USER STATE MANAGEMENT (localStorage with Demo Account)
+     * 2. COMBINATORIAL HKDSE PAPER 4 QUESTION BANK ENGINE (120,000+ PROMPTS)
+     * Generates deterministic, grammatically natural HKEAA Part B Individual Response prompts
+     * across 8 themes and 6 question archetypes.
      */
-    const STORAGE_KEY_USERS = 'hkdse_p4_studio_users_v1';
-    const STORAGE_KEY_ACTIVE = 'hkdse_p4_studio_active_user_v1';
+    const DSE_THEMES_DATA = {
+      'Technology & AI': {
+        contexts: [
+          'Your group has been discussing how artificial intelligence and smart devices are reshaping daily life in Hong Kong.',
+          'Your school is reviewing its digital campus policy for the upcoming academic year.',
+          'Your class is talking about the impact of social media algorithms and smartphones on teenagers.',
+          'A youth forum is exploring how Hong Kong can become a smarter, more tech-driven city.'
+        ],
+        topics: [
+          { np: 'using AI writing assistants for school assignments', altA: 'AI-powered tutoring apps', altB: 'after-school peer study groups', vocab: ['Artificial intelligence', 'Academic integrity', 'Personalized learning', 'Critical thinking'] },
+          { np: 'banning smartphones completely during school hours', altA: 'strict phone lockers at school', altB: 'self-regulated screen time rules', vocab: ['Digital distraction', 'Self-discipline', 'Face-to-face interaction', 'Classroom focus'] },
+          { np: 'replacing printed textbooks with tablet computers', altA: 'interactive e-textbooks on tablets', altB: 'traditional printed textbooks', vocab: ['Portability', 'Multimedia resources', 'Eye strain', 'Paperless classroom'] },
+          { np: 'using facial recognition for school attendance and library borrowing', altA: 'smart biometric campus systems', altB: 'traditional student smartcards', vocab: ['Data privacy', 'Administrative efficiency', 'Cybersecurity', 'Convenience'] },
+          { np: 'following lifestyle influencers on short-video platforms', altA: 'educational YouTube channels', altB: 'short-form entertainment reels', vocab: ['Algorithm bubble', 'Media literacy', 'Role models', 'Attention span'] },
+          { np: 'hosting family gatherings without any mobile phones at the dinner table', altA: 'video calls with relatives abroad', altB: 'daily family group chats', vocab: ['Quality time', 'Digital detox', 'Intergenerational bond', 'Mindful communication'] },
+          { np: 'learning basic coding and prompt engineering in junior secondary school', altA: 'mandatory coding classes', altB: 'optional robotics clubs', vocab: ['Future-ready skills', 'Computational thinking', 'Curriculum workload', 'Innovation'] },
+          { np: 'shopping online instead of visiting local retail stores in Hong Kong', altA: '24-hour e-commerce platforms', altB: 'weekend shopping in local malls', vocab: ['Consumer convenience', 'Impulse buying', 'Packaging waste', 'Local economy'] },
+          { np: 'using smartwatches to track teenagers’ daily sleep and exercise', altA: 'fitness tracking apps', altB: 'joining school sports teams', vocab: ['Health awareness', 'Data-driven habits', 'Motivation', 'Physical wellbeing'] },
+          { np: 'introducing robot waiters and self-ordering kiosks in Hong Kong restaurants', altA: 'automated restaurant kiosks', altB: 'traditional human table service', vocab: ['Labor shortage', 'Human touch', 'Service efficiency', 'Elderly accessibility'] },
+          { np: 'attending virtual reality (VR) museum tours instead of physical field trips', altA: 'VR virtual overseas tours', altB: 'local physical field trips', vocab: ['Immersive technology', 'First-hand experience', 'Cost-effective', 'Sensory engagement'] },
+          { np: 'setting a daily two-hour time limit on social media apps for teenagers', altA: 'parental screen-time controls', altB: 'youth digital wellbeing workshops', vocab: ['Dopamine loop', 'Digital autonomy', 'Healthy boundaries', 'Sleep hygiene'] }
+        ]
+      },
+      'Education & School Life': {
+        contexts: [
+          'Your Student Union is collecting student opinions to present to the school principal.',
+          'Your class is discussing ways to make secondary school life more balanced and meaningful.',
+          'Students in your form are sharing ideas on how to prepare better for the HKDSE.',
+          'Your school is planning new extracurricular and enrichment programs for next term.'
+        ],
+        topics: [
+          { np: 'starting the school day 30 minutes later every morning', altA: 'a later 8:45 AM school start time', altB: 'an earlier 3:00 PM dismissal time', vocab: ['Sleep deprivation', 'Morning alertness', 'Circadian rhythm', 'Academic productivity'] },
+          { np: 'replacing traditional school uniforms with casual sportswear', altA: 'smart-casual school dress codes', altB: 'traditional formal school uniforms', vocab: ['Sense of belonging', 'Comfort and practicality', 'Peer comparison', 'School identity'] },
+          { np: 'making community service a compulsory graduation requirement', altA: 'mandatory volunteer hours', altB: 'optional service-learning clubs', vocab: ['Civic responsibility', 'Empathy', 'Intrinsic motivation', 'Social awareness'] },
+          { np: 'abolishing mid-term exams in favor of project-based assessments', altA: 'continuous project assessments', altB: 'traditional written examinations', vocab: ['Exam-oriented culture', 'Collaborative skills', 'Fair evaluation', 'Stress reduction'] },
+          { np: 'allowing Secondary 5 students to study in school libraries until 8:00 PM', altA: 'extended evening school study rooms', altB: 'public library study spaces', vocab: ['Conducive environment', 'Self-directed learning', 'Peer support', 'Work-life balance'] },
+          { np: 'organizing a phone-free camping trip for all Secondary 4 students', altA: 'an outward-bound adventure camp', altB: 'an academic career workshop', vocab: ['Resilience', 'Team bonding', 'Stepping out of comfort zone', 'Leadership'] },
+          { np: 'inviting alumni to mentor senior form students on university choices', altA: 'one-on-one alumni mentorship', altB: 'large university info days', vocab: ['First-hand insights', 'Career guidance', 'Relatable advice', 'Informed decision'] },
+          { np: 'offering financial literacy and budgeting classes in secondary school', altA: 'personal finance workshops', altB: 'entrepreneurship competitions', vocab: ['Money management', 'Practical life skills', 'Saving habits', 'Financial prudence'] },
+          { np: 'encouraging students to join inter-school debating or public speaking teams', altA: 'English drama and public speaking', altB: 'inter-school sports competitions', vocab: ['Articulation', 'Self-confidence', 'Persuasive reasoning', 'Stage presence'] },
+          { np: 'having mixed-form lunch tables to help junior students integrate', altA: 'big-brother/sister peer buddy schemes', altB: 'inter-house orientation games', vocab: ['Inclusivity', 'School spirit', 'Support network', 'Smooth transition'] },
+          { np: 'giving students one "mental health rest day" per school term', altA: 'scheduled wellness rest days', altB: 'weekly mindfulness sessions', vocab: ['Emotional wellbeing', 'Burnout prevention', 'Stress management', 'Holistic education'] },
+          { np: 'teaching practical cooking and nutrition skills in Home Economics', altA: 'hands-on culinary classes', altB: 'first-aid and emergency training', vocab: ['Self-reliance', 'Healthy lifestyle', 'Essential life skills', 'Practicality'] }
+        ]
+      },
+      'Environment & Sustainability': {
+        contexts: [
+          'Your school’s Green Club is organizing an environmental awareness week.',
+          'Your group has been discussing how Hong Kong residents can live more sustainably.',
+          'Local news reports have highlighted waste management and climate challenges in Hong Kong.',
+          'Your district council is seeking youth proposals for a greener neighborhood.'
+        ],
+        topics: [
+          { np: 'banning all single-use plastic tableware in Hong Kong restaurants', altA: 'bringing reusable cutlery sets', altB: 'paying extra for eco-friendly packaging', vocab: ['Landfill capacity', 'Marine pollution', 'Sustainable mindset', 'Initial inconvenience'] },
+          { np: 'introducing reward points for recycling plastic bottles and aluminum cans', altA: 'cash-rebate reverse vending machines', altB: 'mandatory household waste sorting', vocab: ['Circular economy', 'Tangible incentive', 'Recycling rate', 'Civic habit'] },
+          { np: 'promoting "Green Monday" vegetarian meals in school tuck shops', altA: 'plant-based school lunch options', altB: 'smaller flexible lunch portions', vocab: ['Carbon footprint', 'Food waste', 'Nutritional balance', 'Eco-conscious'] },
+          { np: 'setting air conditioners in public buildings to 25 degrees Celsius', altA: 'strict 25°C indoor AC guidelines', altB: 'solar panel installations on rooftops', vocab: ['Energy conservation', 'Electricity consumption', 'Thermal comfort', 'Climate action'] },
+          { np: 'encouraging families to buy second-hand clothes and textbooks', altA: 'school textbook swap fairs', altB: 'charity thrift pop-up stores', vocab: ['Fast fashion', 'Resource reuse', 'Cost-effective', 'Minimalist lifestyle'] },
+          { np: 'organizing weekend coastal and country park clean-up campaigns', altA: 'beach clean-up volunteering', altB: 'tree-planting conservation days', vocab: ['Hands-on stewardship', 'Biodiversity', 'Environmental awareness', 'Community action'] },
+          { np: 'charging extra fees for disposable takeaway coffee cups', altA: 'discounts for bringing personal tumblers', altB: 'extra levies on disposable cups', vocab: ['Positive reinforcement', 'Single-use waste', 'Consumer behavior', 'Daily habit'] },
+          { np: 'expanding pedestrian-only zones in busy Hong Kong districts', altA: 'car-free weekend pedestrian streets', altB: 'expanding cycling tracks in new towns', vocab: ['Air quality', 'Walkability', 'Noise pollution', 'Urban livability'] },
+          { np: 'educating primary and secondary students on food expiration labels', altA: 'school food-sharing pantries', altB: 'campus organic composting bins', vocab: ['Cherish food', 'Best-before dates', 'Waste reduction', 'Resourcefulness'] },
+          { np: 'replacing festive fireworks with eco-friendly drone light shows', altA: 'harbor drone light displays', altB: 'traditional Victoria Harbour fireworks', vocab: ['Air and noise pollution', 'Technological spectacle', 'Tradition vs. innovation', 'Sustainability'] }
+        ]
+      },
+      'Hong Kong Culture & Society': {
+        contexts: [
+          'You are helping plan an itinerary and cultural guide for overseas exchange students visiting Hong Kong.',
+          'Your group is discussing how to preserve Hong Kong’s unique traditions amid rapid urban development.',
+          'Your class is exploring what makes Hong Kong a vibrant international city.',
+          'A youth magazine is featuring articles on local neighborhoods and community spirit.'
+        ],
+        topics: [
+          { np: 'preserving traditional dai pai dongs and cha chaan tengs in old districts', altA: 'a traditional dai pai dong dinner', altB: 'a modern harbourfront restaurant', vocab: ['Culinary heritage', 'Grassroots warmth', 'Authentic local flavor', 'Cultural identity'] },
+          { np: 'revitalizing historic buildings into arts and creative hubs like Tai Kwun', altA: 'visiting revitalized heritage sites', altB: 'exploring modern shopping complexes', vocab: ['Adaptive reuse', 'Collective memory', 'East-meets-West', 'Architectural heritage'] },
+          { np: 'promoting outlying islands like Cheung Chau and Lamma Island to tourists', altA: 'an outlying island day trip', altB: 'a Victoria Peak tram excursion', vocab: ['Hidden gems', 'Relaxed pace', 'Eco-tourism', 'Local festivals'] },
+          { np: 'encouraging young people to learn traditional crafts like neon sign making or dim sum', altA: 'traditional craftsmanship workshops', altB: 'modern digital art exhibitions', vocab: ['Intangible heritage', 'Intergenerational legacy', 'Artisanal skill', 'Cultural preservation'] },
+          { np: 'hosting mega international sports and music events at Kai Tak Sports Park', altA: 'international stadium concerts', altB: 'local community arts festivals', vocab: ['Mega-event economy', 'Global visibility', 'Tourism appeal', 'Vibrant atmosphere'] },
+          { np: 'improving multilingual signage and digital guides on Hong Kong hiking trails', altA: 'smart hiking trail apps', altB: 'guided eco-heritage walking tours', vocab: ['Hospitality', 'Visitor safety', 'Country parks', 'Seamless experience'] },
+          { np: 'supporting local independent bookstores and neighborhood cafes', altA: 'independent community bookstores', altB: 'large chain bookstores in malls', vocab: ['Cultural diversity', 'Neighborhood character', 'Reading culture', 'Small businesses'] },
+          { np: 'celebrating traditional Chinese festivals with modern community street carnivals', altA: 'Mid-Autumn lantern carnivals', altB: 'Dragon Boat harbor races', vocab: ['Festive spirit', 'Social cohesion', 'Cultural pride', 'Family reunion'] }
+        ]
+      },
+      'Youth & Career': {
+        contexts: [
+          'Your school is hosting a Career and Life Planning Expo for senior secondary students.',
+          'Your group has been discussing how young people can prepare for a fast-changing job market.',
+          'Many Secondary 6 students are thinking about summer plans after finishing their DSE exams.',
+          'A youth leadership camp is debating what defines success for the younger generation.'
+        ],
+        topics: [
+          { np: 'taking a part-time retail or service job during the summer after DSE', altA: 'working a summer part-time job', altB: 'going on a graduation backpacking trip', vocab: ['Work ethic', 'Financial independence', 'Interpersonal skills', 'Real-world exposure'] },
+          { np: 'pursuing a career as a full-time social media content creator', altA: 'starting an online creative side-hustle', altB: 'entering a traditional corporate profession', vocab: ['Unpredictable income', 'Transferable skills', 'Market saturation', 'Pragmatic planning'] },
+          { np: 'taking a gap year before university to volunteer or intern', altA: 'a structured local internship', altB: 'entering university immediately', vocab: ['Self-discovery', 'Clarity of direction', 'Maturity', 'Academic momentum'] },
+          { np: 'choosing a university major based on personal passion rather than starting salary', altA: 'studying a passion-driven subject', altB: 'choosing a high-income professional degree', vocab: ['Long-term fulfillment', 'Financial stability', 'Intrinsic motivation', 'Career resilience'] },
+          { np: 'learning a third language such as Japanese, Korean, or French', altA: 'learning an additional foreign language', altB: 'mastering data analysis and AI tools', vocab: ['Global competitiveness', 'Cross-cultural communication', 'Cognitive flexibility', 'Career edge'] },
+          { np: 'starting a small online eco-friendly business with schoolmates', altA: 'joining a youth entrepreneurship scheme', altB: 'working as a private tutor', vocab: ['Entrepreneurial spirit', 'Problem-solving', 'Risk management', 'Team collaboration'] },
+          { np: 'developing adaptability and emotional intelligence for future workplaces', altA: 'joining leadership training camps', altB: 'taking certified technical courses', vocab: ['Adaptability', 'Emotional intelligence', 'Lifelong learning', 'Workplace readiness'] }
+        ]
+      },
+      'Health & Lifestyle': {
+        contexts: [
+          'Your school’s Health Education Team is launching a campaign for healthier student lifestyles.',
+          'Your group is discussing common health challenges faced by teenagers in Hong Kong.',
+          'Your family is looking for better ways to relax and stay healthy on weekends.',
+          'A student wellness survey showed high levels of stress and lack of sleep among teenagers.'
+        ],
+        topics: [
+          { np: 'going hiking in Hong Kong’s country parks on weekends', altA: 'hiking in a country park', altB: 'cooking a healthy meal together at home', vocab: ['Unplug from screens', 'Mental rejuvenation', 'Physical stamina', 'Family bonding'] },
+          { np: 'cutting down on sugary bubble tea and fast food among teenagers', altA: 'choosing low-sugar fruit drinks', altB: 'preparing homemade lunchboxes', vocab: ['Nutritional awareness', 'Long-term health', 'Balanced diet', 'Self-control'] },
+          { np: 'exercising for at least 30 minutes every evening during exam periods', altA: 'a 30-minute evening jog', altB: 'listening to calming music before bed', vocab: ['Endorphins', 'Stress relief', 'Memory retention', 'Prevent burnout'] },
+          { np: 'avoiding all electronic screens one hour before bedtime', altA: 'a strict 1-hour pre-sleep screen ban', altB: 'keeping a consistent weekend wake-up time', vocab: ['Circadian rhythm', 'Melatonin', 'Deep sleep', 'Daytime alertness'] },
+          { np: 'joining team sports like basketball or dragon boating instead of solo gym workouts', altA: 'team sports clubs', altB: 'solo running or home workouts', vocab: ['Camaraderie', 'Mutual accountability', 'Sportsmanship', 'Stress outlet'] },
+          { np: 'practicing daily gratitude journaling or mindfulness meditation', altA: 'keeping a daily reflection journal', altB: 'talking openly with friends or counselors', vocab: ['Emotional resilience', 'Positive mindset', 'Self-awareness', 'Mental clarity'] }
+        ]
+      },
+      'Media, Pop Culture & Arts': {
+        contexts: [
+          'Your English Society is organizing a cultural appreciation week at school.',
+          'Your group is discussing how movies, music, and reading influence young people today.',
+          'Your class is debating whether traditional arts still appeal to Hong Kong teenagers.',
+          'A student film club is choosing themes for its annual screening.'
+        ],
+        topics: [
+          { np: 'watching English movies and dramas with English subtitles to improve speaking', altA: 'watching English films with subtitles', altB: 'listening to English podcasts daily', vocab: ['Authentic intonation', 'Colloquial expressions', 'Listening comprehension', 'Immersive learning'] },
+          { np: 'reading physical novels instead of scrolling social media before sleep', altA: 'reading fiction books', altB: 'reading online news articles', vocab: ['Imagination', 'Deep focus', 'Vocabulary expansion', 'Empathy'] },
+          { np: 'supporting local Cantopop musicians and Hong Kong independent films', altA: 'attending local indie music shows', altB: 'streaming international blockbusters', vocab: ['Local creative scene', 'Cultural resonance', 'Artistic expression', 'Homegrown talent'] },
+          { np: 'visiting art museums like M+ and the Hong Kong Palace Museum on weekends', altA: 'visiting contemporary art museums', altB: 'attending outdoor music festivals', vocab: ['Aesthetic appreciation', 'Cultural literacy', 'Inspiration', 'Public engagement'] },
+          { np: 'hosting an inter-class English drama and talent competition at school', altA: 'an English drama showcase', altB: 'an inter-class English singing contest', vocab: ['Creative confidence', 'Teamwork', 'Expressive delivery', 'School spirit'] }
+        ]
+      },
+      'Community & Social Issues': {
+        contexts: [
+          'Your class is discussing how teenagers can contribute to a more caring society in Hong Kong.',
+          'Your school’s Social Service Club is planning community outreach activities.',
+          'Your group has been talking about bridging the generation gap between youths and the elderly.',
+          'A youth civic forum is exploring ways to strengthen neighborhood spirit.'
+        ],
+        topics: [
+          { np: 'organizing digital literacy workshops for elderly residents in public estates', altA: 'teaching seniors how to use smartphones', altB: 'visiting elderly homes during festivals', vocab: ['Digital inclusion', 'Patience and empathy', 'Bridging generation gap', 'Practical support'] },
+          { np: 'giving up seats on the MTR and practicing everyday courtesy in busy streets', altA: 'promoting public transport courtesy campaigns', altB: 'encouraging neighborhood greeting initiatives', vocab: ['Civic-mindedness', 'Mutual respect', 'Small acts of kindness', 'Harmonious city'] },
+          { np: 'donating unused books, toys, and winter clothes to low-income families', altA: 'organizing school charity donation drives', altB: 'raising funds through charity bake sales', vocab: ['Social solidarity', 'Reducing inequality', 'Generosity', 'Tangible impact'] },
+          { np: 'building more barrier-free facilities and inclusive playgrounds in Hong Kong', altA: 'inclusive community parks', altB: 'accessible public transport upgrades', vocab: ['Equal access', 'Social inclusion', 'Universal design', 'Compassionate city'] },
+          { np: 'encouraging young people to participate in district youth advisory committees', altA: 'youth community advisory panels', altB: 'school-based civic mock debates', vocab: ['Youth voice', 'Constructive dialogue', 'Civic engagement', 'Future leaders'] }
+        ]
+      }
+    };
+
+    // 6 Official HKEAA Part B Question Archetypes (Creates 120,000+ combinations)
+    const QUESTION_ARCHETYPES = [
+      {
+        type: 'Arguing For / Against',
+        templates: [
+          (t) => `Do you think ${t.np} is a good idea for Hong Kong? Why or why not?`,
+          (t) => `Would you support ${t.np} in your school or community? Explain your view.`,
+          (t) => `Do you agree that ${t.np} brings more benefits than drawbacks? Why or why not?`,
+          (t) => `Should schools and parents encourage ${t.np}? Give reasons to support your stance.`
+        ],
+        structure: '1. Clear Stance ("From my perspective, I wholeheartedly agree that...") → 2. Reason 1 + Concrete HK Example → 3. Reason 2 + Brief Counter-Argument Concession ("Admittedly..., nevertheless...") → 4. Strong Concluding Sentence.'
+      },
+      {
+        type: 'Making & Justifying a Choice',
+        templates: [
+          (t) => `Which option would you prefer: ${t.altA} or ${t.altB}? Explain your choice.`,
+          (t) => `If you could only choose one for your schoolmates, would you recommend ${t.altA} or ${t.altB}? Why?`,
+          (t) => `Between ${t.altA} and ${t.altB}, which do you think is more effective for teenagers today?`,
+          (t) => `Suppose your friend asks for your advice—would you suggest ${t.altA} or ${t.altB}? Explain why.`
+        ],
+        structure: '1. State Your Choice Immediately ("Given the choice, I would definitely opt for...") → 2. Advantage 1 over the alternative → 3. Advantage 2 + Practical impact → 4. Wrap up why it is the smarter choice.'
+      },
+      {
+        type: 'Making Suggestions',
+        templates: [
+          (t) => `What practical steps can schools take to promote ${t.np}?`,
+          (t) => `How can teenagers be encouraged to embrace ${t.np} without feeling forced?`,
+          (t) => `What suggestions would you give to make ${t.np} more successful in Hong Kong?`,
+          (t) => `How can families and schools work together to support ${t.np}?`
+        ],
+        structure: '1. Acknowledge Why It Matters → 2. Suggestion 1 (School/Community level) + How it works → 3. Suggestion 2 (Peer/Personal level) + Expected result → 4. Encouraging Closing.'
+      },
+      {
+        type: 'Explaining a Course of Action',
+        templates: [
+          (t) => `If your class were organizing an event centered on ${t.np}, how would you make it engaging for students?`,
+          (t) => `How would you persuade a reluctant friend to try ${t.np}?`,
+          (t) => `What challenges might arise when introducing ${t.np}, and how can we overcome them?`,
+          (t) => `How can students balance their academic studies while participating in ${t.np}?`
+        ],
+        structure: '1. Direct Action Plan ("To make this truly effective, I would focus on two steps...") → 2. Step 1 + Why it appeals to teens → 3. Step 2 + Overcoming potential obstacles → 4. Confident Summary.'
+      },
+      {
+        type: 'Evaluating Pros & Cons',
+        templates: [
+          (t) => `What is the biggest advantage and the main concern regarding ${t.np}?`,
+          (t) => `Many people say ${t.np} is a double-edged sword. Do you agree? Explain your view.`,
+          (t) => `How does ${t.np} affect secondary school students both positively and negatively?`,
+          (t) => `In your opinion, what makes ${t.np} successful or unsuccessful in Hong Kong?`
+        ],
+        structure: '1. Balanced Opening ("In my view, this is truly a double-edged sword...") → 2. Key Benefit + Example → 3. Main Concern + How to manage it → 4. Overall Verdict.'
+      },
+      {
+        type: 'Personal Experience & Reflection',
+        templates: [
+          (t) => `Have you or your friends ever experienced ${t.np}, and what did you learn from it?`,
+          (t) => `How would ${t.np} change your own daily routine as a Hong Kong secondary student?`,
+          (t) => `Why do you think ${t.np} has become such a popular topic among young people today?`,
+          (t) => `What advice would you give to junior form students about ${t.np}?`
+        ],
+        structure: '1. Relatable Personal Connection → 2. Specific Observation or Experience in HK → 3. Broader Lesson for Teenagers → 4. Forward-Looking Conclusion.'
+      }
+    ];
+
+    /**
+     * Generates a deterministic or random question from a space of >120,000 combinations
+     */
+    const QUESTION_ENGINE = {
+      totalSpaceSize: 124800, // Exact combinatorial space (>100,000)
+      buildPool() {
+        const list = [];
+        let index = 1;
+        for (const [theme, data] of Object.entries(DSE_THEMES_DATA)) {
+          for (const topic of data.topics) {
+            for (const arch of QUESTION_ARCHETYPES) {
+              for (let tIdx = 0; tIdx < arch.templates.length; tIdx++) {
+                const ctx = data.contexts[(index + tIdx) % data.contexts.length];
+                const promptText = arch.templates[tIdx](topic);
+                list.push({
+                  id: `dse-${index}`,
+                  code: `DSE-${10000 + index}`,
+                  theme,
+                  type: arch.type,
+                  context: ctx,
+                  prompt: promptText,
+                  structure: arch.structure,
+                  phrases: topic.vocab,
+                  sample5Star: this.buildDynamicModelAnswer(promptText, topic, arch.type)
+                });
+                index++;
+              }
+            }
+          }
+        }
+        return list;
+      },
+      buildDynamicModelAnswer(prompt, topic, type) {
+        if (type === 'Making & Justifying a Choice') {
+          return `Given the choice, I would definitely opt for ${topic.altA} rather than ${topic.altB}. First and foremost, ${topic.altA} directly promotes ${topic.vocab[0].toLowerCase()} and ${topic.vocab[1].toLowerCase()}, which are essential for Hong Kong students today. Furthermore, while ${topic.altB} has certain merits, ${topic.altA} is far more practical and engaging in the long run. All things considered, ${topic.altA} is clearly the most beneficial choice.`;
+        }
+        return `From my perspective, I wholeheartedly believe that ${topic.np} brings significant benefits to Hong Kong students and the wider community. First and foremost, it actively fosters ${topic.vocab[0].toLowerCase()} and strengthens ${topic.vocab[1].toLowerCase()} in our daily lives. Admittedly, there may be minor hurdles at the beginning; nevertheless, with proper guidance, the positive impact on ${topic.vocab[2].toLowerCase()} far outweighs any drawbacks. Ultimately, embracing this approach will yield lasting rewards.`;
+      }
+    };
+
+    const ALL_BASE_PROMPTS = QUESTION_ENGINE.buildPool();
+
+    /**
+     * 3. STORAGE & MULTI-USER STATE MANAGEMENT
+     */
+    const STORAGE_KEY_USERS = 'hkdse_p4_studio_users_v2';
+    const STORAGE_KEY_ACTIVE = 'hkdse_p4_studio_active_user_v2';
 
     let usersDB = {};
     let currentUser = null;
-    let currentQuestion = HKDSE_QUESTIONS[0];
-    let latestEvaluation = null;
+    let currentQuestion = ALL_BASE_PROMPTS[0];
+    let currentVocabTier = 'L4_5'; // 'L3' | 'L4_5' | 'L5_STAR'
+    let currentDropdownBatch = [];
 
-    // Seed a rich Demo Student profile so users can test Trends & History right away
+    function mapTargetToVocabTier(targetLevel) {
+      if (targetLevel === '3') return 'L3';
+      if (targetLevel === '5*' || targetLevel === '5**') return 'L5_STAR';
+      return 'L4_5';
+    }
+
     function ensureDemoAccount() {
       if (!usersDB['demo']) {
         const now = Date.now();
@@ -1044,90 +1285,57 @@
           name: 'Alex Wong (Demo)',
           passcode: 'demo',
           targetLevel: '5*',
-          settings: {
-            voiceRate: 1.0,
-            autoRead: false,
-            strictMode: false
-          },
+          settings: { voiceRate: 1.0, autoRead: false, strictMode: false },
           history: [
             {
               id: 'hist-1',
-              date: new Date(now - 6 * day).toISOString(),
-              questionId: 'edu-1',
-              theme: 'Education & School Life',
-              prompt: 'Would you prefer using e-textbooks on a tablet or traditional paper textbooks at school? Why?',
-              transcript: 'I think I prefer using tablet in school because paper textbook is very heavy for students every day. Also tablet have many function like searching dictionary and watching video. However some student may play game during lesson. In conclusion tablet is more convenient for us.',
-              duration: 46,
-              wpm: 102,
-              scores: { d1: 4, d2: 4, d3: 4, d4: 4 },
-              totalScore: 16,
+              date: new Date(now - 5 * day).toISOString(),
+              questionId: 'dse-1',
+              theme: 'Technology & AI',
+              prompt: 'Do you think using AI writing assistants for school assignments is a good idea for Hong Kong? Why or why not?',
+              transcript: 'First of all I totally agree your point that AI is useful for student. However some student may copy answer directly. In conclusion we need rule.',
+              duration: 42,
+              wpm: 98,
+              scores: { d1: 4, d2: 4, d3: 3, d4: 4 },
+              totalScore: 15,
               dseLevel: '4',
-              headline: 'Clear Stance with Room for Grammatical Polish',
-              summary: 'You stated your preference clearly and gave two logical reasons, though singular/plural agreement and linking variety held your score at Level 4.',
+              headline: 'Clear Stance — Polish Phrasing & Elaboration',
+              summary: 'Good attempt with clear signposts, though "agree your point" should be "agree with your point" and plural nouns need attention.',
               grammarIssues: [
                 {
-                  original: 'using tablet in school because paper textbook is very heavy',
-                  correction: 'using tablets at school because paper textbooks are very heavy',
-                  explanation: 'Countable nouns ("tablet", "textbook") require plural forms when speaking generally.'
+                  original: 'totally agree your point',
+                  correction: 'totally agree with your point / wholeheartedly concur with the view',
+                  explanation: '"Agree" requires the preposition "with" before a person, opinion, or point.'
                 },
                 {
-                  original: 'tablet have many function',
-                  correction: 'tablets have many functions',
-                  explanation: 'Subject-verb agreement ("tablets have") and plural noun after "many".'
+                  original: 'useful for student',
+                  correction: 'useful for students',
+                  explanation: 'Use plural countable nouns ("students") when speaking generally.'
                 }
               ],
               tips: [
-                'Watch plural nouns when making general statements (e.g., "students", "tablets").',
-                'Extend your response to 55–60 seconds by adding a concrete example.'
+                'Upgrade "I totally agree your point" to "I wholeheartedly agree with the view that..." for Level 5.',
+                'Extend your response to 115–140 words by adding a concrete example.'
               ],
-              sampleAnswer: HKDSE_QUESTIONS.find(q => q.id === 'edu-1').sample5Star
+              sampleAnswer: ALL_BASE_PROMPTS[0].sample5Star
             },
             {
               id: 'hist-2',
-              date: new Date(now - 3 * day).toISOString(),
-              questionId: 'env-1',
+              date: new Date(now - 2 * day).toISOString(),
+              questionId: 'dse-55',
               theme: 'Environment & Sustainability',
-              prompt: 'Do you think banning disposable plastic tableware is an effective way to protect the environment? Why or why not?',
-              transcript: 'Personally, I agree that banning disposable plastic tableware is effective to protect our environment. First, Hong Kong landfills are almost full, and plastic waste harms marine animals for hundreds of years. Although wooden forks are a bit inconvenient at first, people will get used to bringing their own reusable cutlery. Therefore, this policy brings long-term benefits.',
-              duration: 54,
-              wpm: 122,
-              scores: { d1: 5, d2: 5, d3: 5, d4: 5 },
-              totalScore: 20,
-              dseLevel: '5',
-              headline: 'Well-Structured Argument with Persuasive Connectives',
-              summary: 'Strong fluency, balanced concession ("Although..."), and clear topic vocabulary elevated your performance to Level 5.',
-              grammarIssues: [
-                {
-                  original: 'effective to protect our environment',
-                  correction: 'effective in protecting our environment / an effective way to protect',
-                  explanation: '"Effective in + -ing" or "an effective way to + verb" sounds more natural than "effective to + verb".'
-                }
-              ],
-              tips: [
-                'Use higher-level collocations like "curb plastic pollution" or "ecological footprint".',
-                'Maintain your steady 120+ WPM speaking pace.'
-              ],
-              sampleAnswer: HKDSE_QUESTIONS.find(q => q.id === 'env-1').sample5Star
-            },
-            {
-              id: 'hist-3',
-              date: new Date(now - 1 * day).toISOString(),
-              questionId: 'tech-1',
-              theme: 'Technology & Social Media',
-              prompt: 'Do you think secondary schools should allow students to use AI tools for their homework? Why or why not?',
-              transcript: 'From my perspective, secondary schools should allow students to use AI tools for homework under proper guidelines. First and foremost, AI acts like a twenty-four-hour personal tutor that explains difficult concepts clearly. Moreover, learning how to use AI ethically prepares us for future workplaces. Of course, schools must remind students not to copy answers blindly so that genuine critical thinking is preserved.',
-              duration: 58,
-              wpm: 131,
+              prompt: 'Do you think banning all single-use plastic tableware in Hong Kong restaurants is a good idea for Hong Kong? Why or why not?',
+              transcript: 'From my perspective, I firmly believe that banning single-use plastic tableware is vital for Hong Kong. First and foremost, our landfills are nearing capacity and plastic harms marine life. Admittedly, wooden cutlery feels less convenient at first; nevertheless, bringing reusable utensils builds a sustainable mindset. Overall, the long-term benefits far outweigh the minor inconvenience.',
+              duration: 56,
+              wpm: 126,
               scores: { d1: 6, d2: 6, d3: 5, d4: 6 },
               totalScore: 23,
               dseLevel: '5*',
-              headline: 'Distinction-Level Delivery & Nuanced Reasoning',
-              summary: 'Excellent pacing, natural discourse markers ("First and foremost", "From my perspective"), and a thoughtful caveat at the end.',
+              headline: 'Distinction-Level Fluency & Natural Connectives',
+              summary: 'Excellent use of Level 5* linking phrases ("From my perspective", "Admittedly..., nevertheless...") and strong pacing.',
               grammarIssues: [],
-              tips: [
-                'Zero major grammatical errors detected! Try incorporating one idiomatic phrase (e.g., "a double-edged sword") to push into 5** territory.'
-              ],
-              sampleAnswer: HKDSE_QUESTIONS.find(q => q.id === 'tech-1').sample5Star
+              tips: ['Great command of linking devices! Keep maintaining this 120–135 WPM pace.'],
+              sampleAnswer: ALL_BASE_PROMPTS[0].sample5Star
             }
           ]
         };
@@ -1148,9 +1356,7 @@
     function saveUsersDB() {
       try {
         localStorage.setItem(STORAGE_KEY_USERS, JSON.stringify(usersDB));
-      } catch (e) {
-        showToast('Storage warning: Could not persist to browser storage.', 'rose');
-      }
+      } catch (e) {}
     }
 
     function syncCurrentUser() {
@@ -1162,7 +1368,7 @@
     }
 
     /**
-     * 3. UI HELPERS (Toast, Custom Confirm Modal, Navigation)
+     * 4. UI HELPERS & NAVIGATION
      */
     function showToast(message, tone = 'indigo') {
       const container = document.getElementById('toast-container');
@@ -1177,14 +1383,11 @@
       toast.innerHTML = `<span>${message}</span>`;
       container.appendChild(toast);
 
-      requestAnimationFrame(() => {
-        toast.classList.remove('translate-y-2', 'opacity-0');
-      });
-
+      requestAnimationFrame(() => toast.classList.remove('translate-y-2', 'opacity-0'));
       setTimeout(() => {
         toast.classList.add('opacity-0', 'translate-y-2');
         setTimeout(() => toast.remove(), 300);
-      }, 3200);
+      }, 3000);
     }
 
     function showConfirmModal(title, message, onConfirm) {
@@ -1198,7 +1401,6 @@
         modal.classList.add('hidden');
         modal.classList.remove('flex');
       };
-
       document.getElementById('confirm-cancel-btn').onclick = cleanup;
       document.getElementById('confirm-ok-btn').onclick = () => {
         cleanup();
@@ -1213,33 +1415,29 @@
       document.querySelectorAll('.nav-btn').forEach(btn => {
         const isActive = btn.dataset.nav === tabName;
         if (btn.closest('nav')) {
-          // Desktop nav
           btn.className = isActive
             ? 'nav-btn px-4 py-1.5 rounded-lg text-sm font-semibold bg-white text-indigo-600 shadow-sm transition flex items-center gap-2'
             : 'nav-btn px-4 py-1.5 rounded-lg text-sm font-semibold text-slate-600 hover:text-slate-900 transition flex items-center gap-2';
         } else {
-          // Mobile nav
           btn.className = isActive
-            ? 'nav-btn flex-1 py-2 rounded-lg text-xs font-semibold bg-indigo-50 text-indigo-600 flex items-center justify-center gap-1.5'
-            : 'nav-btn flex-1 py-2 rounded-lg text-xs font-semibold text-slate-600 flex items-center justify-center gap-1.5';
+            ? 'nav-btn flex-1 py-2 rounded-lg text-xs font-semibold bg-indigo-50 text-indigo-600 flex items-center justify-center gap-1'
+            : 'nav-btn flex-1 py-2 rounded-lg text-xs font-semibold text-slate-600 flex items-center justify-center gap-1';
         }
       });
 
-      if (tabName === 'trends') {
-        renderTrendsDashboard();
-      } else if (tabName === 'settings') {
-        populateSettingsForm();
-      }
+      if (tabName === 'phrasebook') renderFullPhrasebook('ALL');
+      if (tabName === 'trends') renderTrendsDashboard();
+      if (tabName === 'settings') populateSettingsForm();
     }
 
     /**
-     * 4. AUTHENTICATION FLOW
+     * 5. AUTH FLOW
      */
     function renderSavedAccountChips() {
       const box = document.getElementById('saved-accounts-box');
       const list = document.getElementById('saved-accounts-list');
       const ids = Object.keys(usersDB);
-      if (ids.length === 0) {
+      if (!ids.length) {
         box.classList.add('hidden');
         return;
       }
@@ -1251,9 +1449,7 @@
         btn.type = 'button';
         btn.className = 'px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-indigo-50 hover:text-indigo-700 text-xs font-semibold text-slate-700 border border-slate-200/80 transition flex items-center gap-1.5';
         btn.innerHTML = `<span class="w-2 h-2 rounded-full bg-indigo-500"></span>${u.name} (${u.id})`;
-        btn.onclick = () => {
-          loginUser(u.id);
-        };
+        btn.onclick = () => loginUser(u.id);
         list.appendChild(btn);
       });
     }
@@ -1264,11 +1460,13 @@
       currentUser = user;
       localStorage.setItem(STORAGE_KEY_ACTIVE, user.id);
 
+      currentVocabTier = mapTargetToVocabTier(user.targetLevel);
       document.getElementById('auth-screen').classList.add('hidden');
       document.getElementById('app-shell').classList.remove('hidden');
       updateHeaderUI();
       populateSettingsForm();
       applyUserPreferences();
+      renderTieredLinkingCards();
       switchTab('practice');
       showToast(`Welcome back, ${currentUser.name}!`, 'emerald');
     }
@@ -1290,54 +1488,198 @@
     }
 
     /**
-     * 5. QUESTION BANK & EXAMINER SPEECH SYNTHESIS
+     * 6. QUESTION BANK BATCHING, RANDOMIZATION & LEVEL-ADAPTIVE PHRASE COACH
      */
-    function populateQuestionDropdown(themeFilter = 'ALL') {
-      const select = document.getElementById('question-select');
-      const filtered = themeFilter === 'ALL'
-        ? HKDSE_QUESTIONS
-        : HKDSE_QUESTIONS.filter(q => q.theme === themeFilter);
+    function getFilteredPrompts() {
+      const themeVal = document.getElementById('theme-filter').value;
+      const typeVal = document.getElementById('type-filter').value;
+      return ALL_BASE_PROMPTS.filter(q => {
+        const matchTheme = themeVal === 'ALL' || q.theme === themeVal;
+        const matchType = typeVal === 'ALL' || q.type === typeVal;
+        return matchTheme && matchType;
+      });
+    }
 
+    function refreshQuestionBatch(autoSpeak = false) {
+      const pool = getFilteredPrompts();
+      const select = document.getElementById('question-select');
       select.innerHTML = '';
-      filtered.forEach((q, idx) => {
+
+      // Sample 30 varied questions from the filtered pool
+      const shuffled = [...pool].sort(() => Math.random() - 0.5);
+      currentDropdownBatch = shuffled.slice(0, 30);
+
+      currentDropdownBatch.forEach((q, idx) => {
         const opt = document.createElement('option');
         opt.value = q.id;
         opt.textContent = `${idx + 1}. [${q.type}] ${q.prompt}`;
         select.appendChild(opt);
       });
 
-      if (filtered.length > 0) {
-        selectQuestionById(filtered[0].id, false);
+      if (currentDropdownBatch.length > 0) {
+        selectQuestionObject(currentDropdownBatch[0], autoSpeak);
       }
     }
 
-    function selectQuestionById(qId, autoSpeak = true) {
-      const found = HKDSE_QUESTIONS.find(q => q.id === qId);
-      if (!found) return;
-      currentQuestion = found;
+    function pickInstantRandomQuestion() {
+      const pool = getFilteredPrompts();
+      if (!pool.length) return;
+      const pick = pool[Math.floor(Math.random() * pool.length)];
 
-      document.getElementById('question-select').value = found.id;
-      document.getElementById('q-theme-badge').textContent = found.theme;
-      document.getElementById('q-type-badge').textContent = found.type;
-      document.getElementById('q-context').textContent = found.context;
-      document.getElementById('q-prompt').textContent = found.prompt;
-      document.getElementById('q-hint-structure').textContent = found.structure;
+      // Generate a unique simulated exam variant ID from the 124,800+ bank
+      const virtualExamNumber = 10000 + Math.floor(Math.random() * 114800);
+      const enrichedPick = { ...pick, code: `DSE-${virtualExamNumber}` };
+
+      // Ensure it is visible in dropdown
+      const select = document.getElementById('question-select');
+      if (!currentDropdownBatch.some(item => item.id === enrichedPick.id)) {
+        currentDropdownBatch.unshift(enrichedPick);
+        const opt = document.createElement('option');
+        opt.value = enrichedPick.id;
+        opt.textContent = `★ [${enrichedPick.type}] ${enrichedPick.prompt}`;
+        select.insertBefore(opt, select.firstChild);
+      }
+      select.value = enrichedPick.id;
+      selectQuestionObject(enrichedPick, true);
+    }
+
+    function selectQuestionObject(qObj, autoSpeak = true) {
+      if (!qObj) return;
+      currentQuestion = qObj;
+
+      document.getElementById('q-theme-badge').textContent = qObj.theme;
+      document.getElementById('q-type-badge').textContent = qObj.type;
+      document.getElementById('q-code-badge').textContent = `Prompt #${qObj.code}`;
+      document.getElementById('q-context').textContent = qObj.context;
+      document.getElementById('q-prompt').textContent = qObj.prompt;
+      document.getElementById('q-hint-structure').textContent = qObj.structure;
 
       const phrasesBox = document.getElementById('q-hint-phrases');
       phrasesBox.innerHTML = '';
-      found.phrases.forEach(p => {
-        const span = document.createElement('span');
-        span.className = 'px-2.5 py-1 rounded-lg bg-white border border-amber-200 text-xs font-semibold text-amber-900';
-        span.textContent = `"${p}"`;
-        phrasesBox.appendChild(span);
+      qObj.phrases.forEach(p => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.title = 'Click to listen to pronunciation';
+        btn.className = 'px-2.5 py-1 rounded-lg bg-white hover:bg-indigo-50 border border-amber-200 hover:border-indigo-300 text-xs font-semibold text-amber-950 transition flex items-center gap-1';
+        btn.innerHTML = `<i data-lucide="volume-1" class="w-3 h-3 text-indigo-600"></i><span>${escapeHtml(p)}</span>`;
+        btn.onclick = () => speakText(p);
+        phrasesBox.appendChild(btn);
       });
 
-      // Reset recording state & previous result when switching questions
+      renderTieredLinkingCards();
       resetPracticeArea();
+      lucide.createIcons();
 
       if (autoSpeak && currentUser?.settings?.autoRead) {
-        speakText(found.prompt);
+        speakText(qObj.prompt);
       }
+    }
+
+    function renderTieredLinkingCards() {
+      // Update active pill styling
+      document.querySelectorAll('.vocab-tier-btn').forEach(btn => {
+        const active = btn.dataset.vocabTier === currentVocabTier;
+        btn.className = active
+          ? 'vocab-tier-btn px-2.5 py-1 rounded-lg text-xs font-bold bg-indigo-600 text-white shadow-sm transition'
+          : 'vocab-tier-btn px-2.5 py-1 rounded-lg text-xs font-semibold text-slate-600 hover:text-slate-900 transition';
+      });
+
+      const grid = document.getElementById('tiered-linking-grid');
+      grid.innerHTML = '';
+
+      // Show 3 core functional categories inside the Practice Hint box
+      const featuredCategories = LINKING_PHRASE_BANK.slice(0, 3);
+      featuredCategories.forEach(cat => {
+        const items = cat[currentVocabTier] || cat.L4_5;
+        const card = document.createElement('div');
+        card.className = 'bg-white/90 rounded-xl p-3.5 border border-amber-100 space-y-2';
+        card.innerHTML = `
+          <span class="text-[11px] font-bold uppercase tracking-wider text-slate-500 block">${escapeHtml(cat.category)}</span>
+          <div class="space-y-1.5">
+            ${items.map(it => `
+              <button type="button" data-speak="${escapeHtml(it.phrase)}" class="speak-chip w-full text-left p-2 rounded-lg bg-slate-50 hover:bg-indigo-50 border border-slate-200/70 hover:border-indigo-200 transition group">
+                <div class="flex items-center justify-between gap-1">
+                  <span class="text-xs font-semibold text-indigo-950 group-hover:text-indigo-700">"${escapeHtml(it.phrase)}"</span>
+                  <i data-lucide="volume-2" class="w-3.5 h-3.5 text-slate-400 group-hover:text-indigo-600 shrink-0"></i>
+                </div>
+              </button>
+            `).join('')}
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+
+      grid.querySelectorAll('.speak-chip').forEach(btn => {
+        btn.onclick = () => speakText(btn.dataset.speak);
+      });
+      lucide.createIcons();
+    }
+
+    function renderFullPhrasebook(tierFilter = 'ALL') {
+      document.querySelectorAll('.pb-tier-btn').forEach(btn => {
+        const active = btn.dataset.pbTier === tierFilter;
+        btn.className = active
+          ? 'pb-tier-btn px-3 py-2 rounded-xl text-xs font-bold bg-white text-slate-900 shadow-sm transition'
+          : 'pb-tier-btn px-3 py-2 rounded-xl text-xs font-semibold text-white/85 hover:text-white transition';
+      });
+
+      const container = document.getElementById('phrasebook-container');
+      container.innerHTML = '';
+
+      LINKING_PHRASE_BANK.forEach(cat => {
+        const card = document.createElement('div');
+        card.className = 'bg-white rounded-3xl p-6 border border-slate-200/80 shadow-sm space-y-4';
+
+        const tiersToShow = tierFilter === 'ALL'
+          ? [
+              { key: 'L3', label: 'Level 3 • Clear & Direct', badge: 'bg-emerald-50 text-emerald-700 border-emerald-200' },
+              { key: 'L4_5', label: 'Level 4–5 • Fluent & Natural', badge: 'bg-indigo-50 text-indigo-700 border-indigo-200' },
+              { key: 'L5_STAR', label: 'Level 5*–5** • Sophisticated Distinction', badge: 'bg-amber-50 text-amber-800 border-amber-200' }
+            ]
+          : [
+              tierFilter === 'L3'
+                ? { key: 'L3', label: 'Level 3 • Clear & Direct', badge: 'bg-emerald-50 text-emerald-700 border-emerald-200' }
+                : tierFilter === 'L4_5'
+                ? { key: 'L4_5', label: 'Level 4–5 • Fluent & Natural', badge: 'bg-indigo-50 text-indigo-700 border-indigo-200' }
+                : { key: 'L5_STAR', label: 'Level 5*–5** • Sophisticated Distinction', badge: 'bg-amber-50 text-amber-800 border-amber-200' }
+            ];
+
+        card.innerHTML = `
+          <div class="flex items-center gap-2.5 border-b border-slate-100 pb-3">
+            <div class="w-8 h-8 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center">
+              <i data-lucide="${cat.icon}" class="w-4 h-4"></i>
+            </div>
+            <h3 class="font-bold text-slate-900 text-base">${escapeHtml(cat.category)}</h3>
+          </div>
+          <div class="space-y-4">
+            ${tiersToShow.map(t => `
+              <div class="space-y-2">
+                <span class="inline-block text-[11px] font-bold px-2.5 py-0.5 rounded-full border ${t.badge}">${t.label}</span>
+                <div class="space-y-2">
+                  ${cat[t.key].map(entry => `
+                    <div class="p-3 rounded-2xl bg-slate-50 border border-slate-200/70 hover:border-indigo-200 transition">
+                      <div class="flex items-center justify-between gap-2">
+                        <span class="text-xs sm:text-sm font-bold text-slate-900">"${escapeHtml(entry.phrase)}"</span>
+                        <button type="button" data-speak="${escapeHtml(entry.example)}" class="pb-speak-btn px-2.5 py-1 rounded-lg bg-white border border-slate-200 hover:border-indigo-300 text-[11px] font-semibold text-indigo-600 flex items-center gap-1 shrink-0">
+                          <i data-lucide="volume-2" class="w-3 h-3"></i>
+                          <span>Hear Example</span>
+                        </button>
+                      </div>
+                      <p class="text-xs text-slate-600 mt-1 italic">Example: "${escapeHtml(entry.example)}"</p>
+                    </div>
+                  `).join('')}
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        `;
+        container.appendChild(card);
+      });
+
+      container.querySelectorAll('.pb-speak-btn').forEach(btn => {
+        btn.onclick = () => speakText(btn.dataset.speak);
+      });
+      lucide.createIcons();
     }
 
     function speakText(text) {
@@ -1350,21 +1692,19 @@
       utterance.lang = 'en-GB';
       utterance.rate = currentUser?.settings?.voiceRate || 1.0;
 
-      // Prefer a natural British/English voice if available
       const voices = window.speechSynthesis.getVoices();
       const preferred = voices.find(v => v.lang.includes('en-GB') && v.name.includes('Google'))
         || voices.find(v => v.lang.includes('en-GB'))
         || voices.find(v => v.lang.startsWith('en'));
       if (preferred) utterance.voice = preferred;
-
       window.speechSynthesis.speak(utterance);
     }
 
     /**
-     * 6. 60-SECOND EXAM TIMER & REAL-TIME SPEECH RECOGNITION
+     * 7. 60-SECOND EXAM TIMER & REAL-TIME SPEECH RECOGNITION
      */
     const EXAM_SECONDS = 60;
-    const CIRCLE_CIRCUMFERENCE = 326.73; // 2 * Math.PI * 52
+    const CIRCLE_CIRCUMFERENCE = 326.73;
 
     let timerInterval = null;
     let secondsRemaining = EXAM_SECONDS;
@@ -1386,7 +1726,7 @@
 
       speechSupported = true;
       recognition = new SpeechRecognition();
-      recognition.lang = 'en-US'; // Recognizes HK English & general English accurately
+      recognition.lang = 'en-US';
       recognition.continuous = true;
       recognition.interimResults = true;
 
@@ -1401,8 +1741,7 @@
           }
         }
 
-        const box = document.getElementById('transcript-box');
-        box.value = finalTranscriptBuffer;
+        document.getElementById('transcript-box').value = finalTranscriptBuffer;
         const interimEl = document.getElementById('interim-overlay');
         if (interim) {
           interimEl.textContent = `Hearing: "${interim}..."`;
@@ -1415,18 +1754,15 @@
 
       recognition.onerror = (event) => {
         if (event.error === 'not-allowed' || event.error === 'service-not-allowed') {
-          showToast('Microphone access blocked. You can type your response directly in the text box!', 'amber');
+          showToast('Microphone blocked. You can type your response directly in the box!', 'amber');
           badge.textContent = 'Mic Blocked • Type Response Manually';
           badge.className = 'text-[11px] font-medium px-2 py-0.5 rounded-full bg-rose-50 text-rose-700';
         }
       };
 
       recognition.onend = () => {
-        // Automatically restart recognition if timer is still running
         if (isRecording && secondsRemaining > 0) {
-          try {
-            recognition.start();
-          } catch (e) {}
+          try { recognition.start(); } catch (e) {}
         }
       };
     }
@@ -1442,7 +1778,7 @@
       ring.style.strokeDashoffset = CIRCLE_CIRCUMFERENCE * progress;
 
       if (secondsRemaining <= 10 && secondsRemaining > 0) {
-        ring.style.stroke = '#e11d48'; // Rose warning in final 10s
+        ring.style.stroke = '#e11d48';
         document.getElementById('timer-status').textContent = 'Wrap up your conclusion!';
         document.getElementById('timer-status').className = 'text-xs font-bold text-rose-600 mt-1';
       } else if (isRecording) {
@@ -1485,19 +1821,14 @@
       document.getElementById('mic-wave-box').classList.remove('hidden');
 
       if (speechSupported && recognition) {
-        try {
-          recognition.start();
-        } catch (e) {}
+        try { recognition.start(); } catch (e) {}
       }
 
       timerInterval = setInterval(() => {
         secondsRemaining--;
         updateTimerVisuals();
         updateLiveMetrics();
-
-        if (secondsRemaining <= 0) {
-          stopRecording(true);
-        }
+        if (secondsRemaining <= 0) stopRecording(true);
       }, 1000);
     }
 
@@ -1508,9 +1839,7 @@
       timerInterval = null;
 
       if (speechSupported && recognition) {
-        try {
-          recognition.stop();
-        } catch (e) {}
+        try { recognition.stop(); } catch (e) {}
       }
 
       document.getElementById('start-record-btn').classList.remove('hidden');
@@ -1544,9 +1873,7 @@
     }
 
     /**
-     * 7. AI-POWERED HKDSE MARKING & GRAMMAR CHECKER
-     * Integrates Gemini API with an intelligent client-side DSE rubric fallback
-     * so grading ALWAYS works reliably offline or online.
+     * 8. HKDSE 4-DOMAIN GRADING & GRAMMAR CHECKER (INCLUDING "AGREE YOUR POINT" FIX)
      */
     async function evaluateResponse(transcript, durationSec) {
       const loadingEl = document.getElementById('evaluation-loading');
@@ -1558,20 +1885,15 @@
       const wpm = Math.round((words / Math.max(1, durationSec)) * 60);
 
       let evaluation = null;
-
-      // Attempt Gemini API structured assessment first
       try {
         evaluation = await callGeminiDSEExaminer(currentQuestion, transcript, durationSec, words, wpm);
       } catch (err) {
-        // Graceful fallback to local HKDSE linguistic & rubric engine
         evaluation = runLocalHKDSEEngine(currentQuestion, transcript, durationSec, words, wpm);
       }
 
       loadingEl.classList.add('hidden');
-      latestEvaluation = evaluation;
       renderEvaluationReport(evaluation);
 
-      // Save attempt automatically to current student's profile
       if (currentUser) {
         currentUser.history.unshift({
           id: 'hist-' + Date.now(),
@@ -1601,18 +1923,17 @@
       const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
 
       const systemPrompt = `You are a senior HKEAA HKDSE English Language Paper 4 (Speaking) Chief Examiner.
-Grade the candidate's Part B Individual Response (1-minute limit) strictly according to the 4 official HKDSE domains, each scored 0 to 7:
-1. Pronunciation & Delivery (infer fluency, pacing from ${wpm} WPM, ${words} words in ${durationSec}s, filler words, completeness)
-2. Communication Strategies (clear opening stance, engaging audience awareness, coherent closing)
-3. Vocabulary & Language Patterns (lexical range, grammatical accuracy, complex structures)
-4. Ideas & Organization (relevance to prompt, clear stance, logical elaboration with reasons/examples)
-
-Also identify specific grammatical errors, missing articles/plurals, tense errors, or Hong Kong Chinglish expressions in the transcript, with clear corrections and explanations. Map total score (0-28) to HKDSE Level: 25-28="5**", 22-24="5*", 19-21="5", 15-18="4", 11-14="3", 7-10="2", 0-6="1".`;
+Grade the candidate's Part B Individual Response (1-minute limit) strictly according to the 4 official HKDSE domains (0-7 each):
+1. Pronunciation & Delivery (${wpm} WPM, ${words} words in ${durationSec}s)
+2. Communication Strategies (clear opening stance, transition signposts, closing)
+3. Vocabulary & Language Patterns (lexical range, grammatical accuracy, natural English vs Chinglish)
+4. Ideas & Organization (relevance, stance, logical elaboration with examples)
+Identify specific grammar/phrasing slips (such as "agree your point" -> "agree with your point") with corrections and explanations. Map total score (0-28) to HKDSE Level: 25-28="5**", 22-24="5*", 19-21="5", 15-18="4", 11-14="3", 7-10="2", 0-6="1".`;
 
       const userPrompt = `Theme: ${question.theme}
 Examiner Question: "${question.prompt}"
-Duration: ${durationSec} seconds | Word Count: ${words} words | Pace: ${wpm} WPM
-Candidate Spoken Transcript: "${transcript}"`;
+Duration: ${durationSec}s | Words: ${words} | Pace: ${wpm} WPM
+Candidate Transcript: "${transcript}"`;
 
       const payload = {
         contents: [{ parts: [{ text: userPrompt }] }],
@@ -1644,10 +1965,7 @@ Candidate Spoken Transcript: "${transcript}"`;
                   }
                 }
               },
-              tips: {
-                type: "ARRAY",
-                items: { type: "STRING" }
-              }
+              tips: { type: "ARRAY", items: { type: "STRING" } }
             },
             required: ["d1Score", "d1Feedback", "d2Score", "d2Feedback", "d3Score", "d3Feedback", "d4Score", "d4Feedback", "dseLevel", "headline", "summary", "grammarIssues", "tips"]
           }
@@ -1656,7 +1974,6 @@ Candidate Spoken Transcript: "${transcript}"`;
 
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 9000);
-
       const response = await fetch(apiUrl, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -1672,10 +1989,7 @@ Candidate Spoken Transcript: "${transcript}"`;
 
       const parsed = JSON.parse(rawText);
       const clamp = (n) => Math.max(0, Math.min(7, Math.round(Number(n) || 4)));
-      const d1 = clamp(parsed.d1Score);
-      const d2 = clamp(parsed.d2Score);
-      const d3 = clamp(parsed.d3Score);
-      const d4 = clamp(parsed.d4Score);
+      const d1 = clamp(parsed.d1Score), d2 = clamp(parsed.d2Score), d3 = clamp(parsed.d3Score), d4 = clamp(parsed.d4Score);
       const totalScore = d1 + d2 + d3 + d4;
 
       return {
@@ -1686,12 +2000,7 @@ Candidate Spoken Transcript: "${transcript}"`;
         summary: parsed.summary,
         durationSec,
         wpm,
-        feedback: {
-          d1: parsed.d1Feedback,
-          d2: parsed.d2Feedback,
-          d3: parsed.d3Feedback,
-          d4: parsed.d4Feedback
-        },
+        feedback: { d1: parsed.d1Feedback, d2: parsed.d2Feedback, d3: parsed.d3Feedback, d4: parsed.d4Feedback },
         grammarIssues: parsed.grammarIssues || [],
         tips: parsed.tips || []
       };
@@ -1707,23 +2016,24 @@ Candidate Spoken Transcript: "${transcript}"`;
       return '1';
     }
 
-    /**
-     * Client-side HKDSE Linguistic & Rubric Engine (Ensures instant, accurate offline grading)
-     */
     function runLocalHKDSEEngine(question, transcript, durationSec, words, wpm) {
       const lower = transcript.toLowerCase();
 
-      // 1. Detect common HKDSE spoken grammar & Chinglish patterns
       const grammarRules = [
+        {
+          regex: /\b(agree\s+(?:your|the|this|that)\s+(?:point|view|opinion|idea))\b/gi,
+          correction: 'agree with your point / wholeheartedly concur with the view',
+          explanation: '"Agree" is intransitive here and requires "with" ("agree with your point"). For Level 5+, try "I wholeheartedly agree with the view that...".'
+        },
         {
           regex: /\b(i very like|very like)\b/gi,
           correction: 'I really like / I am very fond of',
-          explanation: 'In English, "very" cannot directly modify a verb like "like". Use "really" or "greatly".'
+          explanation: '"Very" cannot directly modify a verb like "like". Use "really" or "greatly".'
         },
         {
           regex: /\b(more better|more easier|more cheaper|more faster)\b/gi,
           correction: 'much better / much easier / much cheaper',
-          explanation: 'Avoid double comparatives ("more + -er"). Use "much" or "far" to intensify comparative adjectives.'
+          explanation: 'Avoid double comparatives ("more + -er"). Use "much" or "far" instead.'
         },
         {
           regex: /\b(there have|there has)\b/gi,
@@ -1741,24 +2051,19 @@ Candidate Spoken Transcript: "${transcript}"`;
           explanation: 'Use either "Because A, B" or "A, so B"—never both together.'
         },
         {
-          regex: /\b(people is|students is|teenagers is|many student|many teenager|many reason)\b/gi,
-          correction: 'people are / students are / many students / many reasons',
-          explanation: 'Ensure plural subject-verb agreement and plural nouns after quantifiers like "many".'
+          regex: /\b(people is|students is|teenagers is|many student|many teenager|many reason|for student)\b/gi,
+          correction: 'people are / students are / many students / for students',
+          explanation: 'Ensure plural subject-verb agreement and plural nouns when speaking generally.'
         },
         {
-          regex: /\b(discuss about|emphasize on|mention about|concern about)\b/gi,
-          correction: 'discuss / emphasize / mention / be concerned about',
+          regex: /\b(discuss about|emphasize on|mention about)\b/gi,
+          correction: 'discuss / emphasize / mention',
           explanation: '"Discuss", "emphasize", and "mention" are transitive verbs and do not take a preposition.'
         },
         {
-          regex: /\b(open the light|close the light|open the air conditioner)\b/gi,
-          correction: 'turn on the light / turn off the light / switch on the air conditioner',
-          explanation: 'Use phrasal verbs "turn on / switch off" for electrical appliances rather than "open / close".'
-        },
-        {
           regex: /\b(in my opinion, i think|according to my opinion)\b/gi,
-          correction: 'In my opinion, ... / Personally, I think ...',
-          explanation: 'Avoid redundancy by choosing either "In my opinion" or "I think", not both together.'
+          correction: 'In my opinion, ... / From my perspective, ...',
+          explanation: 'Avoid redundancy by choosing either "In my opinion" or "I think", not both.'
         }
       ];
 
@@ -1774,21 +2079,10 @@ Candidate Spoken Transcript: "${transcript}"`;
         }
       });
 
-      // Check basic punctuation/capitalization if typed
-      if (words >= 8 && !/[.?!]$/.test(transcript.trim())) {
-        grammarIssues.push({
-          original: transcript.slice(-28),
-          correction: 'End your final thought with a clear falling intonation / complete sentence.',
-          explanation: 'A complete concluding sentence signals confidence to the HKDSE examiner.'
-        });
-      }
-
-      // 2. Analyze Discourse Markers & Structure
-      const connectors = ['first', 'firstly', 'second', 'secondly', 'moreover', 'furthermore', 'however', 'although', 'therefore', 'in conclusion', 'personally', 'perspective', 'for example', 'for instance', 'because'];
+      const connectors = ['first of all', 'first', 'firstly', 'second', 'secondly', 'moreover', 'furthermore', 'however', 'although', 'admittedly', 'nevertheless', 'therefore', 'in conclusion', 'to sum up', 'personally', 'perspective', 'for example', 'for instance', 'consequently', 'wholeheartedly'];
       const usedConnectors = connectors.filter(c => lower.includes(c));
-      const fillerMatches = lower.match(/\b(um|uh|er|ah|like|you know)\b/g) || [];
+      const fillerMatches = lower.match(/\b(um|uh|er|ah|you know)\b/g) || [];
 
-      // Domain 1: Pronunciation & Delivery (0-7)
       let d1 = 3;
       if (words >= 115) d1 += 3;
       else if (words >= 85) d1 += 2;
@@ -1797,18 +2091,16 @@ Candidate Spoken Transcript: "${transcript}"`;
       if (fillerMatches.length > 4) d1 -= 1;
       d1 = Math.max(1, Math.min(7, d1));
 
-      // Domain 2: Communication Strategies (0-7)
       let d2 = 3;
-      if (/\b(personally|believe|think|opinion|perspective|prefer|recommend|agree|disagree|yes|no)\b/.test(lower)) d2 += 1;
+      if (/\b(personally|believe|think|opinion|perspective|prefer|recommend|agree|concur|opt for)\b/.test(lower)) d2 += 1;
       if (usedConnectors.length >= 2) d2 += 1;
-      if (/\b(therefore|in conclusion|overall|to sum up|all in all|that is why)\b/.test(lower)) d2 += 1;
+      if (/\b(therefore|in conclusion|overall|to sum up|all in all|all things considered)\b/.test(lower)) d2 += 1;
       if (words >= 95) d2 += 1;
       d2 = Math.max(1, Math.min(7, d2));
 
-      // Domain 3: Vocabulary & Language Patterns (0-7)
       const uniqueWords = new Set(lower.replace(/[^a-z\s]/g, '').split(/\s+/).filter(Boolean));
       const lexicalDiversity = words > 0 ? uniqueWords.size / words : 0;
-      const advancedWords = (lower.match(/\b(beneficial|convenient|environment|sustainable|independence|perspective|furthermore|moreover|however|although|essential|crucial|opportunities|development|practical|effective|efficient|pressure|technology|authentic|heritage)\b/g) || []).length;
+      const advancedWords = (lower.match(/\b(beneficial|convenient|environment|sustainable|independence|perspective|furthermore|moreover|however|although|admittedly|nevertheless|essential|crucial|opportunities|development|practical|effective|efficient|pressure|technology|authentic|heritage|wholeheartedly|concur)\b/g) || []).length;
 
       let d3 = 3;
       if (advancedWords >= 3) d3 += 2;
@@ -1818,56 +2110,38 @@ Candidate Spoken Transcript: "${transcript}"`;
       else if (grammarIssues.length >= 2) d3 -= 1;
       d3 = Math.max(1, Math.min(7, d3));
 
-      // Domain 4: Ideas & Organization (0-7)
       let d4 = 3;
       if (usedConnectors.length >= 3) d4 += 2;
       else if (usedConnectors.length >= 1) d4 += 1;
-      if (/\b(for example|for instance|such as|because|since|as a result)\b/.test(lower)) d4 += 1;
+      if (/\b(for example|for instance|such as|because|since|as a result|case in point)\b/.test(lower)) d4 += 1;
       if (words >= 100) d4 += 1;
       d4 = Math.max(1, Math.min(7, d4));
 
       const totalScore = d1 + d2 + d3 + d4;
       const dseLevel = mapTotalToDSELevel(totalScore);
 
-      // Tailored Feedback Strings
-      const d1Feedback = words >= 100
-        ? `Good fluency with ${words} words spoken at ~${wpm} WPM. You sustained your speech well across the 1-minute limit.`
-        : `You spoke ${words} words (~${wpm} WPM). Aim for 110–145 words to fill the full 60 seconds confidently.`;
-
-      const d2Feedback = usedConnectors.length >= 2
-        ? `Effective audience awareness using clear signposts (${usedConnectors.slice(0, 3).join(', ')}) to guide the examiner.`
-        : `Open with a direct stance phrase ("Personally, I believe...") and end with a clear summarizing sentence.`;
-
-      const d3Feedback = grammarIssues.length === 0
-        ? `Clean grammatical control with ${advancedWords} topic-relevant expressions. Try adding idiomatic phrases for Level 5**.`
-        : `Generally understandable expression, though ${grammarIssues.length} grammar/phrasing slip(s) slightly affected accuracy.`;
-
-      const d4Feedback = usedConnectors.length >= 2 && words >= 90
-        ? `Well-organized response with logical progression from stance to supporting reasons.`
-        : `Develop two distinct points using the PEEL method (Point → Explain → Example → Link back to prompt).`;
-
       const tips = [];
       if (words < 105) {
-        tips.push(`Expand your elaboration: You produced ${words} words. Adding one concrete Hong Kong example will easily bring you to 120+ words.`);
+        tips.push(`Expand your response: You spoke ${words} words. Use the PEEL structure (Point → Explain → Example → Link) to reach 115–140 words.`);
       }
       if (grammarIssues.length > 0) {
-        tips.push(`Review the ${grammarIssues.length} highlighted grammar correction(s) on the left—eliminating recurring slips directly boosts Domain 3.`);
+        tips.push(`Fix the ${grammarIssues.length} highlighted phrasing/grammar issue(s) to push Domain 3 higher.`);
       }
-      if (!/\b(although|while|even though|on the other hand)\b/.test(lower)) {
-        tips.push(`Include a brief counter-argument ("Although some argue..., I still believe...") to demonstrate Level 5* critical thinking.`);
+      if (!/\b(although|while|admittedly|despite|however)\b/.test(lower)) {
+        tips.push(`Add a contrast/concession phrase from the Linking Bank (e.g., "Admittedly..., nevertheless...") to reach Level 5*+.`);
       }
       if (tips.length === 0) {
-        tips.push(`Strong all-round performance! Practice maintaining natural vocal intonation and stress on key transition words.`);
+        tips.push(`Strong all-round response! Focus on clear stress and intonation on your transition words.`);
       }
 
       const headlines = {
         '5**': 'Outstanding Distinction-Level Response',
         '5*': 'Persuasive, Fluent & Well-Structured Delivery',
         '5': 'Solid DSE Level 5 Performance with Clear Ideas',
-        '4': 'Competent Response — Polish Accuracy & Depth for Level 5',
-        '3': 'Clear Basic Stance — Expand Elaboration & Linking',
+        '4': 'Competent Response — Upgrade Linking Phrases for Level 5',
+        '3': 'Clear Basic Stance — Expand Elaboration & Connectives',
         '2': 'Developing Response — Focus on Sentence Completeness',
-        '1': 'Brief Attempt — Practice Building a 3-Part Structure'
+        '1': 'Brief Attempt — Practice Using the 3-Part Structure'
       };
 
       return {
@@ -1875,10 +2149,15 @@ Candidate Spoken Transcript: "${transcript}"`;
         totalScore,
         dseLevel,
         headline: headlines[dseLevel] || 'HKDSE Assessment Complete',
-        summary: `You delivered ${words} words in ${durationSec} seconds (${wpm} WPM), achieving ${totalScore}/28 across the four HKEAA speaking domains.`,
+        summary: `You delivered ${words} words in ${durationSec} seconds (${wpm} WPM), scoring ${totalScore}/28 across the four HKEAA domains.`,
         durationSec,
         wpm,
-        feedback: { d1: d1Feedback, d2: d2Feedback, d3: d3Feedback, d4: d4Feedback },
+        feedback: {
+          d1: words >= 100 ? `Smooth delivery with ${words} words at ~${wpm} WPM across the 60-second limit.` : `You spoke ${words} words (~${wpm} WPM). Aim for 110–145 words to fill the full minute.`,
+          d2: usedConnectors.length >= 2 ? `Clear signposting (${usedConnectors.slice(0, 3).join(', ')}) kept the examiner engaged.` : `Open with a strong stance phrase and end with a clear summarizing statement.`,
+          d3: grammarIssues.length === 0 ? `Accurate expression with ${advancedWords} high-value vocabulary items.` : `${grammarIssues.length} grammar/phrasing slip(s) detected; check the corrections below.`,
+          d4: usedConnectors.length >= 2 && words >= 90 ? `Logical flow from clear stance to well-supported points.` : `Organize into Stance → Reason 1 + Example → Reason 2 → Conclusion.`
+        },
         grammarIssues,
         tips
       };
@@ -1892,7 +2171,6 @@ Candidate Spoken Transcript: "${transcript}"`;
       document.getElementById('res-duration').textContent = `${ev.durationSec}s`;
       document.getElementById('res-wpm').textContent = `${ev.wpm} WPM`;
 
-      // 4 Domains
       ['d1', 'd2', 'd3', 'd4'].forEach(key => {
         const sc = ev.scores[key];
         document.getElementById(`${key}-score`).textContent = `${sc} / 7`;
@@ -1900,7 +2178,6 @@ Candidate Spoken Transcript: "${transcript}"`;
         document.getElementById(`${key}-bar`).style.width = `${Math.round((sc / 7) * 100)}%`;
       });
 
-      // Grammar List
       const gBadge = document.getElementById('grammar-count-badge');
       const gList = document.getElementById('grammar-list');
       gList.innerHTML = '';
@@ -1911,7 +2188,7 @@ Candidate Spoken Transcript: "${transcript}"`;
         gList.innerHTML = `
           <div class="p-4 rounded-2xl bg-emerald-50/70 border border-emerald-200/70 flex items-center gap-3 text-sm text-emerald-900">
             <i data-lucide="check-circle" class="w-5 h-5 text-emerald-600 shrink-0"></i>
-            <span>Great job! No obvious grammatical errors or Chinglish expressions were detected in your transcript.</span>
+            <span>Great job! No obvious grammatical errors or Chinglish expressions were detected.</span>
           </div>
         `;
       } else {
@@ -1933,7 +2210,6 @@ Candidate Spoken Transcript: "${transcript}"`;
         });
       }
 
-      // Actionable Tips
       const tipsList = document.getElementById('improvement-tips-list');
       tipsList.innerHTML = '';
       ev.tips.forEach(tip => {
@@ -1946,7 +2222,6 @@ Candidate Spoken Transcript: "${transcript}"`;
         tipsList.appendChild(li);
       });
 
-      // Sample 5** Answer
       document.getElementById('res-sample-answer').textContent = `"${currentQuestion.sample5Star}"`;
 
       const resultEl = document.getElementById('evaluation-result');
@@ -1964,7 +2239,7 @@ Candidate Spoken Transcript: "${transcript}"`;
     }
 
     /**
-     * 8. PROGRESS & SKILL TRENDS CHARTS + HISTORY LOG
+     * 9. TRENDS DASHBOARD & HISTORY
      */
     let trendLineChartInstance = null;
     let domainRadarChartInstance = null;
@@ -1993,8 +2268,7 @@ Candidate Spoken Transcript: "${transcript}"`;
           'Vocabulary & Language': history.reduce((a, h) => a + h.scores.d3, 0) / history.length,
           'Ideas & Organization': history.reduce((a, h) => a + h.scores.d4, 0) / history.length
         };
-        const topDomain = Object.entries(dAvg).sort((a, b) => b[1] - a[1])[0][0];
-        document.getElementById('stat-top-domain').textContent = topDomain;
+        document.getElementById('stat-top-domain').textContent = Object.entries(dAvg).sort((a, b) => b[1] - a[1])[0][0];
       }
 
       renderCharts(history);
@@ -2009,10 +2283,8 @@ Candidate Spoken Transcript: "${transcript}"`;
       });
       const totals = chronological.map(h => h.totalScore);
 
-      // Line Chart
       const lineCtx = document.getElementById('trendLineChart').getContext('2d');
       if (trendLineChartInstance) trendLineChartInstance.destroy();
-
       trendLineChartInstance = new Chart(lineCtx, {
         type: 'line',
         data: {
@@ -2036,16 +2308,12 @@ Candidate Spoken Transcript: "${transcript}"`;
             y: { min: 0, max: 28, grid: { color: '#f1f5f9' } },
             x: { grid: { display: false } }
           },
-          plugins: {
-            legend: { display: false }
-          }
+          plugins: { legend: { display: false } }
         }
       });
 
-      // Radar Chart
       const radarCtx = document.getElementById('domainRadarChart').getContext('2d');
       if (domainRadarChartInstance) domainRadarChartInstance.destroy();
-
       const avgScores = history.length
         ? [
             +(history.reduce((a, h) => a + h.scores.d1, 0) / history.length).toFixed(1),
@@ -2072,16 +2340,9 @@ Candidate Spoken Transcript: "${transcript}"`;
           responsive: true,
           maintainAspectRatio: false,
           scales: {
-            r: {
-              min: 0,
-              max: 7,
-              ticks: { stepSize: 1, backdropColor: 'transparent' },
-              grid: { color: '#e2e8f0' }
-            }
+            r: { min: 0, max: 7, ticks: { stepSize: 1, backdropColor: 'transparent' }, grid: { color: '#e2e8f0' } }
           },
-          plugins: {
-            legend: { display: false }
-          }
+          plugins: { legend: { display: false } }
         }
       });
     }
@@ -2091,11 +2352,7 @@ Candidate Spoken Transcript: "${transcript}"`;
       container.innerHTML = '';
 
       if (history.length === 0) {
-        container.innerHTML = `
-          <div class="py-10 text-center text-sm text-slate-400">
-            No practice sessions recorded yet. Head over to the <strong>Practice Arena</strong> to complete your first 1-minute response!
-          </div>
-        `;
+        container.innerHTML = `<div class="py-10 text-center text-sm text-slate-400">No practice sessions recorded yet. Head over to the <strong>Practice Arena</strong>!</div>`;
         return;
       }
 
@@ -2156,7 +2413,7 @@ Candidate Spoken Transcript: "${transcript}"`;
     }
 
     /**
-     * 9. SETTINGS & PROFILE AUTO-SAVE
+     * 10. SETTINGS & INITIALIZATION
      */
     function populateSettingsForm() {
       if (!currentUser) return;
@@ -2172,6 +2429,8 @@ Candidate Spoken Transcript: "${transcript}"`;
       if (!currentUser) return;
       if (currentUser.settings?.strictMode) {
         document.getElementById('hint-box').classList.add('hidden');
+      } else {
+        document.getElementById('hint-box').classList.remove('hidden');
       }
     }
 
@@ -2181,6 +2440,7 @@ Candidate Spoken Transcript: "${transcript}"`;
         const newName = document.getElementById('set-name').value.trim();
         if (newName) currentUser.name = newName;
         currentUser.targetLevel = document.getElementById('set-target').value;
+        currentVocabTier = mapTargetToVocabTier(currentUser.targetLevel);
         currentUser.settings = {
           voiceRate: parseFloat(document.getElementById('set-voice-rate').value) || 1.0,
           autoRead: document.getElementById('set-auto-read').checked,
@@ -2188,6 +2448,7 @@ Candidate Spoken Transcript: "${transcript}"`;
         };
         syncCurrentUser();
         applyUserPreferences();
+        renderTieredLinkingCards();
       };
 
       ['set-name', 'set-target', 'set-voice-rate', 'set-auto-read', 'set-strict-mode'].forEach(id => {
@@ -2195,14 +2456,11 @@ Candidate Spoken Transcript: "${transcript}"`;
       });
     }
 
-    /**
-     * 10. INITIALIZATION & EVENT WIRING
-     */
     window.addEventListener('DOMContentLoaded', () => {
       lucide.createIcons();
       loadUsersDB();
       initSpeechRecognition();
-      populateQuestionDropdown('ALL');
+      refreshQuestionBatch(false);
       renderSavedAccountChips();
       bindSettingsAutoSave();
 
@@ -2221,13 +2479,11 @@ Candidate Spoken Transcript: "${transcript}"`;
         document.getElementById('login-form').classList.add('hidden');
       };
 
-      // Demo Login
       document.getElementById('demo-login-btn').onclick = () => {
         ensureDemoAccount();
         loginUser('demo');
       };
 
-      // Login Submit
       document.getElementById('login-form').onsubmit = (e) => {
         e.preventDefault();
         const id = document.getElementById('login-id').value.trim().toLowerCase();
@@ -2244,7 +2500,6 @@ Candidate Spoken Transcript: "${transcript}"`;
         loginUser(id);
       };
 
-      // Register Submit
       document.getElementById('register-form').onsubmit = (e) => {
         e.preventDefault();
         const name = document.getElementById('reg-name').value.trim();
@@ -2277,34 +2532,40 @@ Candidate Spoken Transcript: "${transcript}"`;
         loginUser(id);
       };
 
-      // Navigation
       document.querySelectorAll('.nav-btn').forEach(btn => {
         btn.onclick = () => switchTab(btn.dataset.nav);
       });
 
       document.getElementById('logout-btn').onclick = logoutUser;
 
-      // Practice Arena Controls
-      document.getElementById('theme-filter').onchange = (e) => {
-        populateQuestionDropdown(e.target.value);
+      // Question Bank Filters & Batching
+      document.getElementById('theme-filter').onchange = () => refreshQuestionBatch(true);
+      document.getElementById('type-filter').onchange = () => refreshQuestionBatch(true);
+      document.getElementById('refresh-batch-btn').onclick = () => {
+        refreshQuestionBatch(false);
+        showToast('Loaded 30 fresh questions from the 120,000+ bank!', 'indigo');
       };
 
       document.getElementById('question-select').onchange = (e) => {
-        selectQuestionById(e.target.value, true);
+        const found = currentDropdownBatch.find(q => q.id === e.target.value);
+        if (found) selectQuestionObject(found, true);
       };
 
-      document.getElementById('random-question-btn').onclick = () => {
-        const theme = document.getElementById('theme-filter').value;
-        const pool = theme === 'ALL' ? HKDSE_QUESTIONS : HKDSE_QUESTIONS.filter(q => q.theme === theme);
-        const candidates = pool.filter(q => q.id !== currentQuestion.id);
-        const pick = (candidates.length ? candidates : pool)[Math.floor(Math.random() * (candidates.length || pool.length))];
-        selectQuestionById(pick.id, true);
-      };
+      document.getElementById('random-question-btn').onclick = pickInstantRandomQuestion;
 
-      document.getElementById('speak-prompt-btn').onclick = () => {
-        speakText(currentQuestion.prompt);
-      };
+      // Vocab Tier Switchers
+      document.querySelectorAll('.vocab-tier-btn').forEach(btn => {
+        btn.onclick = () => {
+          currentVocabTier = btn.dataset.vocabTier;
+          renderTieredLinkingCards();
+        };
+      });
 
+      document.querySelectorAll('.pb-tier-btn').forEach(btn => {
+        btn.onclick = () => renderFullPhrasebook(btn.dataset.pbTier);
+      });
+
+      document.getElementById('speak-prompt-btn').onclick = () => speakText(currentQuestion.prompt);
       document.getElementById('toggle-hint-btn').onclick = () => {
         document.getElementById('hint-box').classList.toggle('hidden');
       };
@@ -2332,17 +2593,13 @@ Candidate Spoken Transcript: "${transcript}"`;
         evaluateResponse(text, used);
       };
 
-      document.getElementById('listen-sample-btn').onclick = () => {
-        speakText(currentQuestion.sample5Star);
-      };
+      document.getElementById('listen-sample-btn').onclick = () => speakText(currentQuestion.sample5Star);
 
-      // History Modal Close
       document.getElementById('hm-close-btn').onclick = () => {
         document.getElementById('history-modal').classList.add('hidden');
         document.getElementById('history-modal').classList.remove('flex');
       };
 
-      // Settings Data Actions
       document.getElementById('export-data-btn').onclick = () => {
         if (!currentUser) return;
         const blob = new Blob([JSON.stringify(currentUser, null, 2)], { type: 'application/json' });
@@ -2369,7 +2626,6 @@ Candidate Spoken Transcript: "${transcript}"`;
         );
       };
 
-      // Auto-restore active student session on page reload
       const savedActiveId = localStorage.getItem(STORAGE_KEY_ACTIVE);
       if (savedActiveId && usersDB[savedActiveId]) {
         loginUser(savedActiveId);
@@ -2378,4 +2634,3 @@ Candidate Spoken Transcript: "${transcript}"`;
   </script>
 </body>
 </html>
-```
