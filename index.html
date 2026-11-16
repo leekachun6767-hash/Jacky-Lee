@@ -1,0 +1,2379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HKDSE English Paper 4 • Individual Response Studio</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Chart.js for Skill Trends -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Plus Jakarta Sans', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+              900: '#312e81',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f8fafc;
+      color: #0f172a;
+    }
+    h1, h2, h3, .font-display {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    /* Custom subtle scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+    /* Pulse animation for active recording */
+    @keyframes soundWave {
+      0%, 100% { transform: scaleY(0.35); }
+      50% { transform: scaleY(1); }
+    }
+    .wave-bar {
+      animation: soundWave 0.9s ease-in-out infinite;
+    }
+    .wave-bar:nth-child(2) { animation-delay: 0.15s; }
+    .wave-bar:nth-child(3) { animation-delay: 0.3s; }
+    .wave-bar:nth-child(4) { animation-delay: 0.45s; }
+    .wave-bar:nth-child(5) { animation-delay: 0.6s; }
+
+    /* =====================================================================
+       ADAPTIVE DEVICE MODES (Phone / Tablet / Desktop)
+    ====================================================================== */
+    /* Prevent iOS Safari input auto-zoom & ensure comfortable touch ergonomics */
+    html[data-device="phone"] input,
+    html[data-device="phone"] select,
+    html[data-device="phone"] textarea {
+      font-size: 16px !important;
+    }
+
+    html[data-device="phone"] .adaptive-btn {
+      min-height: 52px;
+      padding-left: 1.25rem;
+      padding-right: 1.25rem;
+      font-size: 0.95rem;
+      border-radius: 1rem;
+    }
+
+    html[data-device="tablet"] .adaptive-btn {
+      min-height: 46px;
+      padding-left: 1.15rem;
+      padding-right: 1.15rem;
+      font-size: 0.9rem;
+    }
+
+    html[data-device="desktop"] .adaptive-btn {
+      min-height: 40px;
+    }
+
+    /* Safe-area bottom clearance when fixed mobile dock is active */
+    html[data-device="phone"] #app-shell {
+      padding-bottom: calc(9.5rem + env(safe-area-inset-bottom));
+    }
+
+    .safe-pb {
+      padding-bottom: max(0.65rem, env(safe-area-inset-bottom));
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased selection:bg-indigo-100 selection:text-indigo-900">
+
+  <!-- Toast Notification Banner (Replaces alert/confirm) -->
+  <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+  <!-- Custom Confirmation Modal (Replaces confirm) -->
+  <div id="confirm-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-900/50 backdrop-blur-sm p-4">
+    <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-100 transform transition-all">
+      <div class="flex items-center gap-3 text-amber-600 mb-3">
+        <div class="w-10 h-10 rounded-xl bg-amber-50 flex items-center justify-center">
+          <i data-lucide="alert-triangle" class="w-5 h-5"></i>
+        </div>
+        <h3 id="confirm-title" class="text-lg font-bold text-slate-900">Confirm Action</h3>
+      </div>
+      <p id="confirm-message" class="text-sm text-slate-600 leading-relaxed mb-6">Are you sure you want to proceed?</p>
+      <div class="flex justify-end gap-3">
+        <button id="confirm-cancel-btn" class="px-4 py-2.5 rounded-xl text-sm font-medium text-slate-600 hover:bg-slate-100 transition">Cancel</button>
+        <button id="confirm-ok-btn" class="px-4 py-2.5 rounded-xl text-sm font-semibold text-white bg-rose-600 hover:bg-rose-700 shadow-sm transition">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       AUTH / STUDENT LOGIN & PROFILE PORTAL
+  ====================================================================== -->
+  <div id="auth-screen" class="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-slate-50 via-indigo-50/40 to-emerald-50/30">
+    <div class="max-w-4xl w-full grid grid-cols-1 lg:grid-cols-12 bg-white rounded-3xl shadow-xl shadow-slate-200/60 border border-slate-100 overflow-hidden">
+      
+      <!-- Left Info Panel -->
+      <div class="lg:col-span-5 bg-gradient-to-br from-indigo-600 via-indigo-700 to-slate-900 p-8 sm:p-10 text-white flex flex-col justify-between">
+        <div>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/15 backdrop-blur-sm text-xs font-semibold tracking-wide uppercase mb-6">
+            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            HKDSE English Paper 4
+          </div>
+          <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight leading-snug mb-4">
+            Part B Individual Response Studio
+          </h1>
+          <p class="text-indigo-100 text-sm leading-relaxed mb-8">
+            Master the 1-minute DSE speaking response with real-time speech recognition, HKEAA 4-domain rubric marking, instant grammar coaching, and personal progress tracking.
+          </p>
+
+          <div class="space-y-4 text-sm">
+            <div class="flex items-start gap-3">
+              <div class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center shrink-0 mt-0.5">
+                <i data-lucide="mic" class="w-4 h-4 text-emerald-300"></i>
+              </div>
+              <div>
+                <p class="font-semibold text-white">60-Second Exam Simulation</p>
+                <p class="text-indigo-200 text-xs">Examiner audio prompt + live speech-to-text pacing.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center shrink-0 mt-0.5">
+                <i data-lucide="award" class="w-4 h-4 text-amber-300"></i>
+              </div>
+              <div>
+                <p class="font-semibold text-white">Official 4-Domain DSE Grading</p>
+                <p class="text-indigo-200 text-xs">Scored 0–7 per domain & mapped to Levels 1 to 5**.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center shrink-0 mt-0.5">
+                <i data-lucide="trending-up" class="w-4 h-4 text-sky-300"></i>
+              </div>
+              <div>
+                <p class="font-semibold text-white">Auto-Saved Multi-Student Profiles</p>
+                <p class="text-indigo-200 text-xs">Every attempt, grammar tip & skill trend stays saved.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-8 pt-6 border-t border-white/15 flex items-center justify-between text-xs text-indigo-200">
+          <span>HKEAA Rubric Aligned</span>
+          <span>Auto-Save Enabled</span>
+        </div>
+      </div>
+
+      <!-- Right Login / Register Form -->
+      <div class="lg:col-span-7 p-8 sm:p-10 flex flex-col justify-center">
+        <!-- Quick Demo Banner -->
+        <div class="mb-6 p-4 rounded-2xl bg-emerald-50/80 border border-emerald-200/80 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div>
+            <p class="text-xs font-bold uppercase tracking-wider text-emerald-700">Instant Preview</p>
+            <p class="text-sm text-slate-700">Try with a pre-loaded DSE student profile & history.</p>
+          </div>
+          <button id="demo-login-btn" type="button" class="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-semibold shadow-sm transition shrink-0 flex items-center justify-center gap-1.5">
+            <i data-lucide="zap" class="w-3.5 h-3.5"></i>
+            Demo Student
+          </button>
+        </div>
+
+        <!-- Auth Mode Tabs -->
+        <div class="flex p-1 bg-slate-100 rounded-xl mb-6">
+          <button id="tab-login" type="button" class="flex-1 py-2 text-sm font-semibold rounded-lg bg-white text-slate-900 shadow-sm transition">
+            Student Sign In
+          </button>
+          <button id="tab-register" type="button" class="flex-1 py-2 text-sm font-semibold rounded-lg text-slate-500 hover:text-slate-800 transition">
+            New Student Account
+          </button>
+        </div>
+
+        <!-- Login Form -->
+        <form id="login-form" class="space-y-4">
+          <div>
+            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1.5">Student ID or Username</label>
+            <input id="login-id" type="text" required placeholder="e.g., s202601 or chan_taiman" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 outline-none text-sm transition" />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1.5">Passcode</label>
+            <input id="login-pass" type="password" required placeholder="Enter your passcode" class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 outline-none text-sm transition" />
+          </div>
+          <div id="login-error" class="hidden text-xs font-medium text-rose-600 bg-rose-50 px-3 py-2 rounded-lg"></div>
+          <button type="submit" class="adaptive-btn w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-sm shadow-md shadow-indigo-200 transition flex items-center justify-center gap-2">
+            <span>Enter Practice Studio</span>
+            <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </button>
+        </form>
+
+        <!-- Register Form -->
+        <form id="register-form" class="space-y-4 hidden">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1.5">Full Name / Display Name</label>
+              <input id="reg-name" type="text" required placeholder="e.g., Chan Tai Man" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 outline-none text-sm transition" />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1.5">Student ID (Login ID)</label>
+              <input id="reg-id" type="text" required placeholder="e.g., s202688" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 outline-none text-sm transition" />
+            </div>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1.5">Create Passcode</label>
+              <input id="reg-pass" type="password" required placeholder="Min. 4 characters" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 outline-none text-sm transition" />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1.5">Target DSE Level</label>
+              <select id="reg-target" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 outline-none text-sm bg-white transition">
+                <option value="5**">Level 5** (Top Distinction)</option>
+                <option value="5*">Level 5* (Distinction)</option>
+                <option value="5" selected>Level 5 (Credit)</option>
+                <option value="4">Level 4 (Good Pass)</option>
+                <option value="3">Level 3 (University Entrance)</option>
+              </select>
+            </div>
+          </div>
+          <div id="reg-error" class="hidden text-xs font-medium text-rose-600 bg-rose-50 px-3 py-2 rounded-lg"></div>
+          <button type="submit" class="adaptive-btn w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-sm shadow-md shadow-indigo-200 transition flex items-center justify-center gap-2">
+            <i data-lucide="user-plus" class="w-4 h-4"></i>
+            <span>Create Profile & Start</span>
+          </button>
+        </form>
+
+        <!-- Saved Local Accounts Quick Switcher -->
+        <div id="saved-accounts-box" class="mt-6 pt-5 border-t border-slate-100 hidden">
+          <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2.5">Saved Student Profiles on This Device</p>
+          <div id="saved-accounts-list" class="flex flex-wrap gap-2"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       MAIN APPLICATION SHELL (SHOWN AFTER LOGIN)
+  ====================================================================== -->
+  <div id="app-shell" class="hidden flex-1 flex flex-col">
+    
+    <!-- Top Navigation Header -->
+    <header class="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-slate-200/80">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-2 sm:gap-4">
+        <!-- Brand Logo -->
+        <div class="flex items-center gap-2.5 sm:gap-3 shrink-0">
+          <div class="w-9 h-9 rounded-xl bg-indigo-600 text-white flex items-center justify-center shadow-sm">
+            <i data-lucide="mic-2" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <span class="font-display font-bold text-slate-900 text-sm sm:text-base tracking-tight block leading-none">HKDSE Paper 4</span>
+            <span class="text-[11px] font-medium text-slate-500 hidden xs:block">Part B • Individual Response</span>
+          </div>
+        </div>
+
+        <!-- Top Navigation (Shown on Tablet & Desktop; hidden on Phone in favor of thumb dock) -->
+        <nav id="top-nav-bar" class="hidden md:flex items-center bg-slate-100/90 p-1 rounded-xl border border-slate-200/60">
+          <button data-nav="practice" class="nav-btn px-3.5 py-1.5 rounded-lg text-sm font-semibold bg-white text-indigo-600 shadow-sm transition flex items-center gap-2">
+            <i data-lucide="play-circle" class="w-4 h-4"></i>
+            Practice
+          </button>
+          <button data-nav="trends" class="nav-btn px-3.5 py-1.5 rounded-lg text-sm font-semibold text-slate-600 hover:text-slate-900 transition flex items-center gap-2">
+            <i data-lucide="bar-chart-2" class="w-4 h-4"></i>
+            Trends
+          </button>
+          <button data-nav="bank" class="nav-btn px-3.5 py-1.5 rounded-lg text-sm font-semibold text-slate-600 hover:text-slate-900 transition flex items-center gap-2">
+            <i data-lucide="book-open" class="w-4 h-4"></i>
+            Question Bank
+          </button>
+          <button data-nav="settings" class="nav-btn px-3.5 py-1.5 rounded-lg text-sm font-semibold text-slate-600 hover:text-slate-900 transition flex items-center gap-2">
+            <i data-lucide="sliders" class="w-4 h-4"></i>
+            Settings
+          </button>
+        </nav>
+
+        <!-- Device Mode Switcher + Student Pill & Logout -->
+        <div class="flex items-center gap-2 sm:gap-2.5">
+          <!-- Live Adaptive Device Mode Switcher -->
+          <div class="flex items-center bg-slate-100 border border-slate-200/80 rounded-xl px-2 py-1 gap-1" title="Adaptive UI Layout Mode">
+            <i id="device-mode-icon" data-lucide="monitor" class="w-3.5 h-3.5 text-indigo-600 shrink-0"></i>
+            <select id="device-mode-select" aria-label="Device UI Mode" class="bg-transparent text-xs font-semibold text-slate-700 outline-none cursor-pointer pr-1">
+              <option value="auto">Auto (Desktop)</option>
+              <option value="phone">Phone Mode</option>
+              <option value="tablet">Tablet Mode</option>
+              <option value="desktop">Desktop Mode</option>
+            </select>
+          </div>
+
+          <div class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-50 border border-indigo-100">
+            <span class="w-2 h-2 rounded-full bg-emerald-500" title="Auto-saved"></span>
+            <span id="header-student-name" class="text-xs font-semibold text-indigo-950 max-w-[90px] truncate">Student</span>
+            <span id="header-target-badge" class="text-[11px] font-bold px-1.5 py-0.5 rounded bg-indigo-600 text-white">Target: 5</span>
+          </div>
+          <button id="logout-btn" title="Switch Student / Logout" class="p-2.5 rounded-xl text-slate-500 hover:text-rose-600 hover:bg-rose-50 transition">
+            <i data-lucide="log-out" class="w-4 h-4"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- ===================================================================
+         PHONE-ONLY THUMB-ZONE FLOATING RECORD CTA & FIXED BOTTOM NAV DOCK
+    ==================================================================== -->
+    <div id="mobile-thumb-dock" class="hidden fixed bottom-0 inset-x-0 z-30 bg-white/95 backdrop-blur-md border-t border-slate-200 shadow-[0_-6px_24px_rgba(15,23,42,0.08)] safe-pb">
+      <!-- Primary One-Handed Recording Action Bar (Visible in Practice tab on Phone) -->
+      <div id="mobile-practice-cta-bar" class="px-4 pt-2.5 pb-1.5 flex items-center gap-2.5">
+        <button id="mobile-start-btn" type="button" class="flex-1 min-h-[52px] rounded-2xl bg-indigo-600 active:bg-indigo-700 text-white font-bold text-base shadow-lg shadow-indigo-200 flex items-center justify-center gap-2.5 transition">
+          <i data-lucide="mic" class="w-5 h-5"></i>
+          <span>Start 1-Min Response</span>
+        </button>
+
+        <button id="mobile-stop-btn" type="button" class="hidden flex-1 min-h-[52px] rounded-2xl bg-rose-600 active:bg-rose-700 text-white font-bold text-base shadow-lg shadow-rose-200 flex items-center justify-center gap-2.5 transition">
+          <i data-lucide="square" class="w-5 h-5"></i>
+          <span>Finish & Grade (<span id="mobile-dock-timer">01:00</span>)</span>
+        </button>
+
+        <button id="mobile-reset-btn" type="button" aria-label="Reset Response" class="hidden min-h-[52px] px-4 rounded-2xl border border-slate-200 bg-slate-50 active:bg-slate-100 text-slate-700 font-semibold text-sm">
+          Reset
+        </button>
+      </div>
+
+      <!-- 4-Tab Thumb Navigation -->
+      <nav class="grid grid-cols-4 px-2 pt-1">
+        <button data-nav="practice" class="nav-btn min-h-[52px] flex flex-col items-center justify-center gap-1 rounded-xl text-indigo-600 font-bold text-[11px]">
+          <i data-lucide="mic" class="w-5 h-5"></i>
+          <span>Practice</span>
+        </button>
+        <button data-nav="trends" class="nav-btn min-h-[52px] flex flex-col items-center justify-center gap-1 rounded-xl text-slate-500 font-semibold text-[11px]">
+          <i data-lucide="bar-chart-2" class="w-5 h-5"></i>
+          <span>Trends</span>
+        </button>
+        <button data-nav="bank" class="nav-btn min-h-[52px] flex flex-col items-center justify-center gap-1 rounded-xl text-slate-500 font-semibold text-[11px]">
+          <i data-lucide="book-open" class="w-5 h-5"></i>
+          <span>Bank</span>
+        </button>
+        <button data-nav="settings" class="nav-btn min-h-[52px] flex flex-col items-center justify-center gap-1 rounded-xl text-slate-500 font-semibold text-[11px]">
+          <i data-lucide="sliders" class="w-5 h-5"></i>
+          <span>Settings</span>
+        </button>
+      </nav>
+    </div>
+
+    <!-- ===================================================================
+         TAB 1: PRACTICE ARENA
+    ==================================================================== -->
+    <main id="view-practice" class="view-section max-w-5xl w-full mx-auto px-4 sm:px-6 py-5 sm:py-8 space-y-5 sm:space-y-6 flex-1">
+      
+      <!-- Question Selector Bar -->
+      <div id="practice-selector-card" class="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/80 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
+        <div class="flex flex-col sm:flex-row sm:items-center gap-2.5 w-full sm:w-auto">
+          <div class="flex items-center gap-2">
+            <label for="theme-filter" class="text-xs font-bold uppercase tracking-wider text-slate-400 shrink-0">Theme:</label>
+            <select id="theme-filter" class="w-full sm:w-auto px-3.5 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-sm font-medium text-slate-700 focus:border-indigo-500 outline-none">
+              <option value="ALL">All HKDSE Themes (18 Questions)</option>
+              <option value="Technology & Social Media">Technology & Social Media</option>
+              <option value="Education & School Life">Education & School Life</option>
+              <option value="Environment & Sustainability">Environment & Sustainability</option>
+              <option value="Hong Kong Culture & Society">Hong Kong Culture & Society</option>
+              <option value="Youth & Career">Youth & Career</option>
+              <option value="Health & Lifestyle">Health & Lifestyle</option>
+            </select>
+          </div>
+
+          <select id="question-select" class="w-full sm:max-w-xs md:max-w-sm px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-sm font-medium text-slate-700 truncate focus:border-indigo-500 outline-none">
+            <!-- Populated by JS -->
+          </select>
+        </div>
+
+        <div class="flex items-center gap-2 w-full sm:w-auto">
+          <button id="random-question-btn" class="adaptive-btn w-full sm:w-auto px-4 py-2.5 rounded-xl bg-indigo-50 hover:bg-indigo-100 text-indigo-700 text-xs font-semibold transition flex items-center justify-center gap-1.5">
+            <i data-lucide="shuffle" class="w-4 h-4"></i>
+            <span>Random Exam Prompt</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Bottom-Style Subheader Nav -->
+      <div class="flex md:hidden border-t border-slate-100 bg-white px-2 py-1.5 gap-1">
+        <button data-nav="practice" class="nav-btn flex-1 py-2 rounded-lg text-xs font-semibold bg-indigo-50 text-indigo-600 flex items-center justify-center gap-1.5">
+          <i data-lucide="play-circle" class="w-3.5 h-3.5"></i>
+          Practice
+        </button>
+        <button data-nav="trends" class="nav-btn flex-1 py-2 rounded-lg text-xs font-semibold text-slate-600 flex items-center justify-center gap-1.5">
+          <i data-lucide="bar-chart-2" class="w-3.5 h-3.5"></i>
+          Trends
+        </button>
+        <button data-nav="settings" class="nav-btn flex-1 py-2 rounded-lg text-xs font-semibold text-slate-600 flex items-center justify-center gap-1.5">
+          <i data-lucide="sliders" class="w-3.5 h-3.5"></i>
+          Settings
+        </button>
+      </div>
+    </header>
+
+    <!-- ===================================================================
+         TAB 1: PRACTICE ARENA
+    ==================================================================== -->
+    <main id="view-practice" class="view-section max-w-5xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-6 flex-1">
+      
+      <!-- Question Selector Bar -->
+      <div class="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200/80 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div class="flex flex-wrap items-center gap-2.5">
+          <label for="theme-filter" class="text-xs font-bold uppercase tracking-wider text-slate-400">Theme:</label>
+          <select id="theme-filter" class="px-3.5 py-2 rounded-xl border border-slate-200 bg-slate-50 text-sm font-medium text-slate-700 focus:border-indigo-500 outline-none">
+            <option value="ALL">All HKDSE Themes (18 Questions)</option>
+            <option value="Technology & Social Media">Technology & Social Media</option>
+            <option value="Education & School Life">Education & School Life</option>
+            <option value="Environment & Sustainability">Environment & Sustainability</option>
+            <option value="Hong Kong Culture & Society">Hong Kong Culture & Society</option>
+            <option value="Youth & Career">Youth & Career</option>
+            <option value="Health & Lifestyle">Health & Lifestyle</option>
+          </select>
+
+          <select id="question-select" class="px-3.5 py-2 rounded-xl border border-slate-200 bg-white text-sm font-medium text-slate-700 max-w-xs sm:max-w-sm truncate focus:border-indigo-500 outline-none">
+            <!-- Populated by JS -->
+          </select>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <button id="random-question-btn" class="px-4 py-2 rounded-xl bg-indigo-50 hover:bg-indigo-100 text-indigo-700 text-xs font-semibold transition flex items-center gap-1.5">
+            <i data-lucide="shuffle" class="w-3.5 h-3.5"></i>
+            Random Exam Prompt
+          </button>
+        </div>
+      </div>
+
+      <!-- Exam Prompt Card -->
+      <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm overflow-hidden">
+        <!-- Context Header (Simulates Part A Group Interaction link) -->
+        <div class="bg-slate-900 text-slate-300 px-6 py-3.5 flex flex-wrap items-center justify-between gap-2 text-xs">
+          <div class="flex items-center gap-2">
+            <span class="px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-300 font-semibold border border-indigo-400/20" id="q-theme-badge">Technology & Social Media</span>
+            <span class="text-slate-400">•</span>
+            <span id="q-type-badge" class="text-slate-300 font-medium">Arguing For / Against</span>
+          </div>
+          <span class="text-slate-400 font-medium">Part B: Individual Response (1 Minute)</span>
+        </div>
+
+        <div class="p-6 sm:p-8">
+          <p class="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Group Discussion Context</p>
+          <p id="q-context" class="text-sm text-slate-600 mb-5 pb-5 border-b border-slate-100">
+            Your class is discussing how artificial intelligence tools affect secondary school students' learning habits.
+          </p>
+
+          <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
+            <div class="space-y-2">
+              <span class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-indigo-600">
+                <i data-lucide="message-square-quote" class="w-4 h-4"></i>
+                Examiner's Question
+              </span>
+              <h2 id="q-prompt" class="text-xl sm:text-2xl font-bold text-slate-900 leading-snug">
+                Do you think secondary schools should allow students to use AI tools for their homework? Why or why not?
+              </h2>
+            </div>
+
+            <!-- Read Aloud & Hint Buttons -->
+            <div class="flex flex-row sm:flex-col gap-2.5 shrink-0 w-full sm:w-auto">
+              <button id="speak-prompt-btn" class="adaptive-btn flex-1 sm:flex-initial px-3.5 py-2.5 rounded-xl border border-slate-200 hover:border-indigo-300 hover:bg-indigo-50/50 text-slate-700 text-xs font-semibold transition flex items-center justify-center gap-1.5">
+                <i data-lucide="volume-2" class="w-4 h-4 text-indigo-600"></i>
+                <span>Listen to Examiner</span>
+              </button>
+              <button id="toggle-hint-btn" class="adaptive-btn flex-1 sm:flex-initial px-3.5 py-2.5 rounded-xl border border-slate-200 hover:border-amber-300 hover:bg-amber-50/50 text-slate-700 text-xs font-semibold transition flex items-center justify-center gap-1.5">
+                <i data-lucide="lightbulb" class="w-4 h-4 text-amber-500"></i>
+                <span>Structure Hint</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Collapsible Learning Mode Hint Box -->
+          <div id="hint-box" class="hidden mt-5 p-4 rounded-2xl bg-amber-50/70 border border-amber-200/80 text-sm text-slate-700 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold uppercase tracking-wider text-amber-800">5** Response Blueprint & Useful Expressions</span>
+              <span class="text-[11px] text-amber-700">Tip: Aim for 110–150 words in 60s</span>
+            </div>
+            <p id="q-hint-structure" class="text-xs sm:text-sm text-slate-700 leading-relaxed"></p>
+            <div id="q-hint-phrases" class="flex flex-wrap gap-1.5 pt-1"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recording & 60-Second Timer Studio -->
+      <div id="practice-studio-card" class="bg-white rounded-3xl p-5 sm:p-8 border border-slate-200/80 shadow-sm">
+        <div id="studio-grid" class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
+          
+          <!-- Left: Circular 60s Countdown Ring & Controls -->
+          <div id="studio-timer-col" class="lg:col-span-5 flex flex-col items-center justify-center text-center border-b lg:border-b-0 lg:border-r border-slate-100 pb-6 lg:pb-0 lg:pr-6">
+            <div id="timer-ring-wrapper" class="relative w-40 h-40 sm:w-44 sm:h-44 flex items-center justify-center mb-4 sm:mb-5">
+              <svg class="w-full h-full -rotate-90" viewBox="0 0 120 120">
+                <circle cx="60" cy="60" r="52" fill="none" stroke="#f1f5f9" stroke-width="8" />
+                <circle id="timer-ring" cx="60" cy="60" r="52" fill="none" stroke="#10b981" stroke-width="8"
+                        stroke-linecap="round" stroke-dasharray="326.73" stroke-dashoffset="0"
+                        class="transition-all duration-300" />
+              </svg>
+              <div class="absolute inset-0 flex flex-col items-center justify-center">
+                <span id="timer-display" class="font-display text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">01:00</span>
+                <span id="timer-status" class="text-xs font-semibold text-slate-400 mt-1">Ready to Speak</span>
+              </div>
+            </div>
+
+            <!-- Action Buttons (Desktop & Tablet primary controls; also accessible on Phone) -->
+            <div id="inline-record-controls" class="flex flex-wrap items-center justify-center gap-3 w-full">
+              <button id="start-record-btn" class="adaptive-btn px-6 py-3 rounded-2xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-sm shadow-lg shadow-indigo-200 transition flex items-center justify-center gap-2">
+                <i data-lucide="mic" class="w-4 h-4"></i>
+                <span>Start 1-Min Response</span>
+              </button>
+
+              <button id="stop-record-btn" class="adaptive-btn hidden px-6 py-3 rounded-2xl bg-rose-600 hover:bg-rose-700 text-white font-semibold text-sm shadow-lg shadow-rose-200 transition flex items-center justify-center gap-2">
+                <i data-lucide="square" class="w-4 h-4"></i>
+                <span>Finish & Grade</span>
+              </button>
+
+              <button id="reset-record-btn" class="adaptive-btn hidden px-4 py-3 rounded-2xl border border-slate-200 hover:bg-slate-50 text-slate-600 font-semibold text-sm transition">
+                Reset
+              </button>
+            </div>
+
+            <!-- Desktop Shortcut Hint -->
+            <p id="desktop-shortcut-hint" class="hidden lg:block mt-3 text-[11px] text-slate-400">
+              Shortcuts: <kbd class="px-1.5 py-0.5 rounded bg-slate-100 border border-slate-200 font-mono text-slate-600">Space</kbd> Start/Stop • <kbd class="px-1.5 py-0.5 rounded bg-slate-100 border border-slate-200 font-mono text-slate-600">R</kbd> Replay Prompt
+            </p>
+
+            <!-- Live Mic Indicator -->
+            <div id="mic-wave-box" class="hidden mt-4 flex items-center gap-2 text-xs font-semibold text-indigo-600">
+              <div class="flex items-end gap-1 h-4">
+                <span class="wave-bar w-1 h-4 bg-indigo-600 rounded-full"></span>
+                <span class="wave-bar w-1 h-4 bg-indigo-600 rounded-full"></span>
+                <span class="wave-bar w-1 h-4 bg-indigo-600 rounded-full"></span>
+                <span class="wave-bar w-1 h-4 bg-indigo-600 rounded-full"></span>
+                <span class="wave-bar w-1 h-4 bg-indigo-600 rounded-full"></span>
+              </div>
+              <span>Listening to your voice...</span>
+            </div>
+          </div>
+
+          <!-- Right: Live Speech-to-Text Transcript & Fallback Editor -->
+          <div id="studio-transcript-col" class="lg:col-span-7 flex flex-col h-full">
+            <div class="flex items-center justify-between mb-2">
+              <div class="flex items-center gap-2">
+                <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Live Spoken Transcript</span>
+                <span id="speech-support-badge" class="text-[11px] font-medium px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700">Voice Recognition Ready</span>
+              </div>
+              <div class="flex items-center gap-3 text-xs font-semibold text-slate-500">
+                <span>Words: <strong id="live-word-count" class="text-slate-900">0</strong></span>
+                <span>Pace: <strong id="live-wpm" class="text-slate-900">0</strong> WPM</span>
+              </div>
+            </div>
+
+            <div class="relative flex-1">
+              <textarea id="transcript-box" rows="6" placeholder="Click 'Start 1-Min Response' and speak clearly into your microphone. Your words will appear here in real time (you can also type or edit text manually if your browser blocks mic access)..." class="w-full h-full min-h-[168px] p-4 rounded-2xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 outline-none text-sm text-slate-800 leading-relaxed resize-none transition"></textarea>
+              <div id="interim-overlay" class="hidden mt-1 text-xs italic text-indigo-600 px-1"></div>
+            </div>
+
+            <div class="mt-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
+              <p class="text-xs text-slate-400">
+                Tip: Speak naturally for 45–60 seconds with a clear stance, 2 reasons, and a brief conclusion.
+              </p>
+              <button id="grade-manual-btn" class="adaptive-btn w-full sm:w-auto px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold transition flex items-center justify-center gap-1.5 shrink-0">
+                <i data-lucide="sparkles" class="w-3.5 h-3.5 text-amber-300"></i>
+                <span>Evaluate Transcript</span>
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- =================================================================
+           AI DSE MARKING & GRAMMAR REPORT PANEL (APPEARS AFTER PRACTICE)
+      ================================================================== -->
+      <div id="evaluation-loading" class="hidden bg-white rounded-3xl p-10 border border-slate-200/80 shadow-sm text-center space-y-3">
+        <div class="w-12 h-12 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center mx-auto animate-bounce">
+          <i data-lucide="sparkles" class="w-6 h-6"></i>
+        </div>
+        <h3 class="text-lg font-bold text-slate-900">Examiner is Marking Your Response...</h3>
+        <p class="text-sm text-slate-500 max-w-md mx-auto">Assessing Pronunciation & Delivery, Communication Strategies, Vocabulary, Organization, and checking grammar accuracy.</p>
+      </div>
+
+      <section id="evaluation-result" class="hidden space-y-6">
+        <!-- Overall DSE Level Hero Card -->
+        <div class="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 rounded-3xl p-6 sm:p-8 text-white shadow-lg flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div class="space-y-2 max-w-xl">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-xs font-semibold text-indigo-200">
+              <i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-emerald-400"></i>
+              HKDSE Paper 4 Assessment Report
+            </div>
+            <h3 id="res-headline" class="text-xl sm:text-2xl font-bold text-white">Solid Argument with Clear Structure</h3>
+            <p id="res-summary" class="text-sm text-slate-300 leading-relaxed"></p>
+          </div>
+
+          <div class="flex items-center gap-5 bg-white/10 backdrop-blur-sm px-6 py-4 rounded-2xl border border-white/10 shrink-0">
+            <div class="text-center">
+              <span class="block text-[11px] uppercase tracking-wider text-indigo-200 font-semibold">Predicted DSE</span>
+              <span id="res-dse-level" class="font-display text-4xl sm:text-5xl font-extrabold text-emerald-400">5</span>
+            </div>
+            <div class="h-12 w-px bg-white/15"></div>
+            <div class="space-y-1 text-xs">
+              <div class="text-slate-300">Total Score: <strong id="res-total-score" class="text-white">20 / 28</strong></div>
+              <div class="text-slate-300">Duration: <strong id="res-duration" class="text-white">54s</strong></div>
+              <div class="text-slate-300">Speaking Pace: <strong id="res-wpm" class="text-white">128 WPM</strong></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 Official HKDSE Domains Breakdown -->
+        <div id="domains-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <!-- Domain 1 -->
+          <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs font-bold uppercase tracking-wider text-indigo-600">Domain 1</span>
+                <span id="d1-score" class="text-sm font-extrabold px-2.5 py-0.5 rounded-lg bg-indigo-50 text-indigo-700">5 / 7</span>
+              </div>
+              <h4 class="font-bold text-slate-900 text-sm mb-2">Pronunciation & Delivery</h4>
+              <p id="d1-feedback" class="text-xs text-slate-600 leading-relaxed"></p>
+            </div>
+            <div class="w-full bg-slate-100 h-1.5 rounded-full mt-4 overflow-hidden">
+              <div id="d1-bar" class="bg-indigo-600 h-full rounded-full" style="width: 71%"></div>
+            </div>
+          </div>
+
+          <!-- Domain 2 -->
+          <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs font-bold uppercase tracking-wider text-emerald-600">Domain 2</span>
+                <span id="d2-score" class="text-sm font-extrabold px-2.5 py-0.5 rounded-lg bg-emerald-50 text-emerald-700">5 / 7</span>
+              </div>
+              <h4 class="font-bold text-slate-900 text-sm mb-2">Communication Strategies</h4>
+              <p id="d2-feedback" class="text-xs text-slate-600 leading-relaxed"></p>
+            </div>
+            <div class="w-full bg-slate-100 h-1.5 rounded-full mt-4 overflow-hidden">
+              <div id="d2-bar" class="bg-emerald-600 h-full rounded-full" style="width: 71%"></div>
+            </div>
+          </div>
+
+          <!-- Domain 3 -->
+          <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs font-bold uppercase tracking-wider text-amber-600">Domain 3</span>
+                <span id="d3-score" class="text-sm font-extrabold px-2.5 py-0.5 rounded-lg bg-amber-50 text-amber-700">5 / 7</span>
+              </div>
+              <h4 class="font-bold text-slate-900 text-sm mb-2">Vocabulary & Language</h4>
+              <p id="d3-feedback" class="text-xs text-slate-600 leading-relaxed"></p>
+            </div>
+            <div class="w-full bg-slate-100 h-1.5 rounded-full mt-4 overflow-hidden">
+              <div id="d3-bar" class="bg-amber-500 h-full rounded-full" style="width: 71%"></div>
+            </div>
+          </div>
+
+          <!-- Domain 4 -->
+          <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-xs font-bold uppercase tracking-wider text-sky-600">Domain 4</span>
+                <span id="d4-score" class="text-sm font-extrabold px-2.5 py-0.5 rounded-lg bg-sky-50 text-sky-700">5 / 7</span>
+              </div>
+              <h4 class="font-bold text-slate-900 text-sm mb-2">Ideas & Organization</h4>
+              <p id="d4-feedback" class="text-xs text-slate-600 leading-relaxed"></p>
+            </div>
+            <div class="w-full bg-slate-100 h-1.5 rounded-full mt-4 overflow-hidden">
+              <div id="d4-bar" class="bg-sky-600 h-full rounded-full" style="width: 71%"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Grammar & Spoken Expression Clinic + Improvement Plan -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          
+          <!-- Grammar Corrections -->
+          <div class="lg:col-span-7 bg-white rounded-3xl p-6 border border-slate-200/80 shadow-sm space-y-4">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center">
+                  <i data-lucide="spell-check" class="w-4 h-4"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-slate-900 text-base">Grammar & Spoken Expression Check</h4>
+                  <p class="text-xs text-slate-500">Detected grammar slips, tense issues, or Chinglish phrasing</p>
+                </div>
+              </div>
+              <span id="grammar-count-badge" class="text-xs font-bold px-2.5 py-1 rounded-full bg-slate-100 text-slate-700">0 issues</span>
+            </div>
+
+            <div id="grammar-list" class="space-y-3">
+              <!-- Populated dynamically -->
+            </div>
+          </div>
+
+          <!-- Actionable Coaching & Sample 5** Answer -->
+          <div class="lg:col-span-5 space-y-6">
+            <div class="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-sm space-y-3">
+              <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
+                  <i data-lucide="compass" class="w-4 h-4"></i>
+                </div>
+                <h4 class="font-bold text-slate-900 text-base">How to Upgrade Your Score</h4>
+              </div>
+              <ul id="improvement-tips-list" class="space-y-2.5 text-xs sm:text-sm text-slate-700">
+                <!-- Populated dynamically -->
+              </ul>
+            </div>
+
+            <div class="bg-indigo-50/70 rounded-3xl p-6 border border-indigo-100 space-y-2.5">
+              <div class="flex items-center justify-between">
+                <span class="text-xs font-bold uppercase tracking-wider text-indigo-700 flex items-center gap-1.5">
+                  <i data-lucide="award" class="w-4 h-4"></i>
+                  Sample Level 5** Model Response
+                </span>
+                <button id="listen-sample-btn" class="text-xs font-semibold text-indigo-600 hover:text-indigo-800 flex items-center gap-1">
+                  <i data-lucide="volume-2" class="w-3.5 h-3.5"></i>
+                  Listen
+                </button>
+              </div>
+              <p id="res-sample-answer" class="text-xs sm:text-sm text-slate-700 leading-relaxed italic"></p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ===================================================================
+         TAB 2: PROGRESS & SKILL TRENDS DASHBOARD
+    ==================================================================== -->
+    <main id="view-trends" class="view-section hidden max-w-6xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-6 flex-1">
+      
+      <!-- Top KPI Summary Cards -->
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm">
+          <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Current Avg Level</span>
+          <div class="mt-2 flex items-baseline justify-between">
+            <span id="stat-avg-level" class="font-display text-3xl font-extrabold text-indigo-600">-</span>
+            <span id="stat-target-compare" class="text-xs font-semibold text-slate-500">Target: 5</span>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm">
+          <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Practices Completed</span>
+          <div class="mt-2 flex items-baseline justify-between">
+            <span id="stat-total-sessions" class="font-display text-3xl font-extrabold text-slate-900">0</span>
+            <span class="text-xs font-medium text-emerald-600">Auto-saved</span>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm">
+          <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Avg Speaking Pace</span>
+          <div class="mt-2 flex items-baseline justify-between">
+            <span id="stat-avg-wpm" class="font-display text-3xl font-extrabold text-slate-900">0</span>
+            <span class="text-xs font-medium text-slate-400">Ideal: 115–145 WPM</span>
+          </div>
+        </div>
+        <div class="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-sm">
+          <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Strongest Domain</span>
+          <div class="mt-2">
+            <span id="stat-top-domain" class="font-display text-lg font-bold text-emerald-700 block truncate">-</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Charts Row -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <!-- DSE Score Trend Line Chart -->
+        <div class="lg:col-span-7 bg-white rounded-3xl p-6 border border-slate-200/80 shadow-sm">
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <h3 class="font-bold text-slate-900 text-base">DSE Score Progression Trend</h3>
+              <p class="text-xs text-slate-500">Total score (out of 28) across your recent practices</p>
+            </div>
+          </div>
+          <div class="h-64 w-full">
+            <canvas id="trendLineChart"></canvas>
+          </div>
+        </div>
+
+        <!-- 4-Domain Skill Radar Chart -->
+        <div class="lg:col-span-5 bg-white rounded-3xl p-6 border border-slate-200/80 shadow-sm">
+          <div class="mb-4">
+            <h3 class="font-bold text-slate-900 text-base">4-Domain Skill Profile</h3>
+            <p class="text-xs text-slate-500">Average mastery across HKEAA assessment criteria (0–7)</p>
+          </div>
+          <div class="h-64 w-full flex items-center justify-center">
+            <canvas id="domainRadarChart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Past Practice History Log -->
+      <div class="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-sm">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <h3 class="font-bold text-slate-900 text-base">Practice History & Saved Feedback</h3>
+            <p class="text-xs text-slate-500">Click any past session to review your transcript and grammar corrections</p>
+          </div>
+        </div>
+
+        <div id="history-list" class="divide-y divide-slate-100">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+
+    </main>
+
+    <!-- ===================================================================
+         TAB 3: HKDSE QUESTION BANK BROWSER
+    ==================================================================== -->
+    <main id="view-bank" class="view-section hidden max-w-5xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-6 flex-1">
+      <div class="bg-white rounded-3xl p-5 sm:p-7 border border-slate-200/80 shadow-sm space-y-5">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-4">
+          <div>
+            <h2 class="text-lg sm:text-xl font-bold text-slate-900">HKDSE Paper 4 Part B Question Bank</h2>
+            <p class="text-xs sm:text-sm text-slate-500">Tap any past-paper style question to load it into the 1-minute Practice Studio.</p>
+          </div>
+          <select id="bank-theme-filter" class="px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-sm font-semibold text-slate-700 outline-none focus:border-indigo-500">
+            <option value="ALL">All 6 Core Themes (18 Prompts)</option>
+            <option value="Technology & Social Media">Technology & Social Media</option>
+            <option value="Education & School Life">Education & School Life</option>
+            <option value="Environment & Sustainability">Environment & Sustainability</option>
+            <option value="Hong Kong Culture & Society">Hong Kong Culture & Society</option>
+            <option value="Youth & Career">Youth & Career</option>
+            <option value="Health & Lifestyle">Health & Lifestyle</option>
+          </select>
+        </div>
+
+        <div id="bank-cards-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+    </main>
+
+    <!-- ===================================================================
+         TAB 4: SETTINGS & STUDENT PROFILE
+    ==================================================================== -->
+    <main id="view-settings" class="view-section hidden max-w-3xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8 space-y-6 flex-1">
+      
+      <div class="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-sm space-y-6">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+          <div>
+            <h2 class="text-lg font-bold text-slate-900">Student Profile & Exam Preferences</h2>
+            <p class="text-xs text-slate-500">All changes are saved automatically to your student account.</p>
+          </div>
+          <span class="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full">
+            <i data-lucide="check" class="w-3.5 h-3.5"></i>
+            Auto-Saved
+          </span>
+        </div>
+
+        <!-- Device Layout Preference Card -->
+        <div class="p-4 rounded-2xl bg-indigo-50/70 border border-indigo-100 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-indigo-700 block">Adaptive Interface Layout</span>
+            <p id="settings-device-status" class="text-xs sm:text-sm text-slate-700 mt-0.5">Currently detecting device automatically.</p>
+          </div>
+          <div class="grid grid-cols-4 gap-1.5 bg-white p-1 rounded-xl border border-indigo-100 shrink-0">
+            <button type="button" data-set-device="auto" class="device-pill-btn px-2.5 py-2 rounded-lg text-xs font-bold bg-indigo-600 text-white transition">Auto</button>
+            <button type="button" data-set-device="phone" class="device-pill-btn px-2.5 py-2 rounded-lg text-xs font-semibold text-slate-600 hover:bg-slate-100 transition">Phone</button>
+            <button type="button" data-set-device="tablet" class="device-pill-btn px-2.5 py-2 rounded-lg text-xs font-semibold text-slate-600 hover:bg-slate-100 transition">Tablet</button>
+            <button type="button" data-set-device="desktop" class="device-pill-btn px-2.5 py-2 rounded-lg text-xs font-semibold text-slate-600 hover:bg-slate-100 transition">Desktop</button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <div>
+            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1.5">Display Name</label>
+            <input id="set-name" type="text" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 focus:border-indigo-500 outline-none text-sm" />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1.5">Student ID (Read-Only)</label>
+            <input id="set-id" type="text" disabled class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-slate-500 text-sm" />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1.5">Target HKDSE Level</label>
+            <select id="set-target" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white focus:border-indigo-500 outline-none text-sm">
+              <option value="5**">Level 5**</option>
+              <option value="5*">Level 5*</option>
+              <option value="5">Level 5</option>
+              <option value="4">Level 4</option>
+              <option value="3">Level 3</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-500 mb-1.5">Examiner Speech Rate</label>
+            <select id="set-voice-rate" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-white focus:border-indigo-500 outline-none text-sm">
+              <option value="0.85">0.85x (Clear & Measured)</option>
+              <option value="1.0">1.0x (Standard HKEAA Pace)</option>
+              <option value="1.15">1.15x (Fast Examiner)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="space-y-3 pt-2">
+          <label class="flex items-center justify-between p-4 rounded-2xl bg-slate-50 border border-slate-200/70 cursor-pointer">
+            <div>
+              <span class="text-sm font-semibold text-slate-800 block">Auto-Read Question Aloud</span>
+              <span class="text-xs text-slate-500">Automatically play examiner voice whenever a new question is selected</span>
+            </div>
+            <input id="set-auto-read" type="checkbox" class="w-5 h-5 accent-indigo-600 rounded" />
+          </label>
+
+          <label class="flex items-center justify-between p-4 rounded-2xl bg-slate-50 border border-slate-200/70 cursor-pointer">
+            <div>
+              <span class="text-sm font-semibold text-slate-800 block">Strict Exam Mode (Hide Hints by Default)</span>
+              <span class="text-xs text-slate-500">Keep structure blueprints collapsed to simulate real exam pressure</span>
+            </div>
+            <input id="set-strict-mode" type="checkbox" class="w-5 h-5 accent-indigo-600 rounded" />
+          </label>
+        </div>
+
+        <!-- Data Management -->
+        <div class="pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3">
+          <button id="export-data-btn" type="button" class="px-4 py-2.5 rounded-xl border border-slate-200 hover:bg-slate-50 text-slate-700 text-xs font-semibold transition flex items-center gap-1.5">
+            <i data-lucide="download" class="w-4 h-4"></i>
+            Export Study Report (JSON)
+          </button>
+
+          <button id="clear-history-btn" type="button" class="px-4 py-2.5 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-700 text-xs font-semibold transition flex items-center gap-1.5">
+            <i data-lucide="trash-2" class="w-4 h-4"></i>
+            Reset My Practice History
+          </button>
+        </div>
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- History Detail Modal -->
+  <div id="history-modal" class="fixed inset-0 z-40 hidden items-center justify-center bg-slate-900/50 backdrop-blur-sm p-4">
+    <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[88vh] overflow-y-auto p-6 sm:p-8 shadow-2xl border border-slate-100 space-y-5">
+      <div class="flex items-start justify-between gap-4 border-b border-slate-100 pb-4">
+        <div>
+          <span id="hm-date" class="text-xs font-semibold text-slate-400"></span>
+          <h3 id="hm-question" class="text-base sm:text-lg font-bold text-slate-900 mt-1"></h3>
+        </div>
+        <button id="hm-close-btn" class="p-2 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-100">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-3">
+        <span id="hm-level" class="px-3 py-1 rounded-xl bg-indigo-600 text-white text-sm font-bold">Level 5</span>
+        <span id="hm-scores" class="text-xs font-semibold text-slate-600 bg-slate-100 px-3 py-1.5 rounded-xl"></span>
+      </div>
+
+      <div>
+        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-1.5">Your Spoken Transcript</h4>
+        <p id="hm-transcript" class="text-sm text-slate-700 bg-slate-50 p-4 rounded-2xl border border-slate-200/70 leading-relaxed"></p>
+      </div>
+
+      <div>
+        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2">Grammar & Expression Feedback</h4>
+        <div id="hm-grammar" class="space-y-2"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       APPLICATION JAVASCRIPT LOGIC
+  ====================================================================== -->
+  <script>
+    /**
+     * 3. ADAPTIVE DEVICE DETECTION ENGINE (Phone / Tablet / Desktop)
+     */
+    const STORAGE_KEY_DEVICE_PREF = 'hkdse_p4_device_pref_v1';
+    let devicePreference = localStorage.getItem(STORAGE_KEY_DEVICE_PREF) || 'auto';
+    let activeDeviceMode = 'desktop';
+    let currentTabName = 'practice';
+
+    function detectPhysicalDevice() {
+      const width = window.innerWidth;
+      const ua = navigator.userAgent || '';
+      const hasTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || window.matchMedia('(pointer: coarse)').matches;
+
+      const isPhoneUA = /iPhone|iPod|Android.*Mobile|Windows Phone|BlackBerry/i.test(ua);
+      const isTabletUA = /iPad|Android(?!.*Mobile)|Tablet/i.test(ua) || (/Macintosh/i.test(ua) && navigator.maxTouchPoints > 1);
+
+      if (isPhoneUA || width < 640) return 'phone';
+      if (isTabletUA || (hasTouch && width >= 640 && width <= 1080)) return 'tablet';
+      return 'desktop';
+    }
+
+    function applyAdaptiveDeviceLayout(announce = false) {
+      const detected = detectPhysicalDevice();
+      activeDeviceMode = devicePreference === 'auto' ? detected : devicePreference;
+
+      document.documentElement.setAttribute('data-device', activeDeviceMode);
+
+      // Update header selector & icon
+      const headerSelect = document.getElementById('device-mode-select');
+      const headerIcon = document.getElementById('device-mode-icon');
+      if (headerSelect) {
+        headerSelect.value = devicePreference;
+        const autoOption = headerSelect.querySelector('option[value="auto"]');
+        if (autoOption) {
+          const cap = detected.charAt(0).toUpperCase() + detected.slice(1);
+          autoOption.textContent = `Auto (${cap})`;
+        }
+      }
+      if (headerIcon) {
+        const iconMap = { phone: 'smartphone', tablet: 'tablet', desktop: 'monitor' };
+        headerIcon.setAttribute('data-lucide', iconMap[activeDeviceMode] || 'monitor');
+      }
+
+      // Toggle Top Nav vs Bottom Phone Thumb Dock
+      const topNav = document.getElementById('top-nav-bar');
+      const mobileDock = document.getElementById('mobile-thumb-dock');
+      const mobileCtaBar = document.getElementById('mobile-practice-cta-bar');
+      const inlineControls = document.getElementById('inline-record-controls');
+      const studioGrid = document.getElementById('studio-grid');
+      const studioTimerCol = document.getElementById('studio-timer-col');
+      const studioTranscriptCol = document.getElementById('studio-transcript-col');
+      const domainsGrid = document.getElementById('domains-grid');
+      const desktopShortcutHint = document.getElementById('desktop-shortcut-hint');
+
+      if (activeDeviceMode === 'phone') {
+        if (topNav) topNav.className = 'hidden';
+        if (mobileDock) mobileDock.classList.remove('hidden');
+        if (mobileCtaBar) {
+          mobileCtaBar.classList.toggle('hidden', currentTabName !== 'practice');
+        }
+        // Hide duplicate inline record buttons on phone since the thumb-dock CTA is anchored at bottom
+        if (inlineControls) inlineControls.classList.add('hidden');
+        if (desktopShortcutHint) desktopShortcutHint.classList.add('hidden');
+        if (studioGrid) studioGrid.className = 'grid grid-cols-1 gap-5 items-center';
+        if (studioTimerCol) studioTimerCol.className = 'flex flex-col items-center justify-center text-center border-b border-slate-100 pb-4';
+        if (studioTranscriptCol) studioTranscriptCol.className = 'flex flex-col h-full';
+        if (domainsGrid) domainsGrid.className = 'grid grid-cols-1 gap-3.5';
+      } else if (activeDeviceMode === 'tablet') {
+        if (topNav) topNav.className = 'flex items-center bg-slate-100/90 p-1 rounded-xl border border-slate-200/60';
+        if (mobileDock) mobileDock.classList.add('hidden');
+        if (inlineControls) inlineControls.classList.remove('hidden');
+        if (desktopShortcutHint) desktopShortcutHint.classList.add('hidden');
+        // Balanced 2-column split on Tablet
+        if (studioGrid) studioGrid.className = 'grid grid-cols-1 md:grid-cols-12 gap-6 items-center';
+        if (studioTimerCol) studioTimerCol.className = 'md:col-span-5 flex flex-col items-center justify-center text-center border-b md:border-b-0 md:border-r border-slate-100 pb-5 md:pb-0 md:pr-5';
+        if (studioTranscriptCol) studioTranscriptCol.className = 'md:col-span-7 flex flex-col h-full';
+        if (domainsGrid) domainsGrid.className = 'grid grid-cols-1 sm:grid-cols-2 gap-4';
+      } else {
+        // Desktop
+        if (topNav) topNav.className = 'flex items-center bg-slate-100/90 p-1 rounded-xl border border-slate-200/60';
+        if (mobileDock) mobileDock.classList.add('hidden');
+        if (inlineControls) inlineControls.classList.remove('hidden');
+        if (desktopShortcutHint) desktopShortcutHint.classList.remove('hidden');
+        if (studioGrid) studioGrid.className = 'grid grid-cols-1 lg:grid-cols-12 gap-8 items-center';
+        if (studioTimerCol) studioTimerCol.className = 'lg:col-span-5 flex flex-col items-center justify-center text-center border-b lg:border-b-0 lg:border-r border-slate-100 pb-6 lg:pb-0 lg:pr-6';
+        if (studioTranscriptCol) studioTranscriptCol.className = 'lg:col-span-7 flex flex-col h-full';
+        if (domainsGrid) domainsGrid.className = 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4';
+      }
+
+      // Update Settings pill buttons & status text
+      const statusText = document.getElementById('settings-device-status');
+      if (statusText) {
+        const capActive = activeDeviceMode.charAt(0).toUpperCase() + activeDeviceMode.slice(1);
+        const capDet = detected.charAt(0).toUpperCase() + detected.slice(1);
+        statusText.textContent = devicePreference === 'auto'
+          ? `Auto-detected: ${capDet} Mode (tap size & layout adapted automatically).`
+          : `Manually locked to ${capActive} Mode (detected device: ${capDet}).`;
+      }
+      document.querySelectorAll('.device-pill-btn').forEach(btn => {
+        const isSel = btn.dataset.setDevice === devicePreference;
+        btn.className = isSel
+          ? 'device-pill-btn px-2.5 py-2 rounded-lg text-xs font-bold bg-indigo-600 text-white transition'
+          : 'device-pill-btn px-2.5 py-2 rounded-lg text-xs font-semibold text-slate-600 hover:bg-slate-100 transition';
+      });
+
+      syncNavHighlight(currentTabName);
+      lucide.createIcons();
+
+      if (announce) {
+        const label = activeDeviceMode.charAt(0).toUpperCase() + activeDeviceMode.slice(1);
+        showToast(`Switched to ${label} Interface Mode`, 'indigo');
+      }
+    }
+
+    function setDeviceModePreference(mode, announce = true) {
+      devicePreference = mode;
+      localStorage.setItem(STORAGE_KEY_DEVICE_PREF, mode);
+      applyAdaptiveDeviceLayout(announce);
+    }
+
+    /**
+     * 4. UI HELPERS (Toast, Custom Confirm Modal, Navigation)
+     */
+    function showToast(message, tone = 'indigo') {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      const colors = {
+        indigo: 'bg-slate-900 text-white border-slate-700',
+        emerald: 'bg-emerald-700 text-white border-emerald-600',
+        rose: 'bg-rose-700 text-white border-rose-600',
+        amber: 'bg-amber-600 text-white border-amber-500'
+      };
+      toast.className = `pointer-events-auto px-4 py-3 rounded-2xl shadow-xl border text-xs sm:text-sm font-medium flex items-center gap-2.5 transform transition-all duration-300 translate-y-2 opacity-0 ${colors[tone] || colors.indigo}`;
+      toast.innerHTML = `<span>${message}</span>`;
+      container.appendChild(toast);
+
+      requestAnimationFrame(() => {
+        toast.classList.remove('translate-y-2', 'opacity-0');
+      });
+
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-y-2');
+        setTimeout(() => toast.remove(), 300);
+      }, 3200);
+    }
+
+    function showConfirmModal(title, message, onConfirm) {
+      const modal = document.getElementById('confirm-modal');
+      document.getElementById('confirm-title').textContent = title;
+      document.getElementById('confirm-message').textContent = message;
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+
+      const cleanup = () => {
+        modal.classList.add('hidden');
+        modal.classList.remove('flex');
+      };
+
+      document.getElementById('confirm-cancel-btn').onclick = cleanup;
+      document.getElementById('confirm-ok-btn').onclick = () => {
+        cleanup();
+        onConfirm();
+      };
+    }
+
+    function syncNavHighlight(tabName) {
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        const isActive = btn.dataset.nav === tabName;
+        if (btn.closest('#top-nav-bar')) {
+          btn.className = isActive
+            ? 'nav-btn px-3.5 py-1.5 rounded-lg text-sm font-semibold bg-white text-indigo-600 shadow-sm transition flex items-center gap-2'
+            : 'nav-btn px-3.5 py-1.5 rounded-lg text-sm font-semibold text-slate-600 hover:text-slate-900 transition flex items-center gap-2';
+        } else if (btn.closest('#mobile-thumb-dock')) {
+          btn.className = isActive
+            ? 'nav-btn min-h-[52px] flex flex-col items-center justify-center gap-1 rounded-xl text-indigo-600 bg-indigo-50/70 font-bold text-[11px]'
+            : 'nav-btn min-h-[52px] flex flex-col items-center justify-center gap-1 rounded-xl text-slate-500 font-semibold text-[11px]';
+        }
+      });
+    }
+
+    function switchTab(tabName) {
+      currentTabName = tabName;
+      document.querySelectorAll('.view-section').forEach(el => el.classList.add('hidden'));
+      const targetView = document.getElementById(`view-${tabName}`);
+      if (targetView) targetView.classList.remove('hidden');
+
+      syncNavHighlight(tabName);
+
+      // Show/hide mobile thumb-dock Practice CTA depending on active tab
+      const mobileCtaBar = document.getElementById('mobile-practice-cta-bar');
+      if (mobileCtaBar && activeDeviceMode === 'phone') {
+        mobileCtaBar.classList.toggle('hidden', tabName !== 'practice');
+      }
+
+      if (tabName === 'trends') {
+        renderTrendsDashboard();
+      } else if (tabName === 'bank') {
+        renderQuestionBank(document.getElementById('bank-theme-filter')?.value || 'ALL');
+      } else if (tabName === 'settings') {
+        populateSettingsForm();
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function renderQuestionBank(themeFilter = 'ALL') {
+      const container = document.getElementById('bank-cards-grid');
+      if (!container) return;
+      const list = themeFilter === 'ALL'
+        ? HKDSE_QUESTIONS
+        : HKDSE_QUESTIONS.filter(q => q.theme === themeFilter);
+
+      container.innerHTML = '';
+      list.forEach((q, idx) => {
+        const card = document.createElement('div');
+        card.className = 'p-5 rounded-2xl border border-slate-200/80 bg-slate-50/50 hover:bg-white hover:border-indigo-300 hover:shadow-md transition flex flex-col justify-between gap-4';
+        card.innerHTML = `
+          <div class="space-y-2">
+            <div class="flex flex-wrap items-center justify-between gap-2 text-xs">
+              <span class="px-2.5 py-0.5 rounded-lg bg-indigo-50 text-indigo-700 font-semibold">${escapeHtml(q.theme)}</span>
+              <span class="text-slate-400 font-medium">${escapeHtml(q.type)}</span>
+            </div>
+            <h3 class="text-sm sm:text-base font-bold text-slate-900 leading-snug">${idx + 1}. ${escapeHtml(q.prompt)}</h3>
+            <p class="text-xs text-slate-500 line-clamp-2">${escapeHtml(q.context)}</p>
+          </div>
+          <div class="flex items-center justify-between gap-2 pt-2 border-t border-slate-200/60">
+            <button type="button" class="bank-listen-btn px-3 py-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-xs font-semibold text-slate-700 flex items-center gap-1.5">
+              <i data-lucide="volume-2" class="w-3.5 h-3.5 text-indigo-600"></i>
+              <span>Listen</span>
+            </button>
+            <button type="button" class="bank-practice-btn px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold flex items-center gap-1.5 shadow-sm">
+              <i data-lucide="mic" class="w-3.5 h-3.5"></i>
+              <span>Practice This</span>
+            </button>
+          </div>
+        `;
+        card.querySelector('.bank-listen-btn').onclick = () => speakText(q.prompt);
+        card.querySelector('.bank-practice-btn').onclick = () => {
+          document.getElementById('theme-filter').value = 'ALL';
+          populateQuestionDropdown('ALL');
+          selectQuestionById(q.id, false);
+          switchTab('practice');
+          showToast('Prompt loaded into Practice Studio!', 'indigo');
+        };
+        container.appendChild(card);
+      });
+      lucide.createIcons();
+    }
+
+    /**
+     * 5. AUTHENTICATION FLOW
+     */
+    function renderSavedAccountChips() {
+      const box = document.getElementById('saved-accounts-box');
+      const list = document.getElementById('saved-accounts-list');
+      const ids = Object.keys(usersDB);
+      if (ids.length === 0) {
+        box.classList.add('hidden');
+        return;
+      }
+      box.classList.remove('hidden');
+      list.innerHTML = '';
+      ids.forEach(id => {
+        const u = usersDB[id];
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-indigo-50 hover:text-indigo-700 text-xs font-semibold text-slate-700 border border-slate-200/80 transition flex items-center gap-1.5';
+        btn.innerHTML = `<span class="w-2 h-2 rounded-full bg-indigo-500"></span>${u.name} (${u.id})`;
+        btn.onclick = () => {
+          loginUser(u.id);
+        };
+        list.appendChild(btn);
+      });
+    }
+
+    function loginUser(userId) {
+      const user = usersDB[userId];
+      if (!user) return;
+      currentUser = user;
+      localStorage.setItem(STORAGE_KEY_ACTIVE, user.id);
+
+      document.getElementById('auth-screen').classList.add('hidden');
+      document.getElementById('app-shell').classList.remove('hidden');
+      updateHeaderUI();
+      populateSettingsForm();
+      applyUserPreferences();
+      switchTab('practice');
+      showToast(`Welcome back, ${currentUser.name}!`, 'emerald');
+    }
+
+    function logoutUser() {
+      stopRecording(false);
+      window.speechSynthesis?.cancel();
+      currentUser = null;
+      localStorage.removeItem(STORAGE_KEY_ACTIVE);
+      document.getElementById('app-shell').classList.add('hidden');
+      document.getElementById('auth-screen').classList.remove('hidden');
+      renderSavedAccountChips();
+    }
+
+    function updateHeaderUI() {
+      if (!currentUser) return;
+      document.getElementById('header-student-name').textContent = currentUser.name;
+      document.getElementById('header-target-badge').textContent = `Target: ${currentUser.targetLevel}`;
+    }
+
+    /**
+     * 5. QUESTION BANK & EXAMINER SPEECH SYNTHESIS
+     */
+    function populateQuestionDropdown(themeFilter = 'ALL') {
+      const select = document.getElementById('question-select');
+      const filtered = themeFilter === 'ALL'
+        ? HKDSE_QUESTIONS
+        : HKDSE_QUESTIONS.filter(q => q.theme === themeFilter);
+
+      select.innerHTML = '';
+      filtered.forEach((q, idx) => {
+        const opt = document.createElement('option');
+        opt.value = q.id;
+        opt.textContent = `${idx + 1}. [${q.type}] ${q.prompt}`;
+        select.appendChild(opt);
+      });
+
+      if (filtered.length > 0) {
+        selectQuestionById(filtered[0].id, false);
+      }
+    }
+
+    function selectQuestionById(qId, autoSpeak = true) {
+      const found = HKDSE_QUESTIONS.find(q => q.id === qId);
+      if (!found) return;
+      currentQuestion = found;
+
+      document.getElementById('question-select').value = found.id;
+      document.getElementById('q-theme-badge').textContent = found.theme;
+      document.getElementById('q-type-badge').textContent = found.type;
+      document.getElementById('q-context').textContent = found.context;
+      document.getElementById('q-prompt').textContent = found.prompt;
+      document.getElementById('q-hint-structure').textContent = found.structure;
+
+      const phrasesBox = document.getElementById('q-hint-phrases');
+      phrasesBox.innerHTML = '';
+      found.phrases.forEach(p => {
+        const span = document.createElement('span');
+        span.className = 'px-2.5 py-1 rounded-lg bg-white border border-amber-200 text-xs font-semibold text-amber-900';
+        span.textContent = `"${p}"`;
+        phrasesBox.appendChild(span);
+      });
+
+      // Reset recording state & previous result when switching questions
+      resetPracticeArea();
+
+      if (autoSpeak && currentUser?.settings?.autoRead) {
+        speakText(found.prompt);
+      }
+    }
+
+    function speakText(text) {
+      if (!('speechSynthesis' in window)) {
+        showToast('Speech synthesis is not supported in this browser.', 'amber');
+        return;
+      }
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'en-GB';
+      utterance.rate = currentUser?.settings?.voiceRate || 1.0;
+
+      // Prefer a natural British/English voice if available
+      const voices = window.speechSynthesis.getVoices();
+      const preferred = voices.find(v => v.lang.includes('en-GB') && v.name.includes('Google'))
+        || voices.find(v => v.lang.includes('en-GB'))
+        || voices.find(v => v.lang.startsWith('en'));
+      if (preferred) utterance.voice = preferred;
+
+      window.speechSynthesis.speak(utterance);
+    }
+
+    /**
+     * 6. 60-SECOND EXAM TIMER & REAL-TIME SPEECH RECOGNITION
+     */
+    const EXAM_SECONDS = 60;
+    const CIRCLE_CIRCUMFERENCE = 326.73; // 2 * Math.PI * 52
+
+    let timerInterval = null;
+    let secondsRemaining = EXAM_SECONDS;
+    let isRecording = false;
+    let recognition = null;
+    let finalTranscriptBuffer = '';
+    let speechSupported = false;
+
+    function initSpeechRecognition() {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      const badge = document.getElementById('speech-support-badge');
+
+      if (!SpeechRecognition) {
+        speechSupported = false;
+        badge.textContent = 'Manual / Typing Mode (Mic API Unavailable)';
+        badge.className = 'text-[11px] font-medium px-2 py-0.5 rounded-full bg-amber-50 text-amber-700';
+        return;
+      }
+
+      speechSupported = true;
+      recognition = new SpeechRecognition();
+      recognition.lang = 'en-US'; // Recognizes HK English & general English accurately
+      recognition.continuous = true;
+      recognition.interimResults = true;
+
+      recognition.onresult = (event) => {
+        let interim = '';
+        for (let i = event.resultIndex; i < event.results.length; i++) {
+          const piece = event.results[i][0].transcript;
+          if (event.results[i].isFinal) {
+            finalTranscriptBuffer += (finalTranscriptBuffer ? ' ' : '') + piece.trim();
+          } else {
+            interim += piece;
+          }
+        }
+
+        const box = document.getElementById('transcript-box');
+        box.value = finalTranscriptBuffer;
+        const interimEl = document.getElementById('interim-overlay');
+        if (interim) {
+          interimEl.textContent = `Hearing: "${interim}..."`;
+          interimEl.classList.remove('hidden');
+        } else {
+          interimEl.classList.add('hidden');
+        }
+        updateLiveMetrics();
+      };
+
+      recognition.onerror = (event) => {
+        if (event.error === 'not-allowed' || event.error === 'service-not-allowed') {
+          showToast('Microphone access blocked. You can type your response directly in the text box!', 'amber');
+          badge.textContent = 'Mic Blocked • Type Response Manually';
+          badge.className = 'text-[11px] font-medium px-2 py-0.5 rounded-full bg-rose-50 text-rose-700';
+        }
+      };
+
+      recognition.onend = () => {
+        // Automatically restart recognition if timer is still running
+        if (isRecording && secondsRemaining > 0) {
+          try {
+            recognition.start();
+          } catch (e) {}
+        }
+      };
+    }
+
+    function updateTimerVisuals() {
+      const mins = Math.floor(secondsRemaining / 60);
+      const secs = secondsRemaining % 60;
+      const formatted = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+      document.getElementById('timer-display').textContent = formatted;
+      const mobileDockTimer = document.getElementById('mobile-dock-timer');
+      if (mobileDockTimer) mobileDockTimer.textContent = formatted;
+
+      const ring = document.getElementById('timer-ring');
+      const progress = (EXAM_SECONDS - secondsRemaining) / EXAM_SECONDS;
+      ring.style.strokeDashoffset = CIRCLE_CIRCUMFERENCE * progress;
+
+      if (secondsRemaining <= 10 && secondsRemaining > 0) {
+        ring.style.stroke = '#e11d48'; // Rose warning in final 10s
+        document.getElementById('timer-status').textContent = 'Wrap up your conclusion!';
+        document.getElementById('timer-status').className = 'text-xs font-bold text-rose-600 mt-1 animate-pulse';
+      } else if (secondsRemaining <= 25 && isRecording) {
+        ring.style.stroke = '#f59e0b'; // Amber pacing indicator
+        document.getElementById('timer-status').textContent = 'Develop Reason 2...';
+        document.getElementById('timer-status').className = 'text-xs font-semibold text-amber-600 mt-1';
+      } else if (isRecording) {
+        ring.style.stroke = '#10b981'; // Emerald active recording
+        document.getElementById('timer-status').textContent = 'Recording in progress...';
+        document.getElementById('timer-status').className = 'text-xs font-semibold text-emerald-600 mt-1';
+      } else {
+        ring.style.stroke = '#10b981';
+        document.getElementById('timer-status').textContent = 'Ready to Speak';
+        document.getElementById('timer-status').className = 'text-xs font-semibold text-slate-400 mt-1';
+      }
+    }
+
+    function updateLiveMetrics() {
+      const text = document.getElementById('transcript-box').value.trim();
+      const words = text ? text.split(/\s+/).filter(Boolean).length : 0;
+      const elapsed = Math.max(1, EXAM_SECONDS - secondsRemaining);
+      const wpm = isRecording ? Math.round((words / elapsed) * 60) : (words > 0 ? Math.round((words / Math.max(15, elapsed)) * 60) : 0);
+
+      document.getElementById('live-word-count').textContent = words;
+      document.getElementById('live-wpm').textContent = wpm;
+    }
+
+    function startRecording() {
+      if (isRecording) return;
+      window.speechSynthesis?.cancel();
+
+      isRecording = true;
+      secondsRemaining = EXAM_SECONDS;
+      finalTranscriptBuffer = '';
+      document.getElementById('transcript-box').value = '';
+      document.getElementById('interim-overlay').classList.add('hidden');
+      document.getElementById('evaluation-result').classList.add('hidden');
+      updateLiveMetrics();
+      updateTimerVisuals();
+
+      document.getElementById('start-record-btn').classList.add('hidden');
+      document.getElementById('stop-record-btn').classList.remove('hidden');
+      document.getElementById('reset-record-btn').classList.remove('hidden');
+      document.getElementById('mic-wave-box').classList.remove('hidden');
+
+      // Sync Phone thumb-dock buttons
+      document.getElementById('mobile-start-btn')?.classList.add('hidden');
+      document.getElementById('mobile-stop-btn')?.classList.remove('hidden');
+      document.getElementById('mobile-reset-btn')?.classList.remove('hidden');
+
+      if (speechSupported && recognition) {
+        try {
+          recognition.start();
+        } catch (e) {}
+      }
+
+      timerInterval = setInterval(() => {
+        secondsRemaining--;
+        updateTimerVisuals();
+        updateLiveMetrics();
+
+        if (secondsRemaining <= 0) {
+          stopRecording(true);
+        }
+      }, 1000);
+    }
+
+    function stopRecording(shouldEvaluate = true) {
+      if (!isRecording && !shouldEvaluate) return;
+      isRecording = false;
+      clearInterval(timerInterval);
+      timerInterval = null;
+
+      if (speechSupported && recognition) {
+        try {
+          recognition.stop();
+        } catch (e) {}
+      }
+
+      document.getElementById('start-record-btn').classList.remove('hidden');
+      document.getElementById('stop-record-btn').classList.add('hidden');
+      document.getElementById('mic-wave-box').classList.add('hidden');
+      document.getElementById('interim-overlay').classList.add('hidden');
+      document.getElementById('timer-status').textContent = 'Response Completed';
+
+      // Sync Phone thumb-dock buttons
+      document.getElementById('mobile-start-btn')?.classList.remove('hidden');
+      document.getElementById('mobile-stop-btn')?.classList.add('hidden');
+
+      if (shouldEvaluate) {
+        const transcript = document.getElementById('transcript-box').value.trim();
+        const durationUsed = Math.max(10, EXAM_SECONDS - secondsRemaining);
+        if (!transcript) {
+          showToast('No speech detected. Please speak into your mic or type your answer to evaluate.', 'amber');
+          return;
+        }
+        evaluateResponse(transcript, durationUsed);
+      }
+    }
+
+    function resetPracticeArea() {
+      stopRecording(false);
+      secondsRemaining = EXAM_SECONDS;
+      finalTranscriptBuffer = '';
+      document.getElementById('transcript-box').value = '';
+      document.getElementById('interim-overlay').classList.add('hidden');
+      document.getElementById('reset-record-btn').classList.add('hidden');
+      document.getElementById('mobile-reset-btn')?.classList.add('hidden');
+      document.getElementById('evaluation-result').classList.add('hidden');
+      document.getElementById('evaluation-loading').classList.add('hidden');
+      updateTimerVisuals();
+      updateLiveMetrics();
+    }
+
+    /**
+     * 7. AI-POWERED HKDSE MARKING & GRAMMAR CHECKER
+     * Integrates Gemini API with an intelligent client-side DSE rubric fallback
+     * so grading ALWAYS works reliably offline or online.
+     */
+    async function evaluateResponse(transcript, durationSec) {
+      const loadingEl = document.getElementById('evaluation-loading');
+      const resultEl = document.getElementById('evaluation-result');
+      resultEl.classList.add('hidden');
+      loadingEl.classList.remove('hidden');
+
+      const words = transcript.split(/\s+/).filter(Boolean).length;
+      const wpm = Math.round((words / Math.max(1, durationSec)) * 60);
+
+      let evaluation = null;
+
+      // Attempt Gemini API structured assessment first
+      try {
+        evaluation = await callGeminiDSEExaminer(currentQuestion, transcript, durationSec, words, wpm);
+      } catch (err) {
+        // Graceful fallback to local HKDSE linguistic & rubric engine
+        evaluation = runLocalHKDSEEngine(currentQuestion, transcript, durationSec, words, wpm);
+      }
+
+      loadingEl.classList.add('hidden');
+      latestEvaluation = evaluation;
+      renderEvaluationReport(evaluation);
+
+      // Save attempt automatically to current student's profile
+      if (currentUser) {
+        currentUser.history.unshift({
+          id: 'hist-' + Date.now(),
+          date: new Date().toISOString(),
+          questionId: currentQuestion.id,
+          theme: currentQuestion.theme,
+          prompt: currentQuestion.prompt,
+          transcript,
+          duration: durationSec,
+          wpm,
+          scores: evaluation.scores,
+          totalScore: evaluation.totalScore,
+          dseLevel: evaluation.dseLevel,
+          headline: evaluation.headline,
+          summary: evaluation.summary,
+          grammarIssues: evaluation.grammarIssues,
+          tips: evaluation.tips,
+          sampleAnswer: currentQuestion.sample5Star
+        });
+        syncCurrentUser();
+        showToast(`Saved to ${currentUser.name}'s progress record (Level ${evaluation.dseLevel})`, 'emerald');
+      }
+    }
+
+    async function callGeminiDSEExaminer(question, transcript, durationSec, words, wpm) {
+      const apiKey = "";
+      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+
+      const systemPrompt = `You are a senior HKEAA HKDSE English Language Paper 4 (Speaking) Chief Examiner.
+Grade the candidate's Part B Individual Response (1-minute limit) strictly according to the 4 official HKDSE domains, each scored 0 to 7:
+1. Pronunciation & Delivery (infer fluency, pacing from ${wpm} WPM, ${words} words in ${durationSec}s, filler words, completeness)
+2. Communication Strategies (clear opening stance, engaging audience awareness, coherent closing)
+3. Vocabulary & Language Patterns (lexical range, grammatical accuracy, complex structures)
+4. Ideas & Organization (relevance to prompt, clear stance, logical elaboration with reasons/examples)
+
+Also identify specific grammatical errors, missing articles/plurals, tense errors, or Hong Kong Chinglish expressions in the transcript, with clear corrections and explanations. Map total score (0-28) to HKDSE Level: 25-28="5**", 22-24="5*", 19-21="5", 15-18="4", 11-14="3", 7-10="2", 0-6="1".`;
+
+      const userPrompt = `Theme: ${question.theme}
+Examiner Question: "${question.prompt}"
+Duration: ${durationSec} seconds | Word Count: ${words} words | Pace: ${wpm} WPM
+Candidate Spoken Transcript: "${transcript}"`;
+
+      const payload = {
+        contents: [{ parts: [{ text: userPrompt }] }],
+        systemInstruction: { parts: [{ text: systemPrompt }] },
+        generationConfig: {
+          responseMimeType: "application/json",
+          responseSchema: {
+            type: "OBJECT",
+            properties: {
+              d1Score: { type: "INTEGER" },
+              d1Feedback: { type: "STRING" },
+              d2Score: { type: "INTEGER" },
+              d2Feedback: { type: "STRING" },
+              d3Score: { type: "INTEGER" },
+              d3Feedback: { type: "STRING" },
+              d4Score: { type: "INTEGER" },
+              d4Feedback: { type: "STRING" },
+              dseLevel: { type: "STRING" },
+              headline: { type: "STRING" },
+              summary: { type: "STRING" },
+              grammarIssues: {
+                type: "ARRAY",
+                items: {
+                  type: "OBJECT",
+                  properties: {
+                    original: { type: "STRING" },
+                    correction: { type: "STRING" },
+                    explanation: { type: "STRING" }
+                  }
+                }
+              },
+              tips: {
+                type: "ARRAY",
+                items: { type: "STRING" }
+              }
+            },
+            required: ["d1Score", "d1Feedback", "d2Score", "d2Feedback", "d3Score", "d3Feedback", "d4Score", "d4Feedback", "dseLevel", "headline", "summary", "grammarIssues", "tips"]
+          }
+        }
+      };
+
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 9000);
+
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+        signal: controller.signal
+      });
+      clearTimeout(timeoutId);
+
+      if (!response.ok) throw new Error('API unavailable');
+      const data = await response.json();
+      const rawText = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+      if (!rawText) throw new Error('Empty response');
+
+      const parsed = JSON.parse(rawText);
+      const clamp = (n) => Math.max(0, Math.min(7, Math.round(Number(n) || 4)));
+      const d1 = clamp(parsed.d1Score);
+      const d2 = clamp(parsed.d2Score);
+      const d3 = clamp(parsed.d3Score);
+      const d4 = clamp(parsed.d4Score);
+      const totalScore = d1 + d2 + d3 + d4;
+
+      return {
+        scores: { d1, d2, d3, d4 },
+        totalScore,
+        dseLevel: parsed.dseLevel || mapTotalToDSELevel(totalScore),
+        headline: parsed.headline,
+        summary: parsed.summary,
+        durationSec,
+        wpm,
+        feedback: {
+          d1: parsed.d1Feedback,
+          d2: parsed.d2Feedback,
+          d3: parsed.d3Feedback,
+          d4: parsed.d4Feedback
+        },
+        grammarIssues: parsed.grammarIssues || [],
+        tips: parsed.tips || []
+      };
+    }
+
+    function mapTotalToDSELevel(total) {
+      if (total >= 25) return '5**';
+      if (total >= 22) return '5*';
+      if (total >= 19) return '5';
+      if (total >= 15) return '4';
+      if (total >= 11) return '3';
+      if (total >= 7) return '2';
+      return '1';
+    }
+
+    /**
+     * Client-side HKDSE Linguistic & Rubric Engine (Ensures instant, accurate offline grading)
+     */
+    function runLocalHKDSEEngine(question, transcript, durationSec, words, wpm) {
+      const lower = transcript.toLowerCase();
+
+      // 1. Detect common HKDSE spoken grammar & Chinglish patterns
+      const grammarRules = [
+        {
+          regex: /\b(i very like|very like)\b/gi,
+          correction: 'I really like / I am very fond of',
+          explanation: 'In English, "very" cannot directly modify a verb like "like". Use "really" or "greatly".'
+        },
+        {
+          regex: /\b(more better|more easier|more cheaper|more faster)\b/gi,
+          correction: 'much better / much easier / much cheaper',
+          explanation: 'Avoid double comparatives ("more + -er"). Use "much" or "far" to intensify comparative adjectives.'
+        },
+        {
+          regex: /\b(there have|there has)\b/gi,
+          correction: 'there are / there is',
+          explanation: 'Chinglish transfer from "有": Use "there is / there are" instead of "there have".'
+        },
+        {
+          regex: /\b(although|though)[^.?!]{5,60}\bbut\b/gi,
+          correction: 'Remove "but" when starting a clause with "Although"',
+          explanation: 'In English, "although" and "but" cannot be used together in the same sentence.'
+        },
+        {
+          regex: /\b(because)[^.?!]{5,60}\bso\b/gi,
+          correction: 'Remove "so" when starting a clause with "Because"',
+          explanation: 'Use either "Because A, B" or "A, so B"—never both together.'
+        },
+        {
+          regex: /\b(people is|students is|teenagers is|many student|many teenager|many reason)\b/gi,
+          correction: 'people are / students are / many students / many reasons',
+          explanation: 'Ensure plural subject-verb agreement and plural nouns after quantifiers like "many".'
+        },
+        {
+          regex: /\b(discuss about|emphasize on|mention about|concern about)\b/gi,
+          correction: 'discuss / emphasize / mention / be concerned about',
+          explanation: '"Discuss", "emphasize", and "mention" are transitive verbs and do not take a preposition.'
+        },
+        {
+          regex: /\b(open the light|close the light|open the air conditioner)\b/gi,
+          correction: 'turn on the light / turn off the light / switch on the air conditioner',
+          explanation: 'Use phrasal verbs "turn on / switch off" for electrical appliances rather than "open / close".'
+        },
+        {
+          regex: /\b(in my opinion, i think|according to my opinion)\b/gi,
+          correction: 'In my opinion, ... / Personally, I think ...',
+          explanation: 'Avoid redundancy by choosing either "In my opinion" or "I think", not both together.'
+        }
+      ];
+
+      const grammarIssues = [];
+      grammarRules.forEach(rule => {
+        const match = transcript.match(rule.regex);
+        if (match) {
+          grammarIssues.push({
+            original: match[0],
+            correction: rule.correction,
+            explanation: rule.explanation
+          });
+        }
+      });
+
+      // Check basic punctuation/capitalization if typed
+      if (words >= 8 && !/[.?!]$/.test(transcript.trim())) {
+        grammarIssues.push({
+          original: transcript.slice(-28),
+          correction: 'End your final thought with a clear falling intonation / complete sentence.',
+          explanation: 'A complete concluding sentence signals confidence to the HKDSE examiner.'
+        });
+      }
+
+      // 2. Analyze Discourse Markers & Structure
+      const connectors = ['first', 'firstly', 'second', 'secondly', 'moreover', 'furthermore', 'however', 'although', 'therefore', 'in conclusion', 'personally', 'perspective', 'for example', 'for instance', 'because'];
+      const usedConnectors = connectors.filter(c => lower.includes(c));
+      const fillerMatches = lower.match(/\b(um|uh|er|ah|like|you know)\b/g) || [];
+
+      // Domain 1: Pronunciation & Delivery (0-7)
+      let d1 = 3;
+      if (words >= 115) d1 += 3;
+      else if (words >= 85) d1 += 2;
+      else if (words >= 50) d1 += 1;
+      if (wpm >= 105 && wpm <= 165) d1 += 1;
+      if (fillerMatches.length > 4) d1 -= 1;
+      d1 = Math.max(1, Math.min(7, d1));
+
+      // Domain 2: Communication Strategies (0-7)
+      let d2 = 3;
+      if (/\b(personally|believe|think|opinion|perspective|prefer|recommend|agree|disagree|yes|no)\b/.test(lower)) d2 += 1;
+      if (usedConnectors.length >= 2) d2 += 1;
+      if (/\b(therefore|in conclusion|overall|to sum up|all in all|that is why)\b/.test(lower)) d2 += 1;
+      if (words >= 95) d2 += 1;
+      d2 = Math.max(1, Math.min(7, d2));
+
+      // Domain 3: Vocabulary & Language Patterns (0-7)
+      const uniqueWords = new Set(lower.replace(/[^a-z\s]/g, '').split(/\s+/).filter(Boolean));
+      const lexicalDiversity = words > 0 ? uniqueWords.size / words : 0;
+      const advancedWords = (lower.match(/\b(beneficial|convenient|environment|sustainable|independence|perspective|furthermore|moreover|however|although|essential|crucial|opportunities|development|practical|effective|efficient|pressure|technology|authentic|heritage)\b/g) || []).length;
+
+      let d3 = 3;
+      if (advancedWords >= 3) d3 += 2;
+      else if (advancedWords >= 1) d3 += 1;
+      if (lexicalDiversity > 0.62 && words >= 60) d3 += 1;
+      if (grammarIssues.length === 0 && words >= 75) d3 += 1;
+      else if (grammarIssues.length >= 2) d3 -= 1;
+      d3 = Math.max(1, Math.min(7, d3));
+
+      // Domain 4: Ideas & Organization (0-7)
+      let d4 = 3;
+      if (usedConnectors.length >= 3) d4 += 2;
+      else if (usedConnectors.length >= 1) d4 += 1;
+      if (/\b(for example|for instance|such as|because|since|as a result)\b/.test(lower)) d4 += 1;
+      if (words >= 100) d4 += 1;
+      d4 = Math.max(1, Math.min(7, d4));
+
+      const totalScore = d1 + d2 + d3 + d4;
+      const dseLevel = mapTotalToDSELevel(totalScore);
+
+      // Tailored Feedback Strings
+      const d1Feedback = words >= 100
+        ? `Good fluency with ${words} words spoken at ~${wpm} WPM. You sustained your speech well across the 1-minute limit.`
+        : `You spoke ${words} words (~${wpm} WPM). Aim for 110–145 words to fill the full 60 seconds confidently.`;
+
+      const d2Feedback = usedConnectors.length >= 2
+        ? `Effective audience awareness using clear signposts (${usedConnectors.slice(0, 3).join(', ')}) to guide the examiner.`
+        : `Open with a direct stance phrase ("Personally, I believe...") and end with a clear summarizing sentence.`;
+
+      const d3Feedback = grammarIssues.length === 0
+        ? `Clean grammatical control with ${advancedWords} topic-relevant expressions. Try adding idiomatic phrases for Level 5**.`
+        : `Generally understandable expression, though ${grammarIssues.length} grammar/phrasing slip(s) slightly affected accuracy.`;
+
+      const d4Feedback = usedConnectors.length >= 2 && words >= 90
+        ? `Well-organized response with logical progression from stance to supporting reasons.`
+        : `Develop two distinct points using the PEEL method (Point → Explain → Example → Link back to prompt).`;
+
+      const tips = [];
+      if (words < 105) {
+        tips.push(`Expand your elaboration: You produced ${words} words. Adding one concrete Hong Kong example will easily bring you to 120+ words.`);
+      }
+      if (grammarIssues.length > 0) {
+        tips.push(`Review the ${grammarIssues.length} highlighted grammar correction(s) on the left—eliminating recurring slips directly boosts Domain 3.`);
+      }
+      if (!/\b(although|while|even though|on the other hand)\b/.test(lower)) {
+        tips.push(`Include a brief counter-argument ("Although some argue..., I still believe...") to demonstrate Level 5* critical thinking.`);
+      }
+      if (tips.length === 0) {
+        tips.push(`Strong all-round performance! Practice maintaining natural vocal intonation and stress on key transition words.`);
+      }
+
+      const headlines = {
+        '5**': 'Outstanding Distinction-Level Response',
+        '5*': 'Persuasive, Fluent & Well-Structured Delivery',
+        '5': 'Solid DSE Level 5 Performance with Clear Ideas',
+        '4': 'Competent Response — Polish Accuracy & Depth for Level 5',
+        '3': 'Clear Basic Stance — Expand Elaboration & Linking',
+        '2': 'Developing Response — Focus on Sentence Completeness',
+        '1': 'Brief Attempt — Practice Building a 3-Part Structure'
+      };
+
+      return {
+        scores: { d1, d2, d3, d4 },
+        totalScore,
+        dseLevel,
+        headline: headlines[dseLevel] || 'HKDSE Assessment Complete',
+        summary: `You delivered ${words} words in ${durationSec} seconds (${wpm} WPM), achieving ${totalScore}/28 across the four HKEAA speaking domains.`,
+        durationSec,
+        wpm,
+        feedback: { d1: d1Feedback, d2: d2Feedback, d3: d3Feedback, d4: d4Feedback },
+        grammarIssues,
+        tips
+      };
+    }
+
+    function renderEvaluationReport(ev) {
+      document.getElementById('res-headline').textContent = ev.headline;
+      document.getElementById('res-summary').textContent = ev.summary;
+      document.getElementById('res-dse-level').textContent = ev.dseLevel;
+      document.getElementById('res-total-score').textContent = `${ev.totalScore} / 28`;
+      document.getElementById('res-duration').textContent = `${ev.durationSec}s`;
+      document.getElementById('res-wpm').textContent = `${ev.wpm} WPM`;
+
+      // 4 Domains
+      ['d1', 'd2', 'd3', 'd4'].forEach(key => {
+        const sc = ev.scores[key];
+        document.getElementById(`${key}-score`).textContent = `${sc} / 7`;
+        document.getElementById(`${key}-feedback`).textContent = ev.feedback[key];
+        document.getElementById(`${key}-bar`).style.width = `${Math.round((sc / 7) * 100)}%`;
+      });
+
+      // Grammar List
+      const gBadge = document.getElementById('grammar-count-badge');
+      const gList = document.getElementById('grammar-list');
+      gList.innerHTML = '';
+
+      if (!ev.grammarIssues || ev.grammarIssues.length === 0) {
+        gBadge.textContent = '0 issues found';
+        gBadge.className = 'text-xs font-bold px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700';
+        gList.innerHTML = `
+          <div class="p-4 rounded-2xl bg-emerald-50/70 border border-emerald-200/70 flex items-center gap-3 text-sm text-emerald-900">
+            <i data-lucide="check-circle" class="w-5 h-5 text-emerald-600 shrink-0"></i>
+            <span>Great job! No obvious grammatical errors or Chinglish expressions were detected in your transcript.</span>
+          </div>
+        `;
+      } else {
+        gBadge.textContent = `${ev.grammarIssues.length} improvement${ev.grammarIssues.length > 1 ? 's' : ''}`;
+        gBadge.className = 'text-xs font-bold px-2.5 py-1 rounded-full bg-rose-50 text-rose-700';
+
+        ev.grammarIssues.forEach(item => {
+          const card = document.createElement('div');
+          card.className = 'p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-1.5';
+          card.innerHTML = `
+            <div class="flex flex-wrap items-center gap-2 text-xs">
+              <span class="px-2 py-0.5 rounded bg-rose-100 text-rose-800 line-through font-medium">${escapeHtml(item.original)}</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5 text-slate-400"></i>
+              <span class="px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 font-semibold">${escapeHtml(item.correction)}</span>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed">${escapeHtml(item.explanation)}</p>
+          `;
+          gList.appendChild(card);
+        });
+      }
+
+      // Actionable Tips
+      const tipsList = document.getElementById('improvement-tips-list');
+      tipsList.innerHTML = '';
+      ev.tips.forEach(tip => {
+        const li = document.createElement('li');
+        li.className = 'flex items-start gap-2.5';
+        li.innerHTML = `
+          <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0 mt-0.5 text-xs font-bold">✓</span>
+          <span>${escapeHtml(tip)}</span>
+        `;
+        tipsList.appendChild(li);
+      });
+
+      // Sample 5** Answer
+      document.getElementById('res-sample-answer').textContent = `"${currentQuestion.sample5Star}"`;
+
+      const resultEl = document.getElementById('evaluation-result');
+      resultEl.classList.remove('hidden');
+      lucide.createIcons();
+      resultEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    function escapeHtml(str) {
+      return String(str || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    /**
+     * 8. PROGRESS & SKILL TRENDS CHARTS + HISTORY LOG
+     */
+    let trendLineChartInstance = null;
+    let domainRadarChartInstance = null;
+
+    function renderTrendsDashboard() {
+      if (!currentUser) return;
+      const history = currentUser.history || [];
+
+      document.getElementById('stat-total-sessions').textContent = history.length;
+      document.getElementById('stat-target-compare').textContent = `Target: ${currentUser.targetLevel}`;
+
+      if (history.length === 0) {
+        document.getElementById('stat-avg-level').textContent = '-';
+        document.getElementById('stat-avg-wpm').textContent = '0';
+        document.getElementById('stat-top-domain').textContent = 'Complete 1st practice';
+      } else {
+        const avgTotal = history.reduce((acc, h) => acc + h.totalScore, 0) / history.length;
+        document.getElementById('stat-avg-level').textContent = mapTotalToDSELevel(Math.round(avgTotal));
+
+        const avgWpm = Math.round(history.reduce((acc, h) => acc + (h.wpm || 0), 0) / history.length);
+        document.getElementById('stat-avg-wpm').textContent = avgWpm;
+
+        const dAvg = {
+          'Pronunciation & Delivery': history.reduce((a, h) => a + h.scores.d1, 0) / history.length,
+          'Communication Strategies': history.reduce((a, h) => a + h.scores.d2, 0) / history.length,
+          'Vocabulary & Language': history.reduce((a, h) => a + h.scores.d3, 0) / history.length,
+          'Ideas & Organization': history.reduce((a, h) => a + h.scores.d4, 0) / history.length
+        };
+        const topDomain = Object.entries(dAvg).sort((a, b) => b[1] - a[1])[0][0];
+        document.getElementById('stat-top-domain').textContent = topDomain;
+      }
+
+      renderCharts(history);
+      renderHistoryList(history);
+    }
+
+    function renderCharts(history) {
+      const chronological = [...history].reverse().slice(-10);
+      const labels = chronological.map((h, i) => {
+        const d = new Date(h.date);
+        return `#${i + 1} (${d.getMonth() + 1}/${d.getDate()})`;
+      });
+      const totals = chronological.map(h => h.totalScore);
+
+      // Line Chart
+      const lineCtx = document.getElementById('trendLineChart').getContext('2d');
+      if (trendLineChartInstance) trendLineChartInstance.destroy();
+
+      trendLineChartInstance = new Chart(lineCtx, {
+        type: 'line',
+        data: {
+          labels: labels.length ? labels : ['No Attempts Yet'],
+          datasets: [{
+            label: 'Total DSE Score (out of 28)',
+            data: totals.length ? totals : [0],
+            borderColor: '#4f46e5',
+            backgroundColor: 'rgba(79, 70, 229, 0.12)',
+            borderWidth: 3,
+            pointBackgroundColor: '#4f46e5',
+            pointRadius: 5,
+            fill: true,
+            tension: 0.35
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: { min: 0, max: 28, grid: { color: '#f1f5f9' } },
+            x: { grid: { display: false } }
+          },
+          plugins: {
+            legend: { display: false }
+          }
+        }
+      });
+
+      // Radar Chart
+      const radarCtx = document.getElementById('domainRadarChart').getContext('2d');
+      if (domainRadarChartInstance) domainRadarChartInstance.destroy();
+
+      const avgScores = history.length
+        ? [
+            +(history.reduce((a, h) => a + h.scores.d1, 0) / history.length).toFixed(1),
+            +(history.reduce((a, h) => a + h.scores.d2, 0) / history.length).toFixed(1),
+            +(history.reduce((a, h) => a + h.scores.d3, 0) / history.length).toFixed(1),
+            +(history.reduce((a, h) => a + h.scores.d4, 0) / history.length).toFixed(1)
+          ]
+        : [0, 0, 0, 0];
+
+      domainRadarChartInstance = new Chart(radarCtx, {
+        type: 'radar',
+        data: {
+          labels: ['Pronunciation', 'Communication', 'Vocabulary', 'Organization'],
+          datasets: [{
+            label: 'Your Avg (0–7)',
+            data: avgScores,
+            backgroundColor: 'rgba(16, 185, 129, 0.18)',
+            borderColor: '#059669',
+            borderWidth: 2.5,
+            pointBackgroundColor: '#059669'
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            r: {
+              min: 0,
+              max: 7,
+              ticks: { stepSize: 1, backdropColor: 'transparent' },
+              grid: { color: '#e2e8f0' }
+            }
+          },
+          plugins: {
+            legend: { display: false }
+          }
+        }
+      });
+    }
+
+    function renderHistoryList(history) {
+      const container = document.getElementById('history-list');
+      container.innerHTML = '';
+
+      if (history.length === 0) {
+        container.innerHTML = `
+          <div class="py-10 text-center text-sm text-slate-400">
+            No practice sessions recorded yet. Head over to the <strong>Practice Arena</strong> to complete your first 1-minute response!
+          </div>
+        `;
+        return;
+      }
+
+      history.forEach(item => {
+        const d = new Date(item.date);
+        const dateStr = d.toLocaleDateString('en-HK', { month: 'short', day: 'numeric', year: 'numeric' });
+        const row = document.createElement('div');
+        row.className = 'py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:bg-slate-50/80 px-3 rounded-2xl transition cursor-pointer';
+        row.innerHTML = `
+          <div class="space-y-1 max-w-2xl">
+            <div class="flex flex-wrap items-center gap-2 text-xs">
+              <span class="font-semibold text-slate-400">${dateStr}</span>
+              <span class="px-2 py-0.5 rounded bg-indigo-50 text-indigo-700 font-semibold">${escapeHtml(item.theme)}</span>
+              <span class="text-slate-400">• ${item.wpm} WPM</span>
+            </div>
+            <p class="text-sm font-semibold text-slate-900 line-clamp-1">${escapeHtml(item.prompt)}</p>
+          </div>
+          <div class="flex items-center gap-3 shrink-0">
+            <span class="text-xs font-semibold text-slate-500">${item.totalScore}/28</span>
+            <span class="px-3 py-1 rounded-xl bg-slate-900 text-white text-xs font-bold">Level ${escapeHtml(item.dseLevel)}</span>
+            <i data-lucide="chevron-right" class="w-4 h-4 text-slate-400"></i>
+          </div>
+        `;
+        row.onclick = () => openHistoryModal(item);
+        container.appendChild(row);
+      });
+      lucide.createIcons();
+    }
+
+    function openHistoryModal(item) {
+      const d = new Date(item.date);
+      document.getElementById('hm-date').textContent = `${d.toLocaleString('en-HK')} • ${item.theme}`;
+      document.getElementById('hm-question').textContent = item.prompt;
+      document.getElementById('hm-level').textContent = `Level ${item.dseLevel} (${item.totalScore}/28)`;
+      document.getElementById('hm-scores').textContent =
+        `Pronunciation: ${item.scores.d1}/7 • Communication: ${item.scores.d2}/7 • Vocab: ${item.scores.d3}/7 • Ideas: ${item.scores.d4}/7`;
+      document.getElementById('hm-transcript').textContent = item.transcript;
+
+      const gBox = document.getElementById('hm-grammar');
+      gBox.innerHTML = '';
+      if (!item.grammarIssues || item.grammarIssues.length === 0) {
+        gBox.innerHTML = '<p class="text-xs text-emerald-700 bg-emerald-50 p-3 rounded-xl">No grammar errors flagged in this attempt.</p>';
+      } else {
+        item.grammarIssues.forEach(g => {
+          const div = document.createElement('div');
+          div.className = 'p-3 rounded-xl bg-slate-50 border border-slate-200/70 text-xs space-y-1';
+          div.innerHTML = `
+            <div><span class="line-through text-rose-700">${escapeHtml(g.original)}</span> → <strong class="text-emerald-700">${escapeHtml(g.correction)}</strong></div>
+            <p class="text-slate-500">${escapeHtml(g.explanation)}</p>
+          `;
+          gBox.appendChild(div);
+        });
+      }
+
+      const modal = document.getElementById('history-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    /**
+     * 9. SETTINGS & PROFILE AUTO-SAVE
+     */
+    function populateSettingsForm() {
+      if (!currentUser) return;
+      document.getElementById('set-name').value = currentUser.name;
+      document.getElementById('set-id').value = currentUser.id;
+      document.getElementById('set-target').value = currentUser.targetLevel || '5';
+      document.getElementById('set-voice-rate').value = String(currentUser.settings?.voiceRate || 1.0);
+      document.getElementById('set-auto-read').checked = Boolean(currentUser.settings?.autoRead);
+      document.getElementById('set-strict-mode').checked = Boolean(currentUser.settings?.strictMode);
+    }
+
+    function applyUserPreferences() {
+      if (!currentUser) return;
+      if (currentUser.settings?.strictMode) {
+        document.getElementById('hint-box').classList.add('hidden');
+      }
+    }
+
+    function bindSettingsAutoSave() {
+      const saveHandler = () => {
+        if (!currentUser) return;
+        const newName = document.getElementById('set-name').value.trim();
+        if (newName) currentUser.name = newName;
+        currentUser.targetLevel = document.getElementById('set-target').value;
+        currentUser.settings = {
+          voiceRate: parseFloat(document.getElementById('set-voice-rate').value) || 1.0,
+          autoRead: document.getElementById('set-auto-read').checked,
+          strictMode: document.getElementById('set-strict-mode').checked
+        };
+        syncCurrentUser();
+        applyUserPreferences();
+      };
+
+      ['set-name', 'set-target', 'set-voice-rate', 'set-auto-read', 'set-strict-mode'].forEach(id => {
+        document.getElementById(id).addEventListener('change', saveHandler);
+      });
+    }
+
+    /**
+     * 10. INITIALIZATION & EVENT WIRING
+     */
+    window.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+      applyAdaptiveDeviceLayout(false);
+      loadUsersDB();
+      initSpeechRecognition();
+      populateQuestionDropdown('ALL');
+      renderSavedAccountChips();
+      bindSettingsAutoSave();
+
+      // Adaptive Device Mode Switchers & Resize/Orientation Listeners
+      document.getElementById('device-mode-select').onchange = (e) => {
+        setDeviceModePreference(e.target.value, true);
+      };
+      document.querySelectorAll('.device-pill-btn').forEach(btn => {
+        btn.onclick = () => setDeviceModePreference(btn.dataset.setDevice, true);
+      });
+
+      let resizeTimer = null;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+          if (devicePreference === 'auto') {
+            applyAdaptiveDeviceLayout(false);
+          }
+        }, 150);
+      });
+      window.addEventListener('orientationchange', () => {
+        setTimeout(() => applyAdaptiveDeviceLayout(false), 200);
+      });
+
+      document.getElementById('logout-btn').onclick = logoutUser;
+
+      // Practice Arena Controls
+      document.getElementById('theme-filter').onchange = (e) => {
+        populateQuestionDropdown(e.target.value);
+      };
+
+      document.getElementById('question-select').onchange = (e) => {
+        selectQuestionById(e.target.value, true);
+      };
+
+      document.getElementById('random-question-btn').onclick = () => {
+        const theme = document.getElementById('theme-filter').value;
+        const pool = theme === 'ALL' ? HKDSE_QUESTIONS : HKDSE_QUESTIONS.filter(q => q.theme === theme);
+        const candidates = pool.filter(q => q.id !== currentQuestion.id);
+        const pick = (candidates.length ? candidates : pool)[Math.floor(Math.random() * (candidates.length || pool.length))];
+        selectQuestionById(pick.id, true);
+      };
+
+      document.getElementById('speak-prompt-btn').onclick = () => {
+        speakText(currentQuestion.prompt);
+      };
+
+      document.getElementById('toggle-hint-btn').onclick = () => {
+        document.getElementById('hint-box').classList.toggle('hidden');
+      };
+
+      document.getElementById('start-record-btn').onclick = startRecording;
+      document.getElementById('stop-record-btn').onclick = () => stopRecording(true);
+      document.getElementById('reset-record-btn').onclick = resetPracticeArea;
+
+      // Phone thumb-dock CTA wiring
+      document.getElementById('mobile-start-btn').onclick = startRecording;
+      document.getElementById('mobile-stop-btn').onclick = () => stopRecording(true);
+      document.getElementById('mobile-reset-btn').onclick = resetPracticeArea;
+
+      // Question Bank theme filter
+      document.getElementById('bank-theme-filter').onchange = (e) => {
+        renderQuestionBank(e.target.value);
+      };
+
+      // Desktop keyboard shortcuts (Spacebar = Start/Stop, R = Replay Examiner)
+      window.addEventListener('keydown', (e) => {
+        if (activeDeviceMode !== 'desktop' || !currentUser || currentTabName !== 'practice') return;
+        const tag = (e.target.tagName || '').toLowerCase();
+        if (tag === 'input' || tag === 'textarea' || tag === 'select') return;
+
+        if (e.code === 'Space') {
+          e.preventDefault();
+          if (isRecording) stopRecording(true);
+          else startRecording();
+        } else if (e.key === 'r' || e.key === 'R') {
+          e.preventDefault();
+          speakText(currentQuestion.prompt);
+        }
+      });
+
+      document.getElementById('grade-manual-btn').onclick = () => {
+        if (isRecording) {
+          stopRecording(true);
+          return;
+        }
+        const text = document.getElementById('transcript-box').value.trim();
+        if (!text) {
+          showToast('Please record or type your spoken response first.', 'amber');
+          return;
+        }
+        const used = secondsRemaining < EXAM_SECONDS ? Math.max(10, EXAM_SECONDS - secondsRemaining) : 55;
+        evaluateResponse(text, used);
+      };
+
+      document.getElementById('listen-sample-btn').onclick = () => {
+        speakText(currentQuestion.sample5Star);
+      };
+
+      // History Modal Close
+      document.getElementById('hm-close-btn').onclick = () => {
+        document.getElementById('history-modal').classList.add('hidden');
+        document.getElementById('history-modal').classList.remove('flex');
+      };
+
+      // Settings Data Actions
+      document.getElementById('export-data-btn').onclick = () => {
+        if (!currentUser) return;
+        const blob = new Blob([JSON.stringify(currentUser, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `HKDSE_Paper4_${currentUser.id}_Report.json`;
+        a.click();
+        URL.revokeObjectURL(url);
+        showToast('Study report exported!', 'emerald');
+      };
+
+      document.getElementById('clear-history-btn').onclick = () => {
+        showConfirmModal(
+          'Reset Practice History?',
+          'This will permanently clear all recorded attempts and trend charts for your current student profile.',
+          () => {
+            if (!currentUser) return;
+            currentUser.history = [];
+            syncCurrentUser();
+            renderTrendsDashboard();
+            showToast('Your practice history has been reset.', 'indigo');
+          }
+        );
+      };
+
+      // Auto-restore active student session on page reload
+      const savedActiveId = localStorage.getItem(STORAGE_KEY_ACTIVE);
+      if (savedActiveId && usersDB[savedActiveId]) {
+        loginUser(savedActiveId);
+      }
+    });
+  </script>
+</body>
+</html>
